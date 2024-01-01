@@ -30,7 +30,8 @@ export default function Menus() {
 
 			{/* Menu Slider */}
 			<div className='min-h-screen w-full flex flex-col items-center'>
-				<Menu grouping='hot'>
+				{/* Hot Food Slider */}
+				<Menu grouping='hotFood'>
 					<FoodCard />
 					<FoodCard />
 					<FoodCard />
@@ -46,7 +47,42 @@ export default function Menus() {
 					<FoodCard />
 				</Menu>
 
-				<Menu grouping='cold'>
+				{/* Cold Food Slider */}
+				<Menu grouping='coldFood'>
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+				</Menu>
+
+				{/* Hot Drink Slider */}
+				<Menu grouping='hotDrink'>
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+				</Menu>
+
+				{/* Cold Drink Slider */}
+				<Menu grouping='coldDrink'>
 					<FoodCard />
 					<FoodCard />
 					<FoodCard />
