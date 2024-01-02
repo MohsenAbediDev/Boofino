@@ -6,7 +6,7 @@ export default function FoodCard() {
 			md:min-w-[175px] md:h-[270px] select-none' 
 			>
 				<div className='w-full h-full relative  cp'>
-					<div className='h-[150px] w-full mx-auto bg-cover bg-[url(./public/images/3.jpg)] rounded-md'></div>
+					<div className='h-[150px] w-full mx-auto bg-cover bg-[url(./images/3.jpg)] rounded-md'></div>
 					<h1
 						className='text-black mt-1 text-2xl font-extrabold font-shabnam
 					md:text-xl md:mt-0.5'

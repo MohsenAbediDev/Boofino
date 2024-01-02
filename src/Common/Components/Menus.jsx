@@ -2,8 +2,6 @@ import Menu from './Menu'
 import MenuTitles from './MenuTitles'
 import FoodCard from './FoodCard'
 // import useGetFetch from '../Hooks/useGetFetch'
-import { BiSolidStarHalf } from 'react-icons/bi'
-import { RxBorderSolid } from 'react-icons/rx'
 
 export default function Menus() {
 	// const {datas, isLoading, error} = useGetFetch('https://kmmwkyppcirzjhgcemof.supabase.co')
