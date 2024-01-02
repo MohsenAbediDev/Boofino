@@ -88,7 +88,7 @@ export default function Menus() {
 				</Menu>
 			</div>
 
-			{/* Drink's Menu */}
+			{/* Edible's Menu */}
 			<MenuTitles title='خوراکی‌ها' />
 
 			<div className='w-full flex flex-col items-center'>
