@@ -19,7 +19,7 @@ export default function Dashboard() {
             lg:hidden'
 			>
 				{/* user profile details */}
-				<div className='h-[165px] dashboard-container'>
+				<div className='h-[150px] dashboard-container'>
 					{/* User Container */}
 					<NavLink to='/dashboard' className='bg-hoverBTN dashboard-item h-16'>
 						{/* User Image */}
@@ -93,7 +93,7 @@ export default function Dashboard() {
 
 				{/* Total Price */}
 				{params['*'] === 'cart' && (
-					<div className='dashboard-container h-[160px]'>
+					<div className='dashboard-container h-[140px]'>
 						<div className='h-1/2 flex items-center'>
 							<div className='text-white text-xl flex justify-between items-center w-full'>
 								<span>قیمت کل</span>
