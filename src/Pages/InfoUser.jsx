@@ -1,5 +1,7 @@
 export default function InfoUser() {
   return (
-    <h1>InfoUser</h1>
+    <div className='flex flex-col w-full'>
+      
+    </div>
   )
 }

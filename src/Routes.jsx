@@ -8,7 +8,7 @@ import InfoUser from './Pages/InfoUser'
 const routes = [
 	{ path: '/', element: <Home /> },
 	{ path: '/*', element: <NotFound /> },
-	// { path: '/dashboard', element: <Dashboard /> },
+	
 	{
 		path: '/dashboard/*',
 		element: <Dashboard />,

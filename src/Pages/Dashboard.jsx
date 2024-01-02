@@ -1,22 +1,29 @@
+import { useRef } from 'react'
+
 //? Icons
 import { Outlet, NavLink, useParams } from 'react-router-dom'
 import { IoWalletOutline } from 'react-icons/io5'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { IoDocumentTextOutline } from "react-icons/io5";
-import {
-	MdOutlineArrowBackIos,
-	MdOutlineDashboardCustomize,
-	MdExitToApp,
-} from 'react-icons/md'
+import { IoDocumentTextOutline } from 'react-icons/io5'
+import { MdOutlineArrowBackIos, MdExitToApp } from 'react-icons/md'
 
 export default function Dashboard() {
 	const params = useParams()
+	const dashboardRoute = useRef()
+
+	if (params['*']) {
+		dashboardRoute.current && dashboardRoute.current.classList.add('lg:hidden')
+	}
+	else {
+		dashboardRoute.current &&
+			dashboardRoute.current.classList.remove('lg:hidden')
+	}
 
 	return (
-		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-8 h-[calc(100vh-144px)]'>
+		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-8 h-[calc(100vh-144px)] lg:flex-col lg:px-6'>
 			<div
-				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20
-            lg:hidden'
+				ref={dashboardRoute}
+				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20'
 			>
 				{/* user profile details */}
 				<div className='h-[150px] dashboard-container'>
@@ -117,6 +124,7 @@ export default function Dashboard() {
 					</div>
 				)}
 			</div>
+
 			<Outlet />
 		</section>
 	)
