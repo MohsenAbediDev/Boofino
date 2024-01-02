@@ -1,4 +1,5 @@
 import Menu from './Menu'
+import MenuTitles from './MenuTitles'
 import FoodCard from './FoodCard'
 // import useGetFetch from '../Hooks/useGetFetch'
 import { BiSolidStarHalf } from 'react-icons/bi'
@@ -9,26 +10,10 @@ export default function Menus() {
 
 	return (
 		<div className='container flex flex-col items-center justify-center mt-5'>
-			{/* Menu Category Title */}
-			<div className='font-bold text-xl text-white flex items-center'>
-				<div className='flex items-center'>
-					{/* Star Icon */}
-					<BiSolidStarHalf className='w-6 text-[#FF8F00]' />
-					{/* Line Icon */}
-					<RxBorderSolid className='w-5' />
-				</div>
 
-				<span className='text-xl ps-[15px] pe-[15px] font-shabnam'>غذاها</span>
+			{/* Food's Menu */}
+			<MenuTitles title='غذاها' />
 
-				<div className='flex items-center'>
-					{/* Line Icon */}
-					<RxBorderSolid className='w-5' />
-					{/* Star Icon */}
-					<BiSolidStarHalf className='w-6 text-[#FF8F00]' />
-				</div>
-			</div>
-
-			{/* Menu Slider */}
 			<div className='min-h-screen w-full flex flex-col items-center'>
 				{/* Hot Food Slider */}
 				<Menu grouping='hotFood'>
@@ -63,27 +48,12 @@ export default function Menus() {
 					<FoodCard />
 					<FoodCard />
 				</Menu>
+			</div>
 
-				<div className='font-bold text-xl text-white flex items-center'>
-					<div className='flex items-center'>
-						{/* Star Icon */}
-						<BiSolidStarHalf className='w-6 text-[#FF8F00]' />
-						{/* Line Icon */}
-						<RxBorderSolid className='w-5' />
-					</div>
+			{/* Drink's Menu */}
+			<MenuTitles title='نوشیدنی‌ها' />
 
-					<span className='text-xl ps-[15px] pe-[15px] font-shabnam'>
-						نوشیدنی‌ها
-					</span>
-
-					<div className='flex items-center'>
-						{/* Line Icon */}
-						<RxBorderSolid className='w-5' />
-						{/* Star Icon */}
-						<BiSolidStarHalf className='w-6 text-[#FF8F00]' />
-					</div>
-				</div>
-				
+			<div className='min-h-screen w-full flex flex-col items-center'>
 				{/* Hot Drink Slider */}
 				<Menu grouping='hotDrink'>
 					<FoodCard />
