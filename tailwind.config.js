@@ -16,7 +16,7 @@ export default {
 				arial: 'Arial'
 			},
 			fontSize: {
-				menu: '50px',
+				menu: '40px',
 			},
 			borderRadius: {
 				dashboardcontainer: '20px',

@@ -60,14 +60,14 @@ export default function Menu({ children, grouping }) {
 				>
 					<p
 						className='text-white text-menu font-bold m-3 absolute
-					md:text-[30px] md:mt-2 select-none'
+						md:text-[28px] md:mt-2 select-none'
 					>
 						{/* Insert Food Menu Grouping */}
-						{grouping == 'hotFood' && 'غذا های گرم'}
-						{grouping == 'coldFood' && 'غذا های سرد'}
-						{grouping == 'hotDrink' && 'نوشیدنی های گرم'}
-						{grouping == 'coldDrink' && 'نوشیدنی های سرد'}
-						{grouping == 'edible' && 'خوراکی ها'}
+						{grouping == 'hotFood' && 'غذای گرم'}
+						{grouping == 'coldFood' && 'غذای سرد'}
+						{grouping == 'hotDrink' && 'نوشیدنی داغ'}
+						{grouping == 'coldDrink' && 'نوشیدنی خنک'}
+						{grouping == 'edible' && 'خوراکی'}
 					</p>
 
 					{/* Insert Food Menu Image's */}
