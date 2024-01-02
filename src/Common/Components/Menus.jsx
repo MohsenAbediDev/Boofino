@@ -10,11 +10,10 @@ export default function Menus() {
 
 	return (
 		<div className='container flex flex-col items-center justify-center mt-5'>
-
 			{/* Food's Menu */}
 			<MenuTitles title='غذاها' />
 
-			<div className='min-h-screen w-full flex flex-col items-center'>
+			<div className='w-full flex flex-col items-center'>
 				{/* Hot Food Slider */}
 				<Menu grouping='hotFood'>
 					<FoodCard />
@@ -53,7 +52,7 @@ export default function Menus() {
 			{/* Drink's Menu */}
 			<MenuTitles title='نوشیدنی‌ها' />
 
-			<div className='min-h-screen w-full flex flex-col items-center'>
+			<div className='w-full flex flex-col items-center'>
 				{/* Hot Drink Slider */}
 				<Menu grouping='hotDrink'>
 					<FoodCard />
@@ -73,6 +72,27 @@ export default function Menus() {
 
 				{/* Cold Drink Slider */}
 				<Menu grouping='coldDrink'>
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+					<FoodCard />
+				</Menu>
+			</div>
+
+			{/* Drink's Menu */}
+			<MenuTitles title='خوراکی‌ها' />
+
+			<div className='w-full flex flex-col items-center'>
+				<Menu grouping='edible'>
 					<FoodCard />
 					<FoodCard />
 					<FoodCard />
