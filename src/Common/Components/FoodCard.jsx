@@ -1,28 +1,38 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from 'react'
 
-export default function FoodCard({ id, group, title, image, price, isDiscount, oldPrice }) {
-
+export default function FoodCard({
+	id,
+	group,
+	title,
+	image,
+	price,
+	isDiscount,
+	oldPrice,
+}) {
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
 	const inputRef = useRef()
 
-	console.log(productsID);
-
 	// add product to Cart
 	const addToCart = () => {
-
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 
-
-		const mainProductCartID = mainProductCart ? mainProductCart.map(product => product.id) : []
+		const mainProductCartID = mainProductCart
+			? mainProductCart.map((product) => product.id)
+			: []
 
 		if (!mainProductCartID.includes(id)) {
-
 			if (!mainProductCart) {
-				localStorage.setItem('productCart', JSON.stringify([{ id: id, count: 1 }]))
+				localStorage.setItem(
+					'productCart',
+					JSON.stringify([{ id: id, count: 1 }])
+				)
 				setProductsID([id])
 			} else {
-				localStorage.setItem('productCart', JSON.stringify([...mainProductCart, { id: id, count: 1 }]))
+				localStorage.setItem(
+					'productCart',
+					JSON.stringify([...mainProductCart, { id: id, count: 1 }])
+				)
 				setProductsID([...mainProductCartID, id])
 			}
 		}
@@ -31,12 +41,14 @@ export default function FoodCard({ id, group, title, image, price, isDiscount, o
 	const addCount = () => {
 		// get current datas
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-		const mainProductIndex = mainProductCart ? mainProductCart.findIndex(product => product.id === id) : -1
+		const mainProductIndex = mainProductCart
+			? mainProductCart.findIndex((product) => product.id === id)
+			: -1
 
 		// add count of product from Cart
 		if (mainProductIndex !== -1) {
-
-			mainProductCart[mainProductIndex].count = mainProductCart[mainProductIndex].count + 1
+			mainProductCart[mainProductIndex].count =
+				mainProductCart[mainProductIndex].count + 1
 
 			const newItem = mainProductCart[mainProductIndex]
 
@@ -53,20 +65,21 @@ export default function FoodCard({ id, group, title, image, price, isDiscount, o
 	const minCount = () => {
 		// get current datas
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-		const mainProductIndex = mainProductCart ? mainProductCart.findIndex(product => product.id === id) : -1
+		const mainProductIndex = mainProductCart
+			? mainProductCart.findIndex((product) => product.id === id)
+			: -1
 
 		if (mainProductIndex !== -1) {
-
-			mainProductCart[mainProductIndex].count = mainProductCart[mainProductIndex].count - 1
+			mainProductCart[mainProductIndex].count =
+				mainProductCart[mainProductIndex].count - 1
 
 			const newItem = mainProductCart[mainProductIndex]
 
 			// remove product from Cart
 			if (newItem.count === 0) {
+				const findID = productsID.findIndex((ID) => ID === newItem.id)
 
-				const findID = productsID.findIndex(ID => ID === newItem.id)
-
-				setProductsID(prevIDs => {
+				setProductsID((prevIDs) => {
 					return prevIDs.splice(findID, 1)
 				})
 
@@ -83,20 +96,23 @@ export default function FoodCard({ id, group, title, image, price, isDiscount, o
 
 				inputRef.current.value = newItem.count
 			}
-
 		}
 	}
 
 	useEffect(() => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 
-		const mainProductCartID = mainProductCart ? mainProductCart.map(product => product.id) : []
+		const mainProductCartID = mainProductCart
+			? mainProductCart.map((product) => product.id)
+			: []
 
 		setProductsID(mainProductCartID)
 
-		setCount(prevCount => {
+		setCount((prevCount) => {
 			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-			const mainProductIndex = mainProductCart ? mainProductCart.findIndex(product => product.id === id) : -1
+			const mainProductIndex = mainProductCart
+				? mainProductCart.findIndex((product) => product.id === id)
+				: -1
 
 			if (mainProductIndex !== -1) {
 				return mainProductCart[mainProductIndex].count
@@ -113,7 +129,9 @@ export default function FoodCard({ id, group, title, image, price, isDiscount, o
 				md:min-w-[175px] md:max-w-[175px] md:h-[270px] select-none'
 			>
 				<div className='w-full h-full relative'>
-					<div className={`h-[150px] w-full mx-auto bg-cover bg-[url(${image})] rounded-md`}></div>
+					<div
+						className={`h-[150px] w-full mx-auto bg-cover bg-[url(${image})] rounded-md`}
+					></div>
 					<h1
 						className='text-black mt-1 text-lg font-extrabold font-shabnam
 					md:text-md md:mt-0.5'
@@ -122,63 +140,67 @@ export default function FoodCard({ id, group, title, image, price, isDiscount, o
 					</h1>
 
 					{/* price */}
-					{
-						!isDiscount ? (
-							<h3
-								className='text-price mt-1 text-sm font-extrabold font-shabnam
+					{!isDiscount ? (
+						<h3
+							className='text-price mt-1 text-sm font-extrabold font-shabnam
 								md:mt-1'
+						>
+							{price} تومان
+						</h3>
+					) : (
+						<div
+							className='flex flex-col leading-5
+							md:flex-row md:gap-x-2'
+						>
+							<h3
+								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
+									md:mt-1'
 							>
 								{price} تومان
 							</h3>
-
-						) : (
-							<div className="flex flex-col leading-5
-							md:flex-row md:gap-x-2">
-								<h3
-									className='text-price mt-0.5 text-sm font-extrabold font-shabnam
-									md:mt-1'
-								>
-									{price} تومان
-								</h3>
-								<h3
-									className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
+							<h3
+								className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
 									md:mt-1 md:text-xs'
-								>
-									{oldPrice} تومان
-								</h3>
-							</div>
-						)
-					}
-
-					{
-						!productsID.includes(id) ? (
-							<button
-								className='bg-primaryBTN hover:bg-hoverBTN transition-colors w-full h-8 font-shabnam text-white rounded-md absolute bottom-0'
-								onClick={addToCart}
 							>
-								افزودن به سبد خرید
+								{oldPrice} تومان
+							</h3>
+						</div>
+					)}
+
+					{!productsID.includes(id) ? (
+						<button
+							className='bg-primaryBTN hover:bg-hoverBTN transition-colors w-full h-8 font-shabnam text-white rounded-md absolute bottom-0'
+							onClick={addToCart}
+						>
+							افزودن به سبد خرید
+						</button>
+					) : (
+						<div className='w-full h-8 font-shabnam text-white absolute bottom-0 flex justify-center gap-x-2'>
+							<button
+								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
+								onClick={addCount}
+							>
+								+
 							</button>
-						) : (
-							<div className="w-full h-8 font-shabnam text-white absolute bottom-0 flex justify-center gap-x-2">
-								<button className="bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md"
-									onClick={addCount}>+</button>
-								
-								{/* count of product */}
-								<input type="text"
 
-									className="h-full w-1/3 text-black text-xl border-primaryBTN border-2 outline-primaryBTN outline-2 rounded-md
-									text-center"
-									value={count}
-									disabled
-									ref={inputRef}
+							{/* count of product */}
+							<input
+								type='text'
+								className='h-full w-1/3 text-black text-xl border-primaryBTN border-2 outline-primaryBTN outline-2 rounded-md
+									text-center'
+								value={count}
+								disabled
+								ref={inputRef}
+							/>
 
-								/>
-
-								<button className="bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md"
-									onClick={minCount}>-</button>
-							</div>
-						)
-					}
+							<button
+								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
+								onClick={minCount}
+							>
+								-
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
 		</>
