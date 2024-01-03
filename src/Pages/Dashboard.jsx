@@ -20,7 +20,7 @@ export default function Dashboard() {
 	}
 
 	return (
-		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-8 h-[calc(100vh-144px)] lg:flex-col lg:px-6'>
+		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-6 lg:px-6 h-[calc(100vh-144px)] lg:flex-col'>
 			<div
 				ref={dashboardRoute}
 				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20'
