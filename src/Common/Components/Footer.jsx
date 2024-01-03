@@ -1,43 +1,70 @@
-import { FaInstagram, FaTelegram, FaTwitter, FaYoutube, FaPhone, FaMailBulk, FaLocationArrow } from "react-icons/fa";
+import {
+	FaInstagram,
+	FaTelegram,
+	FaTwitter,
+	FaYoutube,
+	FaPhone,
+	FaMailBulk
+} from 'react-icons/fa'
+
+import { FaLocationDot } from "react-icons/fa6";
 
 export default function Footer() {
 	return (
 		<footer>
-			<div className="h-80 w-full bg-footer flex dir-rtl p-11">
-				<div className="h-full w-1/3 p-9">
-					<div className="w-full h-full flex flex-col">
-						<h1 className="text-white text-5xl">بوفینو</h1>
-						<div className="flex w-44 justify-between mt-6">
-							<a href="#">
-								<FaInstagram className="text-white text-3xl"/>
+			<div className='min-h-80 w-full bg-footer flex lg:flex-col dir-rtl p-11 lg:p-6'>
+				{/* Boofino Brand */}
+				<div className='h-full w-1/3 p-9 lg:p-0'>
+					<div className='w-full h-full flex flex-col'>
+						<h1 className='text-white text-5xl'>بوفینو</h1>
+
+						{/* Social Icons */}
+						<div className='flex w-44 justify-between mt-6'>
+							<a href='#'>
+								<FaInstagram className='text-white text-3xl' />
 							</a>
-							<a href="#">
-								<FaTelegram className="text-white text-3xl"/>
+							<a href='#'>
+								<FaTelegram className='text-white text-3xl' />
 							</a>
-							<a href="">
-								<FaTwitter className="text-white text-3xl"/>
+							<a href=''>
+								<FaTwitter className='text-white text-3xl' />
 							</a>
-							<a href="">
-								<FaYoutube className="text-white text-3xl"/>
+							<a href=''>
+								<FaYoutube className='text-white text-3xl' />
 							</a>
 						</div>
 					</div>
 				</div>
-				<div className="h-full w-1/3">
-					<h1 className="text-white text-2xl">تماس با ما</h1>
-					<div className="w-[90%] flex flex-col gap-y-2">
-						<div className="text-xl text-white p-2 flex gap-x-2">
-							<FaPhone/> <span>090909090909</span>
+
+				{/* Contact Us */}
+				<div className='h-full w-1/3 lg:w-full lg:mt-11'>
+					<h1 className='text-white text-3xl'>تماس با ما</h1>
+					<div className='w-[90%] lg:w-full flex flex-col gap-y-2 lg:mt-3'>
+						{/* Phone */}
+						<div className='text-xl lg:w-full text-white flex items-center gap-x-2 p-2 lg:px-0'>
+							<FaPhone />
+							<a href='tel:09215647908'>09215647908</a>
 						</div>
-						<div className="text-xl text-white p-2 flex gap-x-2">
-							<FaMailBulk/> <span>admin@boofino.co</span>
+
+						{/* Email */}
+						<div className='text-xl lg:w-full text-white flex items-center gap-x-2 p-2 lg:px-0'>
+							<FaMailBulk />
+							<a href='mailto:admin@boofino.co'>admin@boofino.co</a>
 						</div>
-						<div className="text-xl text-white p-2 flex gap-x-2">
-							<span>ادرس دفتر: تهران، خیابون جانبازی، خیابون شهید جانبازی،‌ کوچه مادر جانبازی، پلاک ۴۳</span>
+
+						{/* Address */}
+						<div className='text-xl lg:w-full text-white flex gap-x-2 p-2 lg:px-0'>
+						<FaLocationDot />
+							<span>
+								آدرس دفتر: خیابان ولیعصر, نرسیده به طالقانی, کوچه رحیم زاده,
+								پلاک ۳
+							</span>
 						</div>
 					</div>
 				</div>
-				<div className="bg-primaryBTN h-full w-1/3"></div>
+
+				{/* Map */}
+				<div className='bg-primaryBTN h-full w-1/3 lg:w-full lg:mt-11'></div>
 			</div>
 		</footer>
 	)
