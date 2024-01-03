@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 //? Icons
 import { Outlet, NavLink, useParams } from 'react-router-dom'
@@ -11,13 +11,15 @@ export default function Dashboard() {
 	const params = useParams()
 	const dashboardRoute = useRef()
 
-	if (params['*']) {
-		dashboardRoute.current && dashboardRoute.current.classList.add('lg:hidden')
-	}
-	else {
-		dashboardRoute.current &&
-			dashboardRoute.current.classList.remove('lg:hidden')
-	}
+	useEffect(() => {
+		if (params['*']) {
+			dashboardRoute.current &&
+				dashboardRoute.current.classList.add('lg:hidden')
+		} else {
+			dashboardRoute.current &&
+				dashboardRoute.current.classList.remove('lg:hidden')
+		}
+	})
 
 	return (
 		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-6 lg:px-6 h-[calc(100vh-144px)] lg:flex-col'>
@@ -100,7 +102,7 @@ export default function Dashboard() {
 
 				{/* Total Price */}
 				{params['*'] === 'cart' && (
-					<div className='dashboard-container h-[140px]'>
+					<div className='dashboard-container h-[140px] lg:hidden'>
 						<div className='h-1/2 flex items-center'>
 							<div className='text-white text-xl flex justify-between items-center w-full'>
 								<span>قیمت کل</span>

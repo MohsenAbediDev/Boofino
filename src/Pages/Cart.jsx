@@ -17,7 +17,7 @@ export default function Cart() {
 			</div>
 
 			{/* Mobile Purchase Container */}
-			<div className='hidden w-full p-2 lg:flex flex-col sticky bottom-0 z-50'>
+			<div className='hidden w-full p-2 bg-primary lg:flex flex-col sticky bottom-0 z-50'>
 				<div className='text-base py-1 font-shabnam text-white flex items-center justify-between'>
 					<p>تخفیف:</p>
 					<div className=''>
