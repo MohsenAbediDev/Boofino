@@ -129,9 +129,10 @@ export default function FoodCard({
 				md:min-w-[175px] md:max-w-[175px] md:h-[270px] select-none'
 			>
 				<div className='w-full h-full relative'>
-					<div
-						className={`h-[150px] w-full mx-auto bg-cover bg-[url(${image})] rounded-md`}
-					></div>
+					<img
+						className={`h-[150px] w-full mx-auto bg-cover rounded-md`}
+						src={image}
+					></img>
 					<h1
 						className='text-black mt-1 text-lg font-extrabold font-shabnam
 					md:text-md md:mt-0.5'
