@@ -8,6 +8,7 @@ export default function ProductCart({ id, count , onRemove }) {
 	const [mainData, setMainData] = useState({})
 	const [productCount, setProductCount] = useState(count)
 
+	// get product cart items when component loeaded
 	useEffect(() => {
 		if (count && id) {
 			const findProduct = datas.findIndex(data => data.id === id)
@@ -15,6 +16,7 @@ export default function ProductCart({ id, count , onRemove }) {
 		}
 	}, [])
 
+	// add count of product from Cart
 	const addCount = () => {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
 		const mainDataInedx = productData.findIndex(product => product.id === id)
@@ -24,6 +26,7 @@ export default function ProductCart({ id, count , onRemove }) {
 		setProductCount(productData[mainDataInedx].count)
 	}
 
+	// min count of product from Cart
 	const minCount = () => {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
 		const mainDataInedx = productData.findIndex(product => product.id === id)
@@ -46,7 +49,6 @@ export default function ProductCart({ id, count , onRemove }) {
 
 		
 		productData.splice(mainDataInedx, 1)
-		console.log(productData);
 		localStorage.setItem('productCart', JSON.stringify(productData))
 
 		onRemove()
