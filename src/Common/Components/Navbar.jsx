@@ -97,16 +97,6 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 								{/* Dashboard Link's */}
 								<Link
-									to='/'
-									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-								>
-									<span className='flex items-center gap-x-3'>
-										<AiOutlineHome className='w-5 h-5' />
-										خانه
-									</span>
-								</Link>
-
-								<Link
 									to='/dashboard'
 									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
 								>
