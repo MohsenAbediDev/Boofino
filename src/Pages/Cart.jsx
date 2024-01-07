@@ -1,7 +1,15 @@
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
+import { useEffect, useState } from 'react'
 
 export default function Cart() {
+
+	const [productCart, setProductCart] = useState(JSON.parse(localStorage.getItem('productCart')))
+
+	const removeHandler = ()=> {
+		setProductCart(JSON.parse(localStorage.getItem('productCart')))
+	}
+
 	return (
 		<div className='w-full h-full flex flex-col'>
 			<BackToDashboard title='سبد خرید' />
@@ -9,10 +17,11 @@ export default function Cart() {
 			<div className='w-full h-full overflow-y-auto scroll'>
 				{/* Products Purchased By The User */}
 				<div className='md:divide-y-2 divide-secondary'>
-					<ProductCart />
-					<ProductCart />
-					<ProductCart />
-					<ProductCart />
+					{
+						productCart.map(product => (
+							<ProductCart key={product.id} id={product.id} count={product.count} onRemove={removeHandler}/>
+						))
+					}
 				</div>
 			</div>
 
