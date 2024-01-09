@@ -109,7 +109,7 @@ export default function Dashboard() {
 
 								<div className='flex gap-x-1.5'>
 									{/* Cart Price */}
-									<span>2۰۰,۰۰۰</span>
+									<span className='totalPrice'>0</span>
 
 									<span className='text-xl'>تومان</span>
 								</div>

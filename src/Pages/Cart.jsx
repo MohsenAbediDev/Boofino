@@ -19,10 +19,13 @@ export default function Cart() {
 		setProductCart(JSON.parse(localStorage.getItem('productCart')))
 	}
 
+
+	// total price and discount
 	const totalPriceHandler = () => {
 		const mainProductCard = JSON.parse(localStorage.getItem('productCart'))
 		const productsData = []
 
+		// get products data with id
 		for (let product of products) {
 			for (let main of mainProductCard) {
 				if (product.id === main.id) {
@@ -31,21 +34,26 @@ export default function Cart() {
 			}
 		}
 
-		setTotalPrice(()=> {
+		// computing total price 
+		setTotalPrice(() => {
 			let sumPrice = 0
 
 			productsData.map(productData => {
 				sumPrice += (productData.price * productData.count)
 			})
 
+			// show total price in desktop
+			document.querySelector('.totalPrice').innerHTML = sumPrice
+
 			return sumPrice
 		})
 
-		setTotalDiscount(()=> {
+		// computing total discount 
+		setTotalDiscount(() => {
 			let sumDiscount = 0
 
 			productsData.map(productData => {
-				if(productData.oldPrice){
+				if (productData.oldPrice) {
 					sumDiscount += ((productData.oldPrice - productData.price) * productData.count)
 				}
 			})
