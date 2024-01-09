@@ -1,55 +1,62 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CiUser, CiPhone, CiMail, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signup() {
-	const usernameInputRef = useRef()
-	const phoneInputRef = useRef()
-	const emailInputRef = useRef()
-	const passwordInputRef = useRef()
+	const [usernameInputValue, setUsernameInputValue] = useState('')
+	const [phoneInputValue, setPhoneInputValue] = useState('')
+	const [emailInputValue, setEmailInputValue] = useState('')
+	const [passwordInputValue, setPasswordInputValue] = useState('')
 	const notificationBoxRef = useRef()
-
-	const [isValidUsername, setIsValidUsername] = useState(false)
-	const [isValidPhone, setIsValidPhone] = useState(false)
-	const [isValidEmail, setIsValidEmail] = useState(false)
-	const [isValidPassword, setIsValidPassword] = useState(false)
-
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
-	//? RegExp Pattern's
+	const [validationStatus, setValidationStatus] = useState({
+		isValidUsername: false,
+		isValidPhone: false,
+		isValidEmail: false,
+		isValidPassword: false,
+	})
+
+	//? RegExp Patterns
 	const PhoneNumberPattern = /^09\d{9}$/
 	const EmailPattern = /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$/
 
-	const checkInputValues = () => {
-		const username = usernameInputRef.current.value
-		const phoneNumber = phoneInputRef.current.value
-		const email = emailInputRef.current.value
-		const password = passwordInputRef.current.value
+	//? Validate Inputs Function
+	const validateInputValues = () => {
 		const notification = notificationBoxRef.current
 
-		//? Generate the error message based on validation statuses
-		const usernameError = !isValidUsername ? ' نام' : ''
-		const phoneError = !isValidPhone ? ' شماره همراه' : ''
-		const emailError = !isValidEmail ? ' ایمیل' : ''
-		const passwordError = !isValidPassword ? ' رمزعبور' : ''
+		const { isValidUsername, isValidPhone, isValidEmail, isValidPassword } =
+			validationStatus
 
-		//? Set Validation's
-		username && setIsValidUsername(!!username)
-		PhoneNumberPattern.test(phoneNumber) && setIsValidPhone(!!phoneNumber)
-		EmailPattern.test(email) && setIsValidEmail(!!email)
-		password.length >= 8 && setIsValidPassword(!!password)
+		//? Update Validation
+		setValidationStatus((prevStatus) => ({
+			...prevStatus,
+			isValidUsername: !!usernameInputValue,
+			isValidPhone: PhoneNumberPattern.test(phoneInputValue),
+			isValidEmail: EmailPattern.test(emailInputValue),
+			isValidPassword: passwordInputValue.length >= 8,
+		}))
 
-		//? Set Message
+		//? Set Error Message
 		setErrorMessage(
-			!isValidUsername || !isValidPhone || !isValidEmail || !isValidPassword
-				? `لطفا${usernameError}${phoneError ? '،' : ''}${phoneError}${
-						emailError ? '،' : ''
-				  }${emailError}${
-						passwordError ? ' و' : ''
-				  }${passwordError} را به درستی وارد کنید`
-				: ''
+			'لطفا ' +
+				(!isValidUsername ? `نام` : '') +
+				(!isValidPhone ? `${!isValidUsername ? '، ' : ''}شماره همراه` : '') +
+				(!isValidEmail
+					? `${!isValidUsername || !isValidPhone ? '، ' : ''}ایمیل`
+					: '') +
+				(!isValidPassword
+					? `${
+							!isValidUsername || !isValidPhone || !isValidEmail ? ' و ' : ''
+					  }رمز عبور`
+					: '') +
+				(!isValidUsername || !isValidPhone || !isValidEmail || !isValidPassword
+					? ' را به درستی وارد کنید'
+					: '')
 		)
+
+		//? Set Success Message
 		setSuccessMessage(
 			isValidUsername && isValidPhone && isValidEmail && isValidPassword
 				? 'ثبت نام با موفقیت انجام شد'
@@ -58,6 +65,8 @@ export default function Signup() {
 
 		//? Show Notification
 		notification.classList.add('notification--show')
+
+		//? Hide Notification
 		setTimeout(() => {
 			notification.classList.remove('notification--show')
 		}, 3000)
@@ -86,7 +95,7 @@ export default function Signup() {
 
 							<input
 								className='form-input'
-								ref={usernameInputRef}
+								onChange={(e) => setUsernameInputValue(e.target.value)}
 								type='text'
 								placeholder='نام و نام خانوادگی'
 							/>
@@ -98,7 +107,7 @@ export default function Signup() {
 
 							<input
 								className='form-input'
-								ref={phoneInputRef}
+								onChange={(e) => setPhoneInputValue(e.target.value)}
 								type='text'
 								placeholder='شماره همراه'
 							/>
@@ -110,7 +119,7 @@ export default function Signup() {
 
 							<input
 								className='form-input'
-								ref={emailInputRef}
+								onChange={(e) => setEmailInputValue(e.target.value)}
 								type='email'
 								placeholder='پست الکترونیکی'
 							/>
@@ -122,7 +131,7 @@ export default function Signup() {
 
 							<input
 								className='form-input'
-								ref={passwordInputRef}
+								onChange={(e) => setPasswordInputValue(e.target.value)}
 								type='password'
 								placeholder='رمز عبور'
 							/>
@@ -130,8 +139,8 @@ export default function Signup() {
 
 						{/* Submit Form's */}
 						<button
-							onClick={checkInputValues}
-							className='form-input w-[70%] p-0 text-xl bg-hoverConfirmBTN'
+							onClick={validateInputValues}
+							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'
 						>
 							ادامه
 						</button>
