@@ -1,17 +1,58 @@
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import products from '../../datas'
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
 		JSON.parse(localStorage.getItem('productCart'))
 	)
 
+	const [totalPrice, setTotalPrice] = useState(0)
+	const [totalDisCount, setTotalDiscount] = useState(0)
+
+	useEffect(() => {
+		totalPriceHandler()
+	}, [])
+
 	const removeHandler = () => {
 		setProductCart(JSON.parse(localStorage.getItem('productCart')))
 	}
 
-	console.log(productCart)
+	const totalPriceHandler = () => {
+		const mainProductCard = JSON.parse(localStorage.getItem('productCart'))
+		const productsData = []
+
+		for (let product of products) {
+			for (let main of mainProductCard) {
+				if (product.id === main.id) {
+					productsData.push({ price: product.price, count: main.count, oldPrice: product.oldPrice })
+				}
+			}
+		}
+
+		setTotalPrice(()=> {
+			let sumPrice = 0
+
+			productsData.map(productData => {
+				sumPrice += (productData.price * productData.count)
+			})
+
+			return sumPrice
+		})
+
+		setTotalDiscount(()=> {
+			let sumDiscount = 0
+
+			productsData.map(productData => {
+				if(productData.oldPrice){
+					sumDiscount += ((productData.oldPrice - productData.price) * productData.count)
+				}
+			})
+
+			return sumDiscount
+		})
+	}
 
 	return (
 		<div className='w-full h-full flex flex-col'>
@@ -28,6 +69,7 @@ export default function Cart() {
 									id={product.id}
 									count={product.count}
 									onRemove={removeHandler}
+									totalPrice={totalPriceHandler}
 								/>
 							))}
 					</div>
@@ -42,7 +84,7 @@ export default function Cart() {
 					<div className='text-base py-1 font-shabnam text-white flex items-center justify-between'>
 						<p>تخفیف:</p>
 						<div className=''>
-							10,000
+							{totalDisCount}
 							<span className='pr-2'>تومان</span>
 						</div>
 					</div>
@@ -50,7 +92,7 @@ export default function Cart() {
 					<div className='text-base py-1 font-bold font-shabnam text-white flex items-center justify-between'>
 						<p>قیمت کل:</p>
 						<div>
-							190,000
+							{totalPrice}
 							<span className='pr-2'>تومان</span>
 						</div>
 					</div>

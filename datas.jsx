@@ -26,7 +26,7 @@ const products = [
 		image: '/images/2.jpg',
 		price: 20_000,
 		isDiscount: true,
-		oldPrice: 15_000,
+		oldPrice: 30_000,
 	},
 	{
 		id: 4,
@@ -53,7 +53,7 @@ const products = [
 		image: '/images/3.jpg',
 		price: 10_000,
 		isDiscount: true,
-		oldPrice: 1_000,
+		oldPrice: 100_000,
 	},
 	{
 		id: 7,

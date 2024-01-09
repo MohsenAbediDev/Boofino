@@ -2,7 +2,7 @@ import { FaMinus } from 'react-icons/fa'
 import products from '../../../datas'
 import { useEffect, useState } from 'react'
 
-export default function ProductCart({ id, count, onRemove }) {
+export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	const [datas, setDatas] = useState(products)
 	const [mainData, setMainData] = useState({})
 	const [productCount, setProductCount] = useState(count)
@@ -23,6 +23,7 @@ export default function ProductCart({ id, count, onRemove }) {
 		localStorage.setItem('productCart', JSON.stringify(productData))
 
 		setProductCount(productData[mainDataInedx].count)
+		totalPrice()
 	}
 
 	// min count of product from Cart
@@ -39,6 +40,7 @@ export default function ProductCart({ id, count, onRemove }) {
 			localStorage.setItem('productCart', JSON.stringify(productData))
 			setProductCount(productData[mainDataInedx].count)
 		}
+		totalPrice()
 	}
 
 	const removeHadnler = () => {
@@ -49,6 +51,7 @@ export default function ProductCart({ id, count, onRemove }) {
 		localStorage.setItem('productCart', JSON.stringify(productData))
 
 		onRemove()
+		totalPrice()
 	}
 
 	return (
@@ -74,14 +77,14 @@ export default function ProductCart({ id, count, onRemove }) {
 							{mainData.group === 'hotFood'
 								? 'غذای گرم'
 								: mainData.group === 'coldFood'
-								? 'غذای سرد'
-								: mainData.group === 'hotDrink'
-								? 'نوشیدنی داغ'
-								: mainData.group === 'coldDrink'
-								? 'نوشیدنی خنک'
-								: mainData.group === 'edible'
-								? 'خوراکی'
-								: 'غیره'}
+									? 'غذای سرد'
+									: mainData.group === 'hotDrink'
+										? 'نوشیدنی داغ'
+										: mainData.group === 'coldDrink'
+											? 'نوشیدنی خنک'
+											: mainData.group === 'edible'
+												? 'خوراکی'
+												: 'غیره'}
 						</p>
 
 						{/* Mobile Responsive Price */}
