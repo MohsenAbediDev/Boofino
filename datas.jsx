@@ -4,7 +4,7 @@ const products = [
 	{
 		id: 1,
 		group: 'hotFood',
-		title: 'یوسف سرد',
+		title: 'ساندویچ همبرگر',
 		image: '/images/3.jpg',
 		price: 40_000,
 		isDiscount: false,
@@ -13,7 +13,7 @@ const products = [
 	{
 		id: 2,
 		group: 'coldFood',
-		title: 'یوسف گرم',
+		title: 'ساندویچ کالباس',
 		image: '/images/3.jpg',
 		price: 30_000,
 		isDiscount: false,
@@ -22,7 +22,7 @@ const products = [
 	{
 		id: 3,
 		group: 'hotDrink',
-		title: 'یوسف ۱',
+		title: 'چای',
 		image: '/images/2.jpg',
 		price: 20_000,
 		isDiscount: true,
@@ -31,7 +31,7 @@ const products = [
 	{
 		id: 4,
 		group: 'coldDrink',
-		title: 'یوسف ۲',
+		title: 'نوشابه کوکاکولا',
 		image: '/images/1.jpg',
 		price: 10_000,
 		isDiscount: false,
@@ -40,7 +40,7 @@ const products = [
 	{
 		id: 5,
 		group: 'edible',
-		title: 'یوسف ۳',
+		title: 'کیک تاینی',
 		image: '/images/2.jpg',
 		price: 5_000,
 		isDiscount: false,
@@ -49,7 +49,7 @@ const products = [
 	{
 		id: 6,
 		group: 'coldFood',
-		title: 'یوسف دنده به دنده',
+		title: 'اسنک نوتلا',
 		image: '/images/3.jpg',
 		price: 10_000,
 		isDiscount: true,
@@ -58,7 +58,7 @@ const products = [
 	{
 		id: 7,
 		group: 'hotFood',
-		title: 'یوسف بشقاب پرنده',
+		title: 'ساندویچ ماکارانی',
 		image: '/images/4.jpg',
 		price: 50_000,
 		isDiscount: false,
@@ -67,7 +67,7 @@ const products = [
 	{
 		id: 8,
 		group: 'coldDrink',
-		title: 'یوسف چرا نمیخنده',
+		title: 'ماالشعیر جو',
 		image: '/images/1.jpg',
 		price: 60_000,
 		isDiscount: false,

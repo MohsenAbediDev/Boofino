@@ -1,7 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import productDatas from '../../../datas'
+
 //? Toggle Hoc
 import withToggle from '../Hocs/withToggle'
+
 //? Icon's
 import {
 	AiOutlineUser,
@@ -13,6 +16,26 @@ import { BiLogOut } from 'react-icons/bi'
 import { IoWalletOutline } from 'react-icons/io5'
 
 function Navbar({ toggleValue, toggleHandler }) {
+	const [products, setProducts] = useState(productDatas)
+	const [searchTerm, setSearchTerm] = useState('')
+	const [searchResults, setSearchResults] = useState([])
+	const [showSearchResult, setShowSearchResult] = useState(false)
+
+	const performSearch = (value) => {
+		const results = products.filter((data) => data.title.includes(value.trim()))
+
+		return results
+	}
+
+	const handleSearchChange = (event) => {
+		const { value } = event.target
+		setSearchTerm(value)
+
+		const results = performSearch(value)
+		setSearchResults(results)
+
+		!value && setSearchResults([])
+	}
 	const dropdown = useRef()
 	const overlay = useRef()
 
@@ -45,7 +68,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 						بوفینو
 					</Link>
 
-					<div className='flex items-center w-[30rem] h-[55px] bg-primary bg-opacity-[85%] rounded-[8px] overflow-hidden px-6 sm:mx-2.5'>
+					{/* Search */}
+					<div className='relative flex items-center w-[30rem] h-[55px] bg-primary bg-opacity-[85%] rounded-[8px] px-6 sm:mx-2.5'>
 						{/* Search Input Icon */}
 						<RiSearch2Line className='text-2xl text-[24px] text-white rotate-90' />
 						{/* Search Input */}
@@ -53,7 +77,37 @@ function Navbar({ toggleValue, toggleHandler }) {
 							type='text'
 							className='outline-none w-full h-full ps-1.5 bg-opacity-0 bg-primary text-[18px] ms-1 font-shabnam text-white placeholder:text-[18px] placeholder:font-shabnam placeholder:text-white placeholder:opacity-70'
 							placeholder='جستجوی غذا'
+							value={searchTerm}
+							onChange={handleSearchChange}
+							onFocus={() => setShowSearchResult(true)}
+							onBlur={() => setShowSearchResult(false)}
 						/>
+
+						{/* Show Search Result */}
+						{searchResults.length > 0 && showSearchResult && (
+							<div className='absolute w-full top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg'>
+								<ul>
+									{searchResults.map((result, index) => (
+										<li
+											className='dir-rtl font-shabnam flex items-center sm:items-start justify-between sm:flex-col py-2 border-b border-white'
+											key={index}
+										>
+											<div className='flex items-center'>
+												<img
+													className='w-14 h-14 bg-cover rounded-lg border border-white'
+													src={result.image}
+												/>
+												<p className='font-b text-xl mr-2'>{result.title}</p>
+											</div>
+
+											<button className='rounded-sm font-shabnam p-1 sm:my-2 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200'>
+												افزودن به سبد خرید
+											</button>
+										</li>
+									))}
+								</ul>
+							</div>
+						)}
 					</div>
 
 					{/* User Profile */}
