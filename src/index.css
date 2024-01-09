@@ -31,10 +31,10 @@ body {
 		@apply dir-rtl font-shabnam outline-none border-none w-full h-10 rounded-md hover:bottom-4 text-sm text-white bg-[#252525] pr-7 placeholder:text-sm;
 	}
 	.notification {
-		@apply hidden w-64 min-h-min transition-all duration-300 opacity-0 font-shabnam fixed gap-3 dir-rtl top-24 text-white bg-hoverBTN  rounded-lg p-3;
+		@apply invisible w-64 min-h-min transition-all duration-300 opacity-0 font-shabnam fixed gap-3 dir-rtl top-24 text-white bg-hoverBTN left-20 lg:left-14 rounded-lg p-3 flex;
 	}
 	.notification--show {
-		@apply visible flex left-20 lg:left-14 opacity-100;
+		@apply visible opacity-100;
 	}
 	.notification--error {
 		@apply text-red text-4xl h-full;
