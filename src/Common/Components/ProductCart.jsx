@@ -1,9 +1,8 @@
 import { FaMinus } from 'react-icons/fa'
-import products from '../../../datas';
-import { useEffect, useState } from 'react';
+import products from '../../../datas'
+import { useEffect, useState } from 'react'
 
-export default function ProductCart({ id, count , onRemove }) {
-
+export default function ProductCart({ id, count, onRemove }) {
 	const [datas, setDatas] = useState(products)
 	const [mainData, setMainData] = useState({})
 	const [productCount, setProductCount] = useState(count)
@@ -11,7 +10,7 @@ export default function ProductCart({ id, count , onRemove }) {
 	// get product cart items when component loeaded
 	useEffect(() => {
 		if (count && id) {
-			const findProduct = datas.findIndex(data => data.id === id)
+			const findProduct = datas.findIndex((data) => data.id === id)
 			setMainData(datas[findProduct])
 		}
 	}, [])
@@ -19,7 +18,7 @@ export default function ProductCart({ id, count , onRemove }) {
 	// add count of product from Cart
 	const addCount = () => {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex(product => product.id === id)
+		const mainDataInedx = productData.findIndex((product) => product.id === id)
 		productData[mainDataInedx].count = productData[mainDataInedx].count + 1
 		localStorage.setItem('productCart', JSON.stringify(productData))
 
@@ -29,7 +28,7 @@ export default function ProductCart({ id, count , onRemove }) {
 	// min count of product from Cart
 	const minCount = () => {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex(product => product.id === id)
+		const mainDataInedx = productData.findIndex((product) => product.id === id)
 		productData[mainDataInedx].count = productData[mainDataInedx].count - 1
 
 		if (productData[mainDataInedx].count <= 0) {
@@ -40,14 +39,12 @@ export default function ProductCart({ id, count , onRemove }) {
 			localStorage.setItem('productCart', JSON.stringify(productData))
 			setProductCount(productData[mainDataInedx].count)
 		}
-
 	}
 
 	const removeHadnler = () => {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex(product => product.id === id)
+		const mainDataInedx = productData.findIndex((product) => product.id === id)
 
-		
 		productData.splice(mainDataInedx, 1)
 		localStorage.setItem('productCart', JSON.stringify(productData))
 
@@ -73,18 +70,25 @@ export default function ProductCart({ id, count , onRemove }) {
 						</p>
 
 						{/* Food Category */}
-						<p className='text-white text-xl md:mt-2 md:text-lg'>{
-							mainData.group === "hotFood" ? 'غذای گرم'
-								: mainData.group === "coldFood" ? 'غذای سرد'
-									: mainData.group === "hotDrink" ? 'نوشیدنی داغ'
-										: mainData.group === "coldDrink" ? 'نوشیدنی خنک'
-											: mainData.group === "edible" ? 'خوراکی'
-												: 'غیره'
-						}</p>
+						<p className='text-white text-xl md:mt-2 md:text-lg'>
+							{mainData.group === 'hotFood'
+								? 'غذای گرم'
+								: mainData.group === 'coldFood'
+								? 'غذای سرد'
+								: mainData.group === 'hotDrink'
+								? 'نوشیدنی داغ'
+								: mainData.group === 'coldDrink'
+								? 'نوشیدنی خنک'
+								: mainData.group === 'edible'
+								? 'خوراکی'
+								: 'غیره'}
+						</p>
 
 						{/* Mobile Responsive Price */}
 						<div className='hidden md:block my-2'>
-							<span className='text-white text-xl'>{(+mainData.price) * (+productCount)}</span>
+							<span className='text-white text-xl'>
+								{+mainData.price * +productCount}
+							</span>
 							<span className='text-white text-lg ms-1'>تومان</span>
 						</div>
 
@@ -92,17 +96,27 @@ export default function ProductCart({ id, count , onRemove }) {
 						<div className='flex gap-3 md:mt-2'>
 							<div>
 								<div className='cart-button flex items-center justify-between text-xl border-white text-white'>
-									<button className='mx-4 cursor-pointer outline-none md:mx-2.5' onClick={addCount}>+</button>
+									<button
+										className='mx-4 cursor-pointer outline-none md:mx-2.5'
+										onClick={addCount}
+									>
+										+
+									</button>
 
 									<span>{productCount}</span>
 
-									<button className='mx-4 cursor-pointer outline-none md:mx-2.5' onClick={minCount}>
+									<button
+										className='mx-4 cursor-pointer outline-none md:mx-2.5'
+										onClick={minCount}
+									>
 										<FaMinus className='text-sm' />
 									</button>
 								</div>
 							</div>
-							<button className='cart-button w-28 text-red border-red hover:bg-red text-xl hover:text-white transition-all duration-200 md:w-20'
-							onClick={removeHadnler}>
+							<button
+								className='cart-button w-28 text-red border-red hover:bg-red text-xl hover:text-white transition-all duration-200 md:w-20'
+								onClick={removeHadnler}
+							>
 								حذف
 							</button>
 						</div>
@@ -110,7 +124,9 @@ export default function ProductCart({ id, count , onRemove }) {
 
 					{/* Desktop Responsive Price */}
 					<div className='md:hidden'>
-						<span className='text-white text-2xl'>{(+mainData.price) * (+productCount)}</span>
+						<span className='text-white text-2xl'>
+							{+mainData.price * +productCount}
+						</span>
 						<span className='text-white text-2xl ms-1'>تومان</span>
 					</div>
 				</div>
