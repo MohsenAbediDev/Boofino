@@ -85,11 +85,12 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 						{/* Show Search Result */}
 						{searchResults.length > 0 && showSearchResult && (
-							<div className='absolute w-full top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg'>
-								<ul>
+							<div className='absolute w-full h-[70vh] overflow-y-scroll scroll top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg 
+							md:no-scroll'>
+								<ul className='divide-y-[1px] divide-price'>
 									{searchResults.map((result, index) => (
 										<li
-											className='dir-rtl font-shabnam flex items-center sm:items-start justify-between sm:flex-col py-2 border-b border-white'
+											className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
 											key={index}
 										>
 											<div className='flex items-center'>
@@ -97,12 +98,17 @@ function Navbar({ toggleValue, toggleHandler }) {
 													className='w-14 h-14 bg-cover rounded-lg border border-white'
 													src={result.image}
 												/>
-												<p className='font-b text-xl mr-2'>{result.title}</p>
+												<p className='font-b text-xl mr-2 md:text-lg'>{result.title}</p>
 											</div>
-
-											<button className='rounded-sm font-shabnam p-1 sm:my-2 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200'>
-												افزودن به سبد خرید
-											</button>
+											<div className='flex w-full items-center justify-between my-2'>
+												<button className='rounded-md font-shabnam p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200 
+												md:text-xs md:h-7 md:px-2'>
+													افزودن به سبد خرید
+												</button>
+												<p className='text-md sm:text-sm'>
+													{result.price} تومان
+												</p>
+											</div>
 										</li>
 									))}
 								</ul>
