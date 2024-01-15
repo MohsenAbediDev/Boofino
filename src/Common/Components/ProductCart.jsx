@@ -1,7 +1,7 @@
 import { FaMinus } from 'react-icons/fa'
 import products from '../../../datas'
 import { useEffect, useState } from 'react'
-import { addCount, minCount } from '../../utils/utils'
+import { addCount, minCount, removeProduct } from '../../utils/utils'
 
 export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	const [datas, setDatas] = useState(products)
@@ -30,11 +30,7 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	}
 
 	const removeHadnler = () => {
-		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex((product) => product.id === id)
-
-		productData.splice(mainDataInedx, 1)
-		localStorage.setItem('productCart', JSON.stringify(productData))
+		removeProduct(id)
 
 		onRemove()
 		totalPrice()

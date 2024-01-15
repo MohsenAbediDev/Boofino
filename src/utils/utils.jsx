@@ -35,6 +35,7 @@ const minCount = (setCount, id) => {
 }
 
 const addToCart = (setCount, setId, id) => {
+    // get current datas
     const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
     setCount(1)
 
@@ -59,7 +60,7 @@ const addToCart = (setCount, setId, id) => {
     }
 }
 
-const removeProduct = (id) => {
+const removeProduct = id => {
     const productData = JSON.parse(localStorage.getItem('productCart'))
     const mainDataInedx = productData.findIndex((product) => product.id === id)
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productDatas from '../../../datas'
-import { addToCart } from '../../utils/utils'
+import { addToCart, removeProduct } from '../../utils/utils'
 
 //? Toggle Hoc
 import withToggle from '../Hocs/withToggle'
@@ -31,14 +31,18 @@ function Navbar({ toggleValue, toggleHandler }) {
 	}
 
 	useEffect(() => {
+		getIds()
+	}, [])
+
+	const getIds = () => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 
-		const mainProductCartID = mainProductCart
+		const newProductsId = mainProductCart
 			? mainProductCart.map((product) => product.id)
 			: []
 
-		setProductsID(mainProductCartID)
-	}, [])
+		setProductsID(newProductsId)
+	}
 
 	const handleSearchChange = (event) => {
 		const { value } = event.target
@@ -92,8 +96,11 @@ function Navbar({ toggleValue, toggleHandler }) {
 							placeholder='جستجوی غذا'
 							value={searchTerm}
 							onChange={handleSearchChange}
-							onFocus={() => setShowSearchResult(true)}
-						// onBlur={() => setShowSearchResult(false)}
+							onFocus={() => {
+								setShowSearchResult(true)
+								getIds()
+							}}
+						onBlur={() => setShowSearchResult(false)}
 						/>
 
 						{/* Show Search Result */}
@@ -125,7 +132,9 @@ function Navbar({ toggleValue, toggleHandler }) {
 													<button
 														className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200 
 														md:text-xs md:h-7 md:px-2'
-														onClick={() => addToCart(setCount, productsID, result.id)}
+														onClick={() => {
+															addToCart(setCount, setProductsID, result.id)
+														}}
 													>
 														افزودن به سبد خرید
 													</button>
@@ -133,7 +142,10 @@ function Navbar({ toggleValue, toggleHandler }) {
 													<button
 														className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200 
 														md:text-xs md:h-7 md:px-2'
-														onClick={() => console.log('salam')}
+														onClick={() => {
+															removeProduct(result.id)
+															getIds()
+														}}
 													>
 														حذف از سبد خرید
 													</button>
