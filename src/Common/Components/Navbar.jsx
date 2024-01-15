@@ -100,7 +100,9 @@ function Navbar({ toggleValue, toggleHandler }) {
 								setShowSearchResult(true)
 								getIds()
 							}}
-						onBlur={() => setShowSearchResult(false)}
+							onBlur={(e) => {
+								e.relatedTarget ? '' : setShowSearchResult(false)
+							}}
 						/>
 
 						{/* Show Search Result */}
@@ -149,9 +151,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 													>
 														حذف از سبد خرید
 													</button>
-												)
-
-												}
+												)}
 											</div>
 										</li>
 									))}
