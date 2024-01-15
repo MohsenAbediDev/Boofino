@@ -17,6 +17,7 @@ export default function FoodCard({
 	// add product to Cart
 	const addToCart = () => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
+		setCount(1)
 
 		const mainProductCartID = mainProductCart
 			? mainProductCart.map((product) => product.id)
@@ -46,6 +47,16 @@ export default function FoodCard({
 	const minProductCount = () => {
 		minCount(setCount, id)
 	}
+
+
+	// remove product from cart
+	useEffect(() => {
+		if (count < 1) {
+			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
+			const productsId = mainProductCart.map(product => product.id)
+			setProductsID(productsId)
+		}
+	}, [count])
 
 	useEffect(() => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))

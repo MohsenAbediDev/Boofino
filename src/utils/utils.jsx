@@ -27,10 +27,36 @@ const minCount = (setCount, id) => {
     if (productData[mainDataInedx].count <= 0) {
         productData.splice(mainDataInedx, 1)
         localStorage.setItem('productCart', JSON.stringify(productData))
+        setCount(0)
     } else {
         localStorage.setItem('productCart', JSON.stringify(productData))
         setCount(productData[mainDataInedx].count)
     }
 }
 
-export { addCount, minCount }
+const addToCart = (setCount, setId, id) => {
+    const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
+    setCount(1)
+
+    const mainProductCartID = mainProductCart
+        ? mainProductCart.map((product) => product.id)
+        : []
+
+    if (!mainProductCartID.includes(id)) {
+        if (!mainProductCart) {
+            localStorage.setItem(
+                'productCart',
+                JSON.stringify([{ id: id, count: 1 }])
+            )
+            setId([id])
+        } else {
+            localStorage.setItem(
+                'productCart',
+                JSON.stringify([...mainProductCart, { id: id, count: 1 }])
+            )
+            setId([...mainProductCartID, id])
+        }
+    }
+}
+
+export { addCount, minCount, addToCart }
