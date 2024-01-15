@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { addCount, minCount } from '../../utils/utils'
+import { addCount, minCount, addToCart } from '../../utils/utils'
 
 export default function FoodCard({
 	id,
@@ -15,29 +15,8 @@ export default function FoodCard({
 	const inputRef = useRef()
 
 	// add product to Cart
-	const addToCart = () => {
-		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-		setCount(1)
-
-		const mainProductCartID = mainProductCart
-			? mainProductCart.map((product) => product.id)
-			: []
-
-		if (!mainProductCartID.includes(id)) {
-			if (!mainProductCart) {
-				localStorage.setItem(
-					'productCart',
-					JSON.stringify([{ id: id, count: 1 }])
-				)
-				setProductsID([id])
-			} else {
-				localStorage.setItem(
-					'productCart',
-					JSON.stringify([...mainProductCart, { id: id, count: 1 }])
-				)
-				setProductsID([...mainProductCartID, id])
-			}
-		}
+	const addProductToCart = () => {
+		addToCart(setCount, setProductsID, id)
 	}
 
 	const addProductCount = () => {
@@ -130,7 +109,7 @@ export default function FoodCard({
 					{!productsID.includes(id) ? (
 						<button
 							className='bg-primaryBTN hover:bg-hoverBTN transition-colors w-full h-8 font-shabnam text-white rounded-md absolute bottom-0'
-							onClick={addToCart}
+							onClick={addProductToCart}
 						>
 							افزودن به سبد خرید
 						</button>
