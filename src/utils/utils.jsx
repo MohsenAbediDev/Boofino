@@ -59,4 +59,13 @@ const addToCart = (setCount, setId, id) => {
     }
 }
 
-export { addCount, minCount, addToCart }
+const removeProduct = (id) => {
+    const productData = JSON.parse(localStorage.getItem('productCart'))
+    const mainDataInedx = productData.findIndex((product) => product.id === id)
+
+    productData.splice(mainDataInedx, 1)
+    localStorage.setItem('productCart', JSON.stringify(productData))
+}
+
+
+export { addCount, minCount, addToCart, removeProduct }

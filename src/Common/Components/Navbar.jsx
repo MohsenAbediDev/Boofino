@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productDatas from '../../../datas'
+import { addToCart } from '../../utils/utils'
 
 //? Toggle Hoc
 import withToggle from '../Hocs/withToggle'
@@ -20,12 +21,24 @@ function Navbar({ toggleValue, toggleHandler }) {
 	const [searchTerm, setSearchTerm] = useState('')
 	const [searchResults, setSearchResults] = useState([])
 	const [showSearchResult, setShowSearchResult] = useState(false)
+	const [productsID, setProductsID] = useState([])
+	const [count, setCount] = useState(1)
 
 	const performSearch = (value) => {
 		const results = products.filter((data) => data.title.includes(value.trim()))
 
 		return results
 	}
+
+	useEffect(() => {
+		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
+
+		const mainProductCartID = mainProductCart
+			? mainProductCart.map((product) => product.id)
+			: []
+
+		setProductsID(mainProductCartID)
+	}, [])
 
 	const handleSearchChange = (event) => {
 		const { value } = event.target
@@ -80,7 +93,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 							value={searchTerm}
 							onChange={handleSearchChange}
 							onFocus={() => setShowSearchResult(true)}
-							onBlur={() => setShowSearchResult(false)}
+						// onBlur={() => setShowSearchResult(false)}
 						/>
 
 						{/* Show Search Result */}
@@ -108,12 +121,25 @@ function Navbar({ toggleValue, toggleHandler }) {
 												<p className='text-xl sm:text-lg text-center'>
 													{result.price} تومان
 												</p>
-												<button
-													className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200 
-												md:text-xs md:h-7 md:px-2'
-												>
-													افزودن به سبد خرید
-												</button>
+												{!productsID.includes(result.id) ? (
+													<button
+														className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200 
+														md:text-xs md:h-7 md:px-2'
+														onClick={() => addToCart(setCount, productsID, result.id)}
+													>
+														افزودن به سبد خرید
+													</button>
+												) : (
+													<button
+														className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200 
+														md:text-xs md:h-7 md:px-2'
+														onClick={() => console.log('salam')}
+													>
+														حذف از سبد خرید
+													</button>
+												)
+
+												}
 											</div>
 										</li>
 									))}
