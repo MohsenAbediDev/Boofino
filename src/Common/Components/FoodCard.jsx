@@ -39,11 +39,11 @@ export default function FoodCard({
 		}
 	}
 
-	const addKos = () => {
+	const addProductCount = () => {
 		addCount(setCount, id)
 	}
 
-	const minKos = () => {
+	const minProductCount = () => {
 		minCount(setCount, id)
 	}
 
@@ -127,7 +127,7 @@ export default function FoodCard({
 						<div className='w-full h-8 font-shabnam text-white absolute bottom-0 flex justify-center gap-x-2'>
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={addKos}
+								onClick={addProductCount}
 							>
 								+
 							</button>
@@ -144,7 +144,7 @@ export default function FoodCard({
 
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={minKos}
+								onClick={minProductCount}
 							>
 								-
 							</button>

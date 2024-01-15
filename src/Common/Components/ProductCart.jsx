@@ -1,6 +1,7 @@
 import { FaMinus } from 'react-icons/fa'
 import products from '../../../datas'
 import { useEffect, useState } from 'react'
+import { addCount, minCount } from '../../utils/utils'
 
 export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	const [datas, setDatas] = useState(products)
@@ -16,29 +17,14 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	}, [])
 
 	// add count of product from Cart
-	const addCount = () => {
-		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex((product) => product.id === id)
-		productData[mainDataInedx].count = productData[mainDataInedx].count + 1
-		localStorage.setItem('productCart', JSON.stringify(productData))
-
-		setProductCount(productData[mainDataInedx].count)
+	const addProductCount = () => {
+		addCount(setProductCount, id)
 		totalPrice()
 	}
 
 	// min count of product from Cart
-	const minCount = () => {
-		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex((product) => product.id === id)
-		productData[mainDataInedx].count = productData[mainDataInedx].count - 1
-
-		if (productData[mainDataInedx].count <= 0) {
-			productData.splice(mainDataInedx, 1)
-			localStorage.setItem('productCart', JSON.stringify(productData))
-		} else {
-			localStorage.setItem('productCart', JSON.stringify(productData))
-			setProductCount(productData[mainDataInedx].count)
-		}
+	const minProductCount = () => {
+		minCount(setProductCount, id)
 		onRemove()
 		totalPrice()
 	}
@@ -101,7 +87,7 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 								<div className='cart-button flex items-center justify-between text-xl border-white text-white'>
 									<button
 										className='mx-4 cursor-pointer outline-none md:mx-2.5'
-										onClick={addCount}
+										onClick={addProductCount}
 									>
 										+
 									</button>
@@ -110,7 +96,7 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 
 									<button
 										className='mx-4 cursor-pointer outline-none md:mx-2.5'
-										onClick={minCount}
+										onClick={minProductCount}
 									>
 										<FaMinus className='text-sm' />
 									</button>
