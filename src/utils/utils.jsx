@@ -1,5 +1,5 @@
 // add count funcrion
-const addCount = setCount => {
+const addCount = (setCount, id) => {
     // get current datas
     const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
     const mainProductIndex = mainProductCart
@@ -18,7 +18,7 @@ const addCount = setCount => {
 }
 
 // min count function
-const minCount = setCount => {
+const minCount = (setCount, id) => {
     // get current datas
     const productData = JSON.parse(localStorage.getItem('productCart'))
     const mainDataInedx = productData.findIndex((product) => product.id === id)

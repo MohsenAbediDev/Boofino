@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { addCount, minCount } from '../../utils/utils'
 
 export default function FoodCard({
 	id,
@@ -38,37 +39,12 @@ export default function FoodCard({
 		}
 	}
 
-	const addCount = () => {
-		// get current datas
-		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-		const mainProductIndex = mainProductCart
-			? mainProductCart.findIndex((product) => product.id === id)
-			: -1
-
-		// add count of product from Cart
-		if (mainProductIndex !== -1) {
-			const productData = JSON.parse(localStorage.getItem('productCart'))
-			const mainDataInedx = productData.findIndex((product) => product.id === id)
-			productData[mainDataInedx].count = productData[mainDataInedx].count + 1
-			localStorage.setItem('productCart', JSON.stringify(productData))
-
-			setCount(productData[mainDataInedx].count)
-		}
+	const addKos = () => {
+		addCount(setCount, id)
 	}
 
-	const minCount = () => {
-		// get current datas
-		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex((product) => product.id === id)
-		productData[mainDataInedx].count = productData[mainDataInedx].count - 1
-
-		if (productData[mainDataInedx].count <= 0) {
-			productData.splice(mainDataInedx, 1)
-			localStorage.setItem('productCart', JSON.stringify(productData))
-		} else {
-			localStorage.setItem('productCart', JSON.stringify(productData))
-			setCount(productData[mainDataInedx].count)
-		}
+	const minKos = () => {
+		minCount(setCount, id)
 	}
 
 	useEffect(() => {
@@ -151,7 +127,7 @@ export default function FoodCard({
 						<div className='w-full h-8 font-shabnam text-white absolute bottom-0 flex justify-center gap-x-2'>
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={addCount}
+								onClick={addKos}
 							>
 								+
 							</button>
@@ -168,7 +144,7 @@ export default function FoodCard({
 
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={minCount}
+								onClick={minKos}
 							>
 								-
 							</button>
