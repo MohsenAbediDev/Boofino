@@ -101,7 +101,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 								getIds()
 							}}
 							onBlur={(e) => {
-								e.relatedTarget ? '' : setShowSearchResult(false)
+								e.relatedTarget ? e.target.focus() : setShowSearchResult(false)
 							}}
 						/>
 
