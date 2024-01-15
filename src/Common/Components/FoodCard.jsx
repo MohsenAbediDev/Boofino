@@ -47,55 +47,27 @@ export default function FoodCard({
 
 		// add count of product from Cart
 		if (mainProductIndex !== -1) {
-			mainProductCart[mainProductIndex].count =
-				mainProductCart[mainProductIndex].count + 1
+			const productData = JSON.parse(localStorage.getItem('productCart'))
+			const mainDataInedx = productData.findIndex((product) => product.id === id)
+			productData[mainDataInedx].count = productData[mainDataInedx].count + 1
+			localStorage.setItem('productCart', JSON.stringify(productData))
 
-			const newItem = mainProductCart[mainProductIndex]
-
-			mainProductCart.splice(mainProductIndex, 1)
-
-			const newArray = [...mainProductCart, newItem]
-
-			localStorage.setItem('productCart', JSON.stringify(newArray))
-
-			inputRef.current.value = newItem.count
+			setCount(productData[mainDataInedx].count)
 		}
 	}
 
 	const minCount = () => {
 		// get current datas
-		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-		const mainProductIndex = mainProductCart
-			? mainProductCart.findIndex((product) => product.id === id)
-			: -1
+		const productData = JSON.parse(localStorage.getItem('productCart'))
+		const mainDataInedx = productData.findIndex((product) => product.id === id)
+		productData[mainDataInedx].count = productData[mainDataInedx].count - 1
 
-		if (mainProductIndex !== -1) {
-			mainProductCart[mainProductIndex].count =
-				mainProductCart[mainProductIndex].count - 1
-
-			const newItem = mainProductCart[mainProductIndex]
-
-			// remove product from Cart
-			if (newItem.count === 0) {
-				const findID = productsID.findIndex((ID) => ID === newItem.id)
-
-				setProductsID((prevIDs) => {
-					return prevIDs.splice(findID, 1)
-				})
-
-				mainProductCart.splice(mainProductIndex, 1)
-
-				localStorage.setItem('productCart', JSON.stringify(mainProductCart))
-			} else {
-				// min count of product from Cart
-				mainProductCart.splice(mainProductIndex, 1)
-
-				const newArray = [...mainProductCart, newItem]
-
-				localStorage.setItem('productCart', JSON.stringify(newArray))
-
-				inputRef.current.value = newItem.count
-			}
+		if (productData[mainDataInedx].count <= 0) {
+			productData.splice(mainDataInedx, 1)
+			localStorage.setItem('productCart', JSON.stringify(productData))
+		} else {
+			localStorage.setItem('productCart', JSON.stringify(productData))
+			setCount(productData[mainDataInedx].count)
 		}
 	}
 

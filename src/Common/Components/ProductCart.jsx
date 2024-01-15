@@ -35,11 +35,11 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 		if (productData[mainDataInedx].count <= 0) {
 			productData.splice(mainDataInedx, 1)
 			localStorage.setItem('productCart', JSON.stringify(productData))
-			onRemove()
 		} else {
 			localStorage.setItem('productCart', JSON.stringify(productData))
 			setProductCount(productData[mainDataInedx].count)
 		}
+		onRemove()
 		totalPrice()
 	}
 
