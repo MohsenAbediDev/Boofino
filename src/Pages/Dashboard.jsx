@@ -6,10 +6,13 @@ import { IoWalletOutline } from 'react-icons/io5'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { MdOutlineArrowBackIos, MdExitToApp } from 'react-icons/md'
+import { MdAddCircleOutline } from 'react-icons/md'
+import { MdOutlineModeEditOutline } from "react-icons/md";
 
 export default function Dashboard() {
 	const params = useParams()
 	const dashboardRoute = useRef()
+	const admin = true
 
 	useEffect(() => {
 		if (params['*']) {
@@ -76,6 +79,34 @@ export default function Dashboard() {
 						<MdOutlineArrowBackIos />
 					</NavLink>
 
+					{admin && (
+						<NavLink
+							to='./add-product'
+							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+                    hover:bg-dashboardItemActive transition-all duration-200'
+						>
+							<div className='flex items-center'>
+								<MdAddCircleOutline />
+								<span className='mx-2'>افزودن محصول</span>
+							</div>
+							<MdOutlineArrowBackIos />
+						</NavLink>
+					)}
+
+					{admin && (
+						<NavLink
+							to='./edit-product'
+							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+                    hover:bg-dashboardItemActive transition-all duration-200'
+						>
+							<div className='flex items-center'>
+								<MdOutlineModeEditOutline />
+								<span className='mx-2'>ویرایش محصول</span>
+							</div>
+							<MdOutlineArrowBackIos />
+						</NavLink>
+					)}
+
 					<NavLink
 						to='cart'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
@@ -89,7 +120,7 @@ export default function Dashboard() {
 					</NavLink>
 
 					<NavLink
-						to='#'
+						to='/logout'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
                     hover:bg-dashboardItemActive transition-colors duration-200'
 					>
