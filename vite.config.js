@@ -6,8 +6,8 @@ const pwaConfigs = {
 	manifest: {
 		name: 'Boofino',
 		short_name: 'Boofino',
-		background_color: '#e8aa17',
-		theme_color: '#e8aa17',
+		background_color: '#0b0b0b',
+		theme_color: '#0b0b0b',
 		start_url: '/',
 		scope: '/',
 		display: 'standalone',
@@ -15,6 +15,12 @@ const pwaConfigs = {
 		description: 'خرید آنلاین از بوفه مدارس',
 		lang: 'fa',
 		icons: [
+			{
+				src: 'icons/icon-36x36.png',
+				sizes: '36x36',
+				type: 'image/png',
+				purpose: 'maskable any',
+			},
 			{
 				src: 'icons/icon-48x48.png',
 				sizes: '48x48',
