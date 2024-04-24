@@ -1,6 +1,6 @@
 export default function InfoUser() {
 	return (
-		<div className='w-full h-1/2 sm:h-full px-2 py-5 flex flex-col rounded-2xl text-xl text-white bg-secondary'>
+		<div className='w-full h-1/2 lg:h-full px-2 py-5 flex flex-col rounded-2xl text-xl text-white bg-secondary'>
 			<div className='flex items-center justify-between'>
 				<div className='flex items-center'>
 					<img
@@ -15,8 +15,8 @@ export default function InfoUser() {
 				</a>
 			</div>
 
-			<div className='border mt-5 rounded-lg flex sm:flex-col p-2'>
-				<div className='border-l sm:border-l-0 sm:border-b border-white p-2 mb-5'>
+			<div className='border mt-5 rounded-lg flex lg:flex-col p-2'>
+				<div className='border-l lg:border-l-0 lg:border-b border-white p-2 mb-5'>
 					<p className='text-lg sm:text-sm text-[#c7c6c6]'>
 						نام و نام خانوادگی
 					</p>
@@ -24,7 +24,7 @@ export default function InfoUser() {
 					<span className='text-lg text-white mt-1'>یوسف حاجی پور</span>
 				</div>
 
-				<div className='border-l sm:border-l-0 sm:border-b border-white p-2 mb-5'>
+				<div className='border-l lg:border-l-0 lg:border-b border-white p-2 mb-5'>
 					<p className='text-lg sm:text-sm text-[#c7c6c6]'>شماره همراه</p>
 
 					<span className='text-lg text-white mt-1'>09215647908</span>
