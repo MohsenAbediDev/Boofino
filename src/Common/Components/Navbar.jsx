@@ -11,10 +11,11 @@ import {
 	AiOutlineUser,
 	AiOutlineHome,
 	AiOutlineShoppingCart,
+	AiOutlineDashboard,
 } from 'react-icons/ai'
+import { IoDocumentTextOutline } from 'react-icons/io5'
 import { RiSearch2Line } from 'react-icons/ri'
-import { BiLogOut } from 'react-icons/bi'
-import { IoWalletOutline } from 'react-icons/io5'
+import { MdExitToApp } from 'react-icons/md'
 
 function Navbar({ toggleValue, toggleHandler }) {
 	const [products, setProducts] = useState(productDatas)
@@ -82,7 +83,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 						to='/'
 						className='text-white font-normal text-[20px] font-shabnam cp'
 					>
-						بوفینو
+						<img class="w-24" src="icons/logo.png" alt="boofino" /> 
 					</Link>
 
 					{/* Search */}
@@ -205,7 +206,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
 								>
 									<span className='flex items-center gap-x-3'>
-										<IoWalletOutline className='w-5 h-5' />
+										<AiOutlineDashboard className='w-5 h-5' />
 										داشبورد
 									</span>
 								</Link>
@@ -220,13 +221,26 @@ function Navbar({ toggleValue, toggleHandler }) {
 									</span>
 								</Link>
 
+								<Link
+									to='/dashboard'
+									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
+								>
+									<span className='flex items-center gap-x-3'>
+										<IoDocumentTextOutline className='w-5 h-5' />
+										سفارش‌های من
+									</span>
+								</Link>
+
 								<div className='mt-2 pt-2 border-t border-t-gray-200'>
-									<div className='cp flex items-center justify-between text-zinc-700 px-2.5 py-2.5 rounded-xl hover:bg-hoverDropDownLink transition-colors'>
+									<Link
+										to='/logout'
+										className='cp flex items-center justify-between text-zinc-700 px-2.5 py-2.5 rounded-xl hover:bg-hoverDropDownLink transition-colors'
+									>
 										<span className='flex items-center gap-x-3'>
-											<BiLogOut className='w-5 h-5' />
+											<MdExitToApp className='w-5 h-5 text-red' />
 											خروج
 										</span>
-									</div>
+									</Link>
 								</div>
 							</div>
 						</div>
