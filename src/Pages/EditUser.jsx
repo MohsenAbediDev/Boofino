@@ -79,7 +79,7 @@ export default function EditUser() {
 
 			{/* Overlay in Backdrop Navbar */}
 			<div
-				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all ${isShowModal ? 'show' : 'hide'}`}
+				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${isShowModal ? 'show' : 'hide'}`}
 			>
 			</div>
 
