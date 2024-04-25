@@ -83,7 +83,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 						to='/'
 						className='text-white font-normal text-[20px] font-shabnam cp'
 					>
-						<img class="w-24" src="icons/logo.png" alt="boofino" /> 
+						<img className="w-24" src="icons/logo.png" alt="boofino" /> 
 					</Link>
 
 					{/* Search */}
