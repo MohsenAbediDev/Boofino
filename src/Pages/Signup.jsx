@@ -3,6 +3,7 @@ import { CiUser, CiPhone, CiMail, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signup() {
+	const [nameInputValue, setNameInputValue] = useState('')
 	const [usernameInputValue, setUsernameInputValue] = useState('')
 	const [phoneInputValue, setPhoneInputValue] = useState('')
 	const [emailInputValue, setEmailInputValue] = useState('')
@@ -78,7 +79,7 @@ export default function Signup() {
 				<span className='mt-5 font-bold text-4xl'>بوفینو</span>
 
 				{/* Signup Form */}
-				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[25rem] rounded-lg bg-secondary'>
+				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[26rem] rounded-lg bg-secondary'>
 					<p className='mt-5 text-2xl font-bold'>عضویت</p>
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
@@ -89,7 +90,19 @@ export default function Signup() {
 					</div>
 
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
-						{/* User Input */}
+						{/* Name Input */}
+						<div className='relative mt-2 w-[70%] dir-rtl'>
+							<CiUser className='absolute top-2 right-1.5 text-[#8f95a0]' />
+
+							<input
+								className='form-input'
+								onChange={(e) => setNameInputValue(e.target.value)}
+								type='text'
+								placeholder='نام و نام خانوادگی'
+							/>
+						</div>
+
+						{/* Username Input */}
 						<div className='relative mt-5 w-[70%] dir-rtl'>
 							<CiUser className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
@@ -97,7 +110,7 @@ export default function Signup() {
 								className='form-input'
 								onChange={(e) => setUsernameInputValue(e.target.value)}
 								type='text'
-								placeholder='نام و نام خانوادگی'
+								placeholder='نام کاربری'
 							/>
 						</div>
 
