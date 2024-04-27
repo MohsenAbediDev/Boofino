@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
@@ -32,75 +32,24 @@ export default function Signup() {
 			body: JSON.stringify(userData),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
-			.catch((error) => console.log(error))
+			.then((data) => validateInputValues(data))
+			.catch((error) => validateInputValues(error))
 	}
 
-	const [validationStatus, setValidationStatus] = useState({
-		isValidname: false,
-		isValidUsername: false,
-		isValidPhone: false,
-		isValidPassword: false,
-		isValidConfirmPassword: false,
-	})
-
-	//? RegExp Patterns
-	const PhoneNumberPattern = /^09\d{9}$/
-
 	//? Validate Inputs Function
-	const validateInputValues = () => {
+	const validateInputValues = (response) => {
 		const notification = notificationBoxRef.current;
-	
-		const {
-			isValidname,
-			isValidUsername,
-			isValidPhone,
-			isValidPassword,
-			isValidConfirmPassword,
-		} = validationStatus;
-	
-		// Update Validation
-		const updatedValidationStatus = {
-			isValidname: !!nameInputValue,
-			isValidUsername: !!usernameInputValue,
-			isValidPhone: PhoneNumberPattern.test(phoneInputValue),
-			isValidPassword: passwordInputValue.length >= 8,
-			isValidConfirmPassword: confirmpasswordInputValue === passwordInputValue,
-		};
-	
-		setValidationStatus((prevStatus) => ({
-			...prevStatus,
-			...updatedValidationStatus,
-		}));
-	
-		// Set Error Message
-		let errorMessage = "لطفا ";
-	
-		if (!isValidname) {
-			errorMessage += "نام";
+
+		// Set message's
+		if (response.type == 'success') {
+      setErrorMessage('')
+			setSuccessMessage(response.message)
+		} 
+    if (response.type == 'error') {
+      setSuccessMessage('')
+			setErrorMessage(response.message)
 		}
-		if (!isValidUsername) {
-			errorMessage += errorMessage.endsWith(" ") ? "نام کاربری" : "، نام کاربری";
-		}
-		if (!isValidPhone) {
-			errorMessage += errorMessage.endsWith(" ") ? "شماره همراه" : "، شماره همراه";
-		}
-		if (!isValidPassword) {
-			errorMessage += errorMessage.endsWith(" ") ? "رمز عبور" : " و رمز عبور";
-		}
-	
-		if (!isValidUsername || !isValidPhone || !isValidPassword) {
-			errorMessage += " را به درستی وارد کنید";
-		}
-	
-		setErrorMessage(errorMessage);
-	
-		// Set Success Message
-		if (isValidUsername && isValidPhone && isValidPassword && isValidConfirmPassword) {
-			setSuccessMessage("ثبت نام با موفقیت انجام شد");
-			register();
-		}
-	
+		
 		// Show Notification
 		notification.classList.add("notification--show");
 	
@@ -190,7 +139,7 @@ export default function Signup() {
 
 						{/* Submit Form's */}
 						<button
-							onClick={validateInputValues}
+							onClick={register}
 							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'
 						>
 							ادامه
