@@ -1,6 +1,7 @@
 import Home from './Pages/Home'
 import NotFound from './Pages/NotFound'
 import Signup from './Pages/Signup'
+import Signin from './Pages/Signin'
 import Dashboard from './Pages/Dashboard'
 import Cart from './Pages/Cart'
 import EditUser from './Pages/EditUser'
@@ -10,6 +11,7 @@ const routes = [
 	{ path: '/', element: <Home /> },
 	{ path: '/*', element: <NotFound /> },
 	{ path: '/signup', element: <Signup /> },
+	{ path: '/login', element: <Signin /> },
 	
 	{
 		path: '/dashboard/*',

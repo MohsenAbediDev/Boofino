@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CiUser, CiPhone, CiMail, CiLock } from 'react-icons/ci'
+import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signup() {
@@ -8,11 +8,14 @@ export default function Signup() {
 	const [phoneInputValue, setPhoneInputValue] = useState('')
 	const [passwordInputValue, setPasswordInputValue] = useState('')
 	const [confirmpasswordInputValue, setConfirmPasswordInputValue] = useState('')
-	const notificationBoxRef = useRef()
+
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
+	const notificationBoxRef = useRef()
+
 	const register = () => {
+		// Set user data
 		const userData = {
 			username: usernameInputValue,
 			password: passwordInputValue,
@@ -20,6 +23,7 @@ export default function Signup() {
 			phonenumber: phoneInputValue,
 		}
 
+		// Post user data
 		fetch('http://localhost:3000/register', {
 			method: 'POST',
 			headers: {
