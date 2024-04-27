@@ -6,72 +6,106 @@ export default function Signup() {
 	const [nameInputValue, setNameInputValue] = useState('')
 	const [usernameInputValue, setUsernameInputValue] = useState('')
 	const [phoneInputValue, setPhoneInputValue] = useState('')
-	const [emailInputValue, setEmailInputValue] = useState('')
 	const [passwordInputValue, setPasswordInputValue] = useState('')
+	const [confirmpasswordInputValue, setConfirmPasswordInputValue] = useState('')
 	const notificationBoxRef = useRef()
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
+	const register = () => {
+		const userData = {
+			username: usernameInputValue,
+			password: passwordInputValue,
+			confirmpassword: confirmpasswordInputValue,
+			phonenumber: phoneInputValue,
+		}
+
+		fetch('http://localhost:3000/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userData),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((error) => console.log(error))
+	}
+
 	const [validationStatus, setValidationStatus] = useState({
+		isValidname: false,
 		isValidUsername: false,
 		isValidPhone: false,
-		isValidEmail: false,
 		isValidPassword: false,
+		isValidConfirmPassword: false,
 	})
 
 	//? RegExp Patterns
 	const PhoneNumberPattern = /^09\d{9}$/
-	const EmailPattern = /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$/
 
 	//? Validate Inputs Function
 	const validateInputValues = () => {
-		const notification = notificationBoxRef.current
-
-		const { isValidUsername, isValidPhone, isValidEmail, isValidPassword } =
-			validationStatus
-
-		//? Update Validation
-		setValidationStatus((prevStatus) => ({
-			...prevStatus,
+		const notification = notificationBoxRef.current;
+	
+		const {
+			isValidname,
+			isValidUsername,
+			isValidPhone,
+			isValidPassword,
+			isValidConfirmPassword,
+		} = validationStatus;
+	
+		// Update Validation
+		const updatedValidationStatus = {
+			isValidname: !!nameInputValue,
 			isValidUsername: !!usernameInputValue,
 			isValidPhone: PhoneNumberPattern.test(phoneInputValue),
-			isValidEmail: EmailPattern.test(emailInputValue),
 			isValidPassword: passwordInputValue.length >= 8,
-		}))
-
-		//? Set Error Message
-		setErrorMessage(
-			'لطفا ' +
-				(!isValidUsername ? `نام` : '') +
-				(!isValidPhone ? `${!isValidUsername ? '، ' : ''}شماره همراه` : '') +
-				(!isValidEmail
-					? `${!isValidUsername || !isValidPhone ? '، ' : ''}ایمیل`
-					: '') +
-				(!isValidPassword
-					? `${
-							!isValidUsername || !isValidPhone || !isValidEmail ? ' و ' : ''
-					  }رمز عبور`
-					: '') +
-				(!isValidUsername || !isValidPhone || !isValidEmail || !isValidPassword
-					? ' را به درستی وارد کنید'
-					: '')
-		)
-
-		//? Set Success Message
-		setSuccessMessage(
-			isValidUsername && isValidPhone && isValidEmail && isValidPassword
-				? 'ثبت نام با موفقیت انجام شد'
-				: ''
-		)
-
-		//? Show Notification
-		notification.classList.add('notification--show')
-
-		//? Hide Notification
+			isValidConfirmPassword: confirmpasswordInputValue === passwordInputValue,
+		};
+	
+		setValidationStatus((prevStatus) => ({
+			...prevStatus,
+			...updatedValidationStatus,
+		}));
+	
+		// Set Error Message
+		let errorMessage = "لطفا ";
+	
+		if (!isValidname) {
+			errorMessage += "نام";
+		}
+		if (!isValidUsername) {
+			errorMessage += errorMessage.endsWith(" ") ? "نام کاربری" : "، نام کاربری";
+		}
+		if (!isValidPhone) {
+			errorMessage += errorMessage.endsWith(" ") ? "شماره همراه" : "، شماره همراه";
+		}
+		if (!isValidPassword) {
+			errorMessage += errorMessage.endsWith(" ") ? "رمز عبور" : " و رمز عبور";
+		}
+	
+		if (!isValidUsername || !isValidPhone || !isValidPassword) {
+			errorMessage += " را به درستی وارد کنید";
+		}
+	
+		setErrorMessage(errorMessage);
+	
+		// Set Success Message
+		if (isValidUsername && isValidPhone && isValidPassword && isValidConfirmPassword) {
+			setSuccessMessage("ثبت نام با موفقیت انجام شد");
+			register();
+		}
+	
+		// Show Notification
+		notification.classList.add("notification--show");
+	
+		// Hide Notification
 		setTimeout(() => {
-			notification.classList.remove('notification--show')
-		}, 3000)
-	}
+			notification.classList.remove("notification--show");
+		}, 3000);
+	};
+	
 	return (
 		<>
 			<div className='container h-full flex items-center flex-col text-white text-xl font-shabnam'>
@@ -126,18 +160,6 @@ export default function Signup() {
 							/>
 						</div>
 
-						{/* Email Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
-							<CiMail className='absolute top-2 right-1.5 text-[#8f95a0]' />
-
-							<input
-								className='form-input'
-								onChange={(e) => setEmailInputValue(e.target.value)}
-								type='email'
-								placeholder='پست الکترونیکی'
-							/>
-						</div>
-
 						{/* Password Input */}
 						<div className='relative mt-5 w-[70%] dir-rtl'>
 							<CiLock className='absolute top-2 right-1.5 text-[#8f95a0]' />
@@ -147,6 +169,18 @@ export default function Signup() {
 								onChange={(e) => setPasswordInputValue(e.target.value)}
 								type='password'
 								placeholder='رمز عبور'
+							/>
+						</div>
+
+						{/* Confirm Password Input */}
+						<div className='relative mt-5 w-[70%] dir-rtl'>
+							<CiLock className='absolute top-2 right-1.5 text-[#8f95a0]' />
+
+							<input
+								className='form-input'
+								onChange={(e) => setConfirmPasswordInputValue(e.target.value)}
+								type='password'
+								placeholder='تایید رمز عبور'
 							/>
 						</div>
 
