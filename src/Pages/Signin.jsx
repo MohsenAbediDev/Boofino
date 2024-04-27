@@ -6,10 +6,52 @@ export default function Signin() {
 	const [usernameInputValue, setUsernameInputValue] = useState('')
 	const [passwordInputValue, setPasswordInputValue] = useState('')
 
-  const [successMessage, setSuccessMessage] = useState('')
+	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const notificationBoxRef = useRef()
+
+	const login = () => {
+		// Set user data
+		const userData = {
+			username: usernameInputValue,
+			password: passwordInputValue,
+		}
+
+		// Post user data
+		fetch('http://localhost:3000/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userData),
+		})
+			.then((res) => res.json())
+			.then((data) => validateInputValues(data))
+			.catch((error) => validateInputValues(error))
+	}
+
+	const validateInputValues = (response) => {
+		const notification = notificationBoxRef.current
+
+		// Set message's
+		if (response.type == 'success') {
+      setErrorMessage('')
+			setSuccessMessage(response.message)
+		} 
+    if (response.type == 'error') {
+      setSuccessMessage('')
+			setErrorMessage(response.message)
+		}
+
+		// Show Notification
+		notification.classList.add('notification--show')
+
+		// Hide Notification
+		setTimeout(() => {
+			notification.classList.remove('notification--show')
+		}, 3000)
+	}
 
 	return (
 		<>
@@ -48,6 +90,7 @@ export default function Signin() {
 
 						{/* Login Button */}
 						<button
+							onClick={login}
 							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'
 						>
 							ورود
