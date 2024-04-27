@@ -3,6 +3,8 @@ import { IoCameraOutline } from 'react-icons/io5'
 import { LuPencil } from 'react-icons/lu'
 
 import InputModal from '../Common/Components/InputModal'
+import SchoolsList from '../Common/Components/SchoolsList'
+import { showModalContext } from '../Common/contexts/showModalContext'
 
 export default function EditUser() {
 	const [isShowModal, setIsShowModal] = useState(false)
@@ -85,7 +87,7 @@ export default function EditUser() {
 					</div>
 					{/* change password */}
 					<div className='dashboard-item min-h-[96px] flex-1 flex justify-between bg-dashboardItem px-5'>
-						<div className='flex cursor-pointer justify-between w-full'>
+						<div className='flex cursor-pointer height={384} justify-between w-full'>
 							<p className='text-2xl sm:text-xl text-white'>تغییر رمز عبور</p>
 							<LuPencil
 								className='text-3xl sm:text-2xl text-white'
@@ -101,14 +103,13 @@ export default function EditUser() {
 
 			{/* Overlay in Backdrop Navbar */}
 			<div
-				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all ${
-					isShowModal ? 'show' : 'hide'
-				}`}
-			></div>
+				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${isShowModal ? 'show' : 'hide'}`}
+			>
+			</div>
 
 			{/* show input modals */}
 			{isShowNameModal ? (
-				<InputModal>
+				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>نام جدید خود را وارد کنید</h1>
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
@@ -126,7 +127,7 @@ export default function EditUser() {
 					</div>
 				</InputModal>
 			) : isShowEmailModal ? (
-				<InputModal>
+				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>ایمیل جدید خود را وارد کنید</h1>
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
@@ -144,7 +145,7 @@ export default function EditUser() {
 					</div>
 				</InputModal>
 			) : isShowPasswordModal ? (
-				<InputModal>
+				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>پسورد جدید خود را وارد کنید</h1>
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
@@ -162,25 +163,11 @@ export default function EditUser() {
 					</div>
 				</InputModal>
 			) : isShowSchoolModal ? (
-				<InputModal>
-					<h1 className='text-2xl text-white'>مدرسه جدید خود را وارد کنید</h1>
-					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
-						<button
-							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
-							onClick={() => {
-								setIsShowSchoolModal(false)
-								setIsShowModal(false)
-							}}
-						>
-							لغو
-						</button>
-						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
-							ارسال
-						</button>
-					</div>
-				</InputModal>
+				<showModalContext.Provider value={[setIsShowModal, setIsShowSchoolModal]}>
+					<SchoolsList />
+				</showModalContext.Provider>
 			) : isShowPictureModal ? (
-				<InputModal>
+				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>عکس جدید خود را وارد کنید</h1>
 					<form className='mx-auto h-2/3 flex justify-center items-center'>
 						<div className='text-white w-64 h-40 rounded-lg flex justify-center items-center'>
