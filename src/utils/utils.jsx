@@ -1,3 +1,7 @@
+import CryptoJS from 'crypto-js'
+
+//? Product function's 
+
 // add count funcrion
 const addCount = (setCount, id) => {
 	// get current datas
@@ -68,4 +72,35 @@ const removeProduct = (id) => {
 	localStorage.setItem('productCart', JSON.stringify(productData))
 }
 
-export { addCount, minCount, addToCart, removeProduct }
+//? Data encryption
+
+// Generate Secret Key
+const generateSecretKey = () => {
+	const randomString =
+		Math.random().toString(36).substring(2, 15) +
+		Math.random().toString(36).substring(2, 15)
+
+	const secretKey = CryptoJS.SHA256(randomString).toString(CryptoJS.enc.Hex)
+	return secretKey
+}
+
+// Encrypt data
+const encryptText = (text, secretKey) => {
+	return CryptoJS.AES.encrypt(text, secretKey).toString()
+}
+
+// Decrypt data
+const decryptText = (ciphertext, secretKey) => {
+	const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey)
+	return bytes.toString(CryptoJS.enc.Utf8)
+}
+
+export {
+	addCount,
+	minCount,
+	addToCart,
+	removeProduct,
+	generateSecretKey,
+	encryptText,
+	decryptText,
+}

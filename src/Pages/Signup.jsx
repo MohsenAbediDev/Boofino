@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { generateSecretKey, encryptText } from '../utils/utils'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
@@ -14,10 +15,13 @@ export default function Signup() {
 
 	const notificationBoxRef = useRef()
 
+	const secretKey = generateSecretKey()
+
+	// Register user
 	const register = () => {
 		// Set user data
 		const userData = {
-			username: usernameInputValue,
+			username: usernameInputValue.toLowerCase(),
 			password: passwordInputValue,
 			confirmpassword: confirmpasswordInputValue,
 			phonenumber: phoneInputValue,
@@ -36,29 +40,47 @@ export default function Signup() {
 			.catch((error) => validateInputValues(error))
 	}
 
-	//? Validate Inputs Function
+	// Set cookie for remember user
+	const setLoginCookie = (username, expirationDays) => {
+		// Set expire month
+		const expireDate = new Date()
+		expireDate.setTime(
+			expireDate.getTime() + expirationDays * 24 * 60 * 60 * 1000
+		)
+
+		const expires = 'expires=' + expireDate.toUTCString()
+
+		// Encrypt cookie value
+		const encrypted = encryptText(username, secretKey)
+
+		document.cookie = 'userLogin=' + encrypted + ';' + expires + ';path=/'
+	}
+
+	// Validate Inputs Function
 	const validateInputValues = (response) => {
-		const notification = notificationBoxRef.current;
+		const notification = notificationBoxRef.current
 
 		// Set message's
 		if (response.type == 'success') {
-      setErrorMessage('')
+			setErrorMessage('')
 			setSuccessMessage(response.message)
-		} 
-    if (response.type == 'error') {
-      setSuccessMessage('')
+
+			setLoginCookie(usernameInputValue, 1903625812833)
+		}
+		if (response.type == 'error') {
+			setSuccessMessage('')
 			setErrorMessage(response.message)
 		}
-		
+
 		// Show Notification
-		notification.classList.add("notification--show");
-	
+		notification.classList.add('notification--show')
+
 		// Hide Notification
 		setTimeout(() => {
-			notification.classList.remove("notification--show");
-		}, 3000);
-	};
-	
+			notification.classList.remove('notification--show')
+		}, 3000)
+	}
+
 	return (
 		<>
 			<div className='container h-full flex items-center flex-col text-white text-xl font-shabnam'>
