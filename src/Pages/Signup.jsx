@@ -35,9 +35,8 @@ export default function Signup() {
 			},
 			body: JSON.stringify(userData),
 		})
-			.then((res) => res.json())
-			.then((data) => validateInputValues(data))
-			.catch((error) => validateInputValues(error))
+			.then((res) => showNotification(res))
+			.catch((error) => showNotification(error))
 	}
 
 	// Set cookie for remember user
@@ -56,29 +55,34 @@ export default function Signup() {
 		document.cookie = 'userLogin=' + encrypted + ';' + expires + ';path=/'
 	}
 
-	// Validate Inputs Function
-	const validateInputValues = (response) => {
+	// Show notification Function
+	const showNotification = (response) => {
 		const notification = notificationBoxRef.current
 
-		// Set message's
-		if (response.type == 'success') {
-			setErrorMessage('')
-			setSuccessMessage(response.message)
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+				setLoginCookie(usernameInputValue, 1903625812833)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+			}
 
-			setLoginCookie(usernameInputValue, 1903625812833)
+			// Show Notification
+			notification.classList.add('notification--show')
+
+			// Hide Notification
+			setTimeout(() => {
+				notification.classList.remove('notification--show')
+			}, 3000)
 		}
-		if (response.type == 'error') {
-			setSuccessMessage('')
-			setErrorMessage(response.message)
+
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
 		}
 
-		// Show Notification
-		notification.classList.add('notification--show')
-
-		// Hide Notification
-		setTimeout(() => {
-			notification.classList.remove('notification--show')
-		}, 3000)
+		response.json().then(handleResponse).catch(handleFailure)
 	}
 
 	return (
