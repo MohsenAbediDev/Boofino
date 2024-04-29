@@ -25,32 +25,36 @@ export default function Signin() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
-		})
-			.then((res) => res.json())
-			.then((data) => validateInputValues(data))
-			.catch((error) => validateInputValues(error))
+		}).then((res) => showNotification(res))
 	}
 
-	const validateInputValues = (response) => {
+	// Show notification function
+	const showNotification = (response) => {
 		const notification = notificationBoxRef.current
 
-		// Set message's
-		if (response.type == 'success') {
-      setErrorMessage('')
-			setSuccessMessage(response.message)
-		} 
-    if (response.type == 'error') {
-      setSuccessMessage('')
-			setErrorMessage(response.message)
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+			}
+
+			// Show Notification
+			notification.classList.add('notification--show')
+
+			// Hide Notification
+			setTimeout(() => {
+				notification.classList.remove('notification--show')
+			}, 3000)
 		}
 
-		// Show Notification
-		notification.classList.add('notification--show')
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
+		}
 
-		// Hide Notification
-		setTimeout(() => {
-			notification.classList.remove('notification--show')
-		}, 3000)
+		response.json().then(handleResponse).catch(handleFailure)
 	}
 
 	return (

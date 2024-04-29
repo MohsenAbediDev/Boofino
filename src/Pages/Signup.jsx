@@ -36,7 +36,6 @@ export default function Signup() {
 			body: JSON.stringify(userData),
 		})
 			.then((res) => showNotification(res))
-			.catch((error) => showNotification(error))
 	}
 
 	// Set cookie for remember user
