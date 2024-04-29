@@ -21,6 +21,7 @@ export default function Signup() {
 	const register = () => {
 		// Set user data
 		const userData = {
+			fullname: nameInputValue,
 			username: usernameInputValue.toLowerCase(),
 			password: passwordInputValue,
 			confirmpassword: confirmpasswordInputValue,
@@ -59,7 +60,7 @@ export default function Signup() {
 		const notification = notificationBoxRef.current
 
 		const handleResponse = (data) => {
-			if (response.ok) {
+			if (response.status >= 200 && response.status <= 299) {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
 				setLoginCookie(usernameInputValue, 1903625812833)
