@@ -146,14 +146,14 @@ export default function Dashboard() {
 								</div>
 							</div>
 						</div>
-						<a
-							href='#'
+						<div
 							className='dashboard-item bg-primaryBTN flex items-center justify-center
 								text-white text-xl font-bold cp w-full
-              hover:bg-hoverConfirmBTN transition-colors duration-200'
+              hover:bg-hoverConfirmBTN transition-colors duration-200
+							order-btn'
 						>
 							ثبت سفارش
-						</a>
+						</div>
 					</div>
 				)}
 			</div>
