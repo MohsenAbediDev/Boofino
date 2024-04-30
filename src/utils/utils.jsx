@@ -1,6 +1,4 @@
-import CryptoJS from 'crypto-js'
-
-//? Product function's 
+//? Product function's
 
 // add count funcrion
 const addCount = (setCount, id) => {
@@ -71,28 +69,35 @@ const removeProduct = (id) => {
 	productData.splice(mainDataInedx, 1)
 	localStorage.setItem('productCart', JSON.stringify(productData))
 }
+import { useState } from 'react'
+//? Check user is login or not
 
-//? Data encryption
+fetch('http://localhost:3000/user', {
+	method: 'GET',
+	credentials: 'include',
+})
+	.then((res) => res.json())
+	.then((res) => {
+		isLoggedIn(res)
+		isNotLoggedIn(res)
+	})
+	.catch((error) => error)
 
-// Generate Secret Key
-const generateSecretKey = () => {
-	const randomString =
-		Math.random().toString(36).substring(2, 15) +
-		Math.random().toString(36).substring(2, 15)
-
-	const secretKey = CryptoJS.SHA256(randomString).toString(CryptoJS.enc.Hex)
-	return secretKey
+// Function for when the user is not logged in
+const isNotLoggedIn = (message) => {
+	return
 }
 
-// Encrypt data
-const encryptText = (text, secretKey) => {
-	return CryptoJS.AES.encrypt(text, secretKey).toString()
-}
+// Function for when the user is logged in
+const isLoggedIn = (data) => {
+	const user = data[0]
 
-// Decrypt data
-const decryptText = (ciphertext, secretKey) => {
-	const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey)
-	return bytes.toString(CryptoJS.enc.Utf8)
+	console.log(window.location);
+
+	if (user.username && !window.location.pathname == '/') {
+		window.location.href = '/'
+		return // Stop execution here
+	}
 }
 
 export {
@@ -100,7 +105,6 @@ export {
 	minCount,
 	addToCart,
 	removeProduct,
-	generateSecretKey,
-	encryptText,
-	decryptText,
+	isLoggedIn,
+	isNotLoggedIn,
 }

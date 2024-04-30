@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+// import { isLoggedIn } from '../utils/utils'
 import { CiUser, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
@@ -11,6 +12,9 @@ export default function Signin() {
 
 	const notificationBoxRef = useRef()
 
+	// window.addEventListener('load', () => isLoggedIn)
+
+	// User login
 	const login = () => {
 		// Set user data
 		const userData = {
@@ -21,6 +25,7 @@ export default function Signin() {
 		// Post user data
 		fetch('http://localhost:3000/login', {
 			method: 'POST',
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},

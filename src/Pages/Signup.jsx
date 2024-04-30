@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { generateSecretKey, encryptText } from '../utils/utils'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
@@ -15,8 +14,6 @@ export default function Signup() {
 
 	const notificationBoxRef = useRef()
 
-	const secretKey = generateSecretKey()
-
 	// Register user
 	const register = () => {
 		// Set user data
@@ -31,28 +28,13 @@ export default function Signup() {
 		// Post user data
 		fetch('http://localhost:3000/register', {
 			method: 'POST',
+			credentials: "include",
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
 		})
 			.then((res) => showNotification(res))
-	}
-
-	// Set cookie for remember user
-	const setLoginCookie = (username, expirationDays) => {
-		// Set expire month
-		const expireDate = new Date()
-		expireDate.setTime(
-			expireDate.getTime() + expirationDays * 24 * 60 * 60 * 1000
-		)
-
-		const expires = 'expires=' + expireDate.toUTCString()
-
-		// Encrypt cookie value
-		const encrypted = encryptText(username, secretKey)
-
-		document.cookie = 'userLogin=' + encrypted + ';' + expires + ';path=/'
 	}
 
 	// Show notification Function
@@ -63,7 +45,7 @@ export default function Signup() {
 			if (response.status >= 200 && response.status <= 299) {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
-				setLoginCookie(usernameInputValue, 1903625812833)
+				// setLoginCookie(usernameInputValue, 1903625812833)
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)
