@@ -94,5 +94,11 @@ const supportedCities = [
 	{ state: 'bosnia', title: 'بوستی هرزگوین', cities: [{ city: 'tabriz-bos', title: 'تبریز' }, { city: 'yugoslavia-bos', title: 'یوگوسلاوی' }, { city: 'Azerbaijan-bos', title: 'تورک اوشاخلاری🇦🇿' }] },
 ]
 
-export { schools, supportedCities }
+const breakeTime = [
+	{id: 1 , startHour: 9 , startMinutes : 15 , endHour: 9 , endminutes: 45 , title: 'زنگ اول'} , 
+	{id: 2 , startHour: 11 , startMinutes : 0 , endHour: 11 , endminutes: 30 , title: 'زنگ دوم'} , 
+	{id: 3 , startHour: 12 , startMinutes : 45 , endHour: 13 , endminutes: 15 , title: 'زنگ سوم'} , 
+]
+
+export { schools, supportedCities, breakeTime }
 export default products;

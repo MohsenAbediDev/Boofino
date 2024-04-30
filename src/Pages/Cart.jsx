@@ -2,6 +2,8 @@ import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
 import { useEffect, useState } from 'react'
 import products from '../../datas'
+import { IoArrowDown } from "react-icons/io5";
+import { breakeTime } from '../../datas';
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
@@ -10,9 +12,16 @@ export default function Cart() {
 
 	const [totalPrice, setTotalPrice] = useState(0)
 	const [totalDisCount, setTotalDiscount] = useState(0)
+	const [isShowPatment, setIsShowPayment] = useState(false)
+	const [discountCode, setDiscountCode] = useState('')
+	const [selectedTime , setSelectedTime] = useState()
 
 	useEffect(() => {
 		totalPriceHandler()
+
+		document.querySelector('.order-btn').addEventListener('click', () => {
+			setIsShowPayment(true)
+		})
 	}, [])
 
 	const removeHandler = () => {
@@ -62,8 +71,8 @@ export default function Cart() {
 		})
 	}
 
-	return (
-		<div className='w-full h-full flex flex-col'>
+	return (<>
+		<div className='w-full h-full flex flex-col relative'>
 			<BackToDashboard title='سبد خرید' />
 
 			{productCart.length > 0 ? (
@@ -88,7 +97,7 @@ export default function Cart() {
 
 			{/* Mobile Purchase Container */}
 			{productCart.length > 0 ? (
-				<div className='hidden w-full p-2 bg-primary lg:flex flex-col sticky bottom-0 z-50'>
+				<div className='hidden w-full p-2 bg-primary lg:flex flex-col sticky bottom-0 z-20'>
 					<div className='text-base py-1 font-shabnam text-white flex items-center justify-between'>
 						<p>تخفیف:</p>
 						<div className=''>
@@ -105,7 +114,10 @@ export default function Cart() {
 						</div>
 					</div>
 
-					<button className='w-full h-10 text-xl text-white mt-2 rounded-sm bg-primaryBTN hover:bg-hoverConfirmBTN transition-colors duration-200 text-center'>
+					<button className='w-full h-10 text-xl text-white mt-2 rounded-sm bg-primaryBTN hover:bg-hoverConfirmBTN transition-colors duration-200 text-center'
+						onClick={() => {
+							setIsShowPayment(true)
+						}}>
 						ثبت سفارش
 					</button>
 				</div>
@@ -117,6 +129,47 @@ export default function Cart() {
 					'>سبد خرید شما خالی است</p>
 				</div>
 			)}
+
+			{/* Registration of the final order */}
+			<div className={`w-full bg-secondary absolute z-40 ${isShowPatment ? 'visible h-full' : 'invisible h-0'} rounded-dashboardcontainer transition-all
+			absolute bottom-0 duration-500 overflow-hidden p-7 md:p-4`}>
+				<IoArrowDown className='absolute left-6 top-6 text-4xl lg:text-3xl text-white' onClick={() => {
+					setIsShowPayment(false)
+				}} />
+				<div className='w-full h-full flex flex-col gap-y-10 md:mt-12 overflow-y-auto relative'>
+					<div className='flex gap-x-2 md:flex-col md:gap-y-3'>
+						<p className='text-white text-3xl md:text-3xl'>
+							ملبغ قابل پرداخت:‌
+						</p>
+						<p className='text-white text-3xl md:text-2xl'>{totalPrice} تومان</p>
+					</div>
+					<div className='flex justify-between w-[400px] md:flex-col md:w-full md:gap-y-3'>
+						<p className='text-white text-3xl'>
+							کد تخفیف:
+						</p>
+						<input type="text" value={discountCode} className='outline-4 outline-white border-2 border-white bg-secondary rounded-md px-3 text-xl dir-ltr text-white h-9'
+							onChange={e => {
+								setDiscountCode(e.target.value)
+							}} />
+					</div>
+					<div className='w-96 flex flex-col gap-y-5 md:w-full'>
+						<p className='text-white text-3xl'>زمان تحویل</p>
+						<select id="countries" className="bg-secondary border border-white text-white rounded-lg focus:ring-blue-500 block w-full p-2.5 text-xl">
+							<option value='free' selected
+								onChange={e => {
+									setSelectedTime(e.target.value)
+								}}>تایم آزاد</option>
+							{
+								breakeTime.map(breake => (
+									<option key={breake.id} value={breake.id}>{breake.title}</option>
+								))
+							}
+						</select>
+					</div>
+					<a href="#" className='w-full h-14 rounded-lg md:h-10 text-xl text-white md:rounded-sm bg-primaryBTN hover:bg-hoverConfirmBTN transition-colors duration-200 flex justify-center items-center absolute bottom-0 md:bottom-14'>تکمیل خرید</a>
+				</div>
+			</div>
 		</div>
+	</>
 	)
 }
