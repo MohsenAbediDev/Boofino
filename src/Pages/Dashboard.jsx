@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { getUserAdmin } from '../utils/utils'
 
 //? Icons
 import { Outlet, NavLink, useParams } from 'react-router-dom'
@@ -7,14 +8,20 @@ import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { MdOutlineArrowBackIos, MdExitToApp } from 'react-icons/md'
 import { MdAddCircleOutline } from 'react-icons/md'
-import { MdOutlineModeEditOutline } from "react-icons/md";
+import { MdOutlineModeEditOutline } from 'react-icons/md'
 
 export default function Dashboard() {
+	const [isAdmin, setIsAdmin] = useState(false)
 	const params = useParams()
 	const dashboardRoute = useRef()
-	const admin = true
 
 	useEffect(() => {
+		const checkAdmin = async () => {
+			const adminStatus = await getUserAdmin()
+			setIsAdmin(adminStatus)
+		}
+		checkAdmin()
+
 		if (params['*']) {
 			dashboardRoute.current &&
 				dashboardRoute.current.classList.add('lg:hidden')
@@ -22,7 +29,7 @@ export default function Dashboard() {
 			dashboardRoute.current &&
 				dashboardRoute.current.classList.remove('lg:hidden')
 		}
-	})
+	}, [params])
 
 	return (
 		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-6 lg:px-6 h-[calc(100vh-144px)] lg:flex-col'>
@@ -79,7 +86,7 @@ export default function Dashboard() {
 						<MdOutlineArrowBackIos />
 					</NavLink>
 
-					{admin && (
+					{isAdmin && (
 						<NavLink
 							to='./add-product'
 							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
@@ -93,7 +100,7 @@ export default function Dashboard() {
 						</NavLink>
 					)}
 
-					{admin && (
+					{isAdmin && (
 						<NavLink
 							to='./edit-product'
 							className='dashboard-item bg-dashboardItem justify-between text-white text-xl

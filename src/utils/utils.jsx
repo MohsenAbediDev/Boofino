@@ -85,6 +85,12 @@ const getUser = async () => {
 	}
 }
 
+const getUserAdmin = async () => {
+	const user = await getUser()
+
+	return user[0].is_admin
+}
+
 // Function for when the user is not logged in
 const isNotLoggedIn = async () => {
 	const user = await getUser()
@@ -115,4 +121,5 @@ export {
 	removeProduct,
 	isLoggedIn,
 	isNotLoggedIn,
+	getUserAdmin,
 }
