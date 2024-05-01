@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-// import { isLoggedIn } from '../utils/utils'
+import { isLoggedIn } from '../utils/utils'
 import { CiUser, CiLock } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
@@ -12,7 +12,7 @@ export default function Signin() {
 
 	const notificationBoxRef = useRef()
 
-	// window.addEventListener('load', () => isLoggedIn)
+	isLoggedIn()
 
 	// User login
 	const login = () => {
@@ -41,6 +41,8 @@ export default function Signin() {
 			if (response.ok) {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
+
+				// isLoggedIn()
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)

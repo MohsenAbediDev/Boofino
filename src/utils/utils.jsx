@@ -1,3 +1,5 @@
+import { redirect } from 'react-router-dom'
+
 //? Product function's
 
 // add count funcrion
@@ -69,34 +71,33 @@ const removeProduct = (id) => {
 	productData.splice(mainDataInedx, 1)
 	localStorage.setItem('productCart', JSON.stringify(productData))
 }
-import { useState } from 'react'
+
 //? Check user is login or not
 
-fetch('http://localhost:3000/user', {
-	method: 'GET',
-	credentials: 'include',
-})
-	.then((res) => res.json())
-	.then((res) => {
-		isLoggedIn(res)
-		isNotLoggedIn(res)
-	})
-	.catch((error) => error)
+const getUser = async () => {
+	try {
+		const response = await fetch('http://localhost:3000/user', {
+			method: 'GET',
+			credentials: 'include',
+		})
+		const data = await response.json()
+		return data
+	} catch (error) {
+		console.error(error)
+	}
+}
 
 // Function for when the user is not logged in
-const isNotLoggedIn = (message) => {
+const isNotLoggedIn = () => {
 	return
 }
 
 // Function for when the user is logged in
-const isLoggedIn = (data) => {
-	const user = data[0]
+const isLoggedIn = async () => {
+	const user = await getUser()
 
-	console.log(window.location);
-
-	if (user.username && !window.location.pathname == '/') {
+	if (user[0].username) {
 		window.location.href = '/'
-		return // Stop execution here
 	}
 }
 
