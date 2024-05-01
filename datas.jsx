@@ -95,9 +95,9 @@ const supportedCities = [
 ]
 
 const breakeTime = [
-	{id: 1 , startHour: 9 , startMinutes : 15 , endHour: 9 , endminutes: 45 , title: 'زنگ اول'} , 
-	{id: 2 , startHour: 11 , startMinutes : 0 , endHour: 11 , endminutes: 30 , title: 'زنگ دوم'} , 
-	{id: 3 , startHour: 12 , startMinutes : 45 , endHour: 13 , endminutes: 15 , title: 'زنگ سوم'} , 
+	{id: 1 , startHour: 9 , startMinutes : 15 , endHour: 9 , endMinutes: 45 , title: 'زنگ اول'} , 
+	{id: 2 , startHour: 11 , startMinutes : 0 , endHour: 11 , endMinutes: 30 , title: 'زنگ دوم'} , 
+	{id: 3 , startHour: 22 , startMinutes : 30 , endHour: 22 , endMinutes: 40 , title: 'زنگ سوم'} , 
 ]
 
 export { schools, supportedCities, breakeTime }

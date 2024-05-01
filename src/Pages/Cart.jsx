@@ -14,7 +14,7 @@ export default function Cart() {
 	const [totalDisCount, setTotalDiscount] = useState(0)
 	const [isShowPatment, setIsShowPayment] = useState(false)
 	const [discountCode, setDiscountCode] = useState('')
-	const [selectedTime , setSelectedTime] = useState()
+	const [selectedTime, setSelectedTime] = useState(0)
 
 	useEffect(() => {
 		totalPriceHandler()
@@ -23,6 +23,12 @@ export default function Cart() {
 			setIsShowPayment(true)
 		})
 	}, [])
+
+	useEffect(() => {
+		console.log(selectedTime);
+	}, [selectedTime])
+
+	console.log(new Date().getHours());
 
 	const removeHandler = () => {
 		setProductCart(JSON.parse(localStorage.getItem('productCart')))
@@ -154,14 +160,14 @@ export default function Cart() {
 					</div>
 					<div className='w-96 flex flex-col gap-y-5 md:w-full'>
 						<p className='text-white text-3xl'>زمان تحویل</p>
-						<select id="countries" className="bg-secondary border border-white text-white rounded-lg focus:ring-blue-500 block w-full p-2.5 text-xl">
-							<option value='free' selected
-								onChange={e => {
-									setSelectedTime(e.target.value)
-								}}>تایم آزاد</option>
+						<select id="countries" className="bg-secondary border border-white text-white rounded-lg focus:ring-blue-500 block w-full p-2.5 text-xl"
+							onChange={e => {
+								setSelectedTime(e.nativeEvent.target.value)
+							}}>
+							<option value={0}>تایم آزاد</option>
 							{
 								breakeTime.map(breake => (
-									<option key={breake.id} value={breake.id}>{breake.title}</option>
+									<option key={breake.id} value={breake.id} disabled={new Date().getHours() >= breake.endHour ? new Date().getMinutes() > breake.endMinutes ? true : (new Date().getHours() > breake.endHour ? true : false) : false}>{breake.title}</option>
 								))
 							}
 						</select>
