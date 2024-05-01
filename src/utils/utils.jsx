@@ -1,5 +1,3 @@
-import { redirect } from 'react-router-dom'
-
 //? Product function's
 
 // add count funcrion
@@ -88,8 +86,17 @@ const getUser = async () => {
 }
 
 // Function for when the user is not logged in
-const isNotLoggedIn = () => {
-	return
+const isNotLoggedIn = async () => {
+	const user = await getUser()
+
+	if (!user[0]) {
+		if (
+			window.location.pathname != '/signup' &&
+			window.location.pathname != '/login'
+		) {
+			window.location.href = '/signup'
+		}
+	}
 }
 
 // Function for when the user is logged in
