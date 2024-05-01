@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
+import { isLoggedIn } from '../utils/utils'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signup() {
@@ -13,6 +14,9 @@ export default function Signup() {
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const notificationBoxRef = useRef()
+
+	// When user is logged in redirected to home page
+	isLoggedIn()
 
 	// Register user
 	const register = () => {

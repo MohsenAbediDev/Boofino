@@ -12,6 +12,7 @@ export default function Signin() {
 
 	const notificationBoxRef = useRef()
 
+	// When user is logged in redirected to home page
 	isLoggedIn()
 
 	// User login
