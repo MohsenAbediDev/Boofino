@@ -75,6 +75,13 @@ export default function Signin() {
 				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[18rem] rounded-lg bg-secondary'>
 					<p className='mt-5 text-2xl font-bold'>ورود</p>
 
+					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
+						ثبت نام نکردی؟
+						<a href='/signup' className='mr-1.5 text-red'>
+							ثبت نام کن
+						</a>
+					</div>
+
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
 						{/* Username Input */}
 						<div className='relative mt-5 w-[70%] dir-rtl'>
