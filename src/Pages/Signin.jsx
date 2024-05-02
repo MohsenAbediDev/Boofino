@@ -72,7 +72,7 @@ export default function Signin() {
 				<span className='mt-5 font-bold text-4xl'>بوفینو</span>
 
 				{/* Signup Form */}
-				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[18rem] rounded-lg bg-secondary'>
+				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[19rem] rounded-lg bg-secondary'>
 					<p className='mt-5 text-2xl font-bold'>ورود</p>
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>

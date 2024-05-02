@@ -5,11 +5,14 @@ import Navbar from './Common/Components/Navbar'
 
 function App() {
   const routes = useRoutes(Routes)
+  const path = window.location.pathname
 
   isNotLoggedIn()
   return (
     <>
-      <Navbar/>
+      {
+        path === '/signup' || path === '/login' ? '' : <Navbar/>
+      }
       {routes}
     </>
   )
