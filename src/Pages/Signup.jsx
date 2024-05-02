@@ -40,16 +40,20 @@ export default function Signup() {
 		// Post user data
 		fetch('http://localhost:3000/register', {
 			method: 'POST',
-			credentials: "include",
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
+<<<<<<< HEAD
 		})
 			.then((res) => {
 				setIsSuccess(res.ok)
 				showNotification(res)
 			})
+=======
+		}).then((res) => showNotification(res))
+>>>>>>> f153d5f92b6c53ccf38b7b053f6d8e6f9e89fb0a
 	}
 
 	// Show notification Function
@@ -155,6 +159,7 @@ export default function Signup() {
 							<input
 								className='form-input'
 								onChange={(e) => setConfirmPasswordInputValue(e.target.value)}
+								onKeyDown={(e) => e.code == 'Enter' && register()}
 								type='password'
 								placeholder='تایید رمز عبور'
 							/>
