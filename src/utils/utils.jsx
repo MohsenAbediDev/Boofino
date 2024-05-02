@@ -81,7 +81,7 @@ const getUser = async () => {
 		const data = await response.json()
 		return data
 	} catch (error) {
-		console.error(error)
+		error
 	}
 }
 
@@ -109,7 +109,7 @@ const isNotLoggedIn = async () => {
 const isLoggedIn = async () => {
 	const user = await getUser()
 
-	if (user[0].username) {
+	if (user[0] && user[0].username) {
 		window.location.href = '/'
 	}
 }

@@ -19,7 +19,7 @@ export default function Signin() {
 	const login = () => {
 		// Set user data
 		const userData = {
-			username: usernameInputValue,
+			username: usernameInputValue.toLowerCase(),
 			password: passwordInputValue,
 		}
 
