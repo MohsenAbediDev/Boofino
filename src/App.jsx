@@ -7,11 +7,11 @@ function App() {
   const routes = useRoutes(Routes)
   const path = window.location.pathname
 
-  isNotLoggedIn()
+  // isNotLoggedIn()
   return (
     <>
       {
-        path === '/signup' || path === '/login' ? '' : <Navbar/>
+        path === '/signup' || path === '/login' || path === '/school' ? '' : <Navbar/>
       }
       {routes}
     </>

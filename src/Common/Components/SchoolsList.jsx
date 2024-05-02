@@ -108,6 +108,8 @@ export default function SchoolsList() {
                     // send school id to api👆
                     setShowModal(false)
                     setShowSchoolModal(false)
+                    if(window.location.pathname === '/school')
+                      window.location.href = '/'
                   }}>
                   تایید
                 </button>

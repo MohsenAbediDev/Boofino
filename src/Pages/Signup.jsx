@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import { isLoggedIn } from '../utils/utils'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
@@ -12,6 +12,14 @@ export default function Signup() {
 
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
+
+	const [isSuccess, setIsSuccess] = useState(false)
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.href = '/school'
+			console.log(isSuccess);
+		}
+	}, [isSuccess])
 
 	const notificationBoxRef = useRef()
 
@@ -38,7 +46,10 @@ export default function Signup() {
 			},
 			body: JSON.stringify(userData),
 		})
-			.then((res) => showNotification(res))
+			.then((res) => {
+				setIsSuccess(res.ok)
+				showNotification(res)
+			})
 	}
 
 	// Show notification Function
