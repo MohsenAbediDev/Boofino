@@ -98,7 +98,8 @@ const isNotLoggedIn = async () => {
 	if (!user[0]) {
 		if (
 			window.location.pathname != '/signup' &&
-			window.location.pathname != '/login'
+			window.location.pathname != '/login' &&
+			window.location.pathname != '/school'
 		) {
 			window.location.href = '/signup'
 		}

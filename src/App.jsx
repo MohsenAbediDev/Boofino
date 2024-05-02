@@ -7,7 +7,9 @@ function App() {
   const routes = useRoutes(Routes)
   const path = window.location.pathname
 
-  // isNotLoggedIn()
+  // When user is not logged in redirected to signup page
+  isNotLoggedIn()
+
   return (
     <>
       {
