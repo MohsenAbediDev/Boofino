@@ -32,13 +32,12 @@ export default function Signup() {
 		// Post user data
 		fetch('http://localhost:3000/register', {
 			method: 'POST',
-			credentials: "include",
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
-		})
-			.then((res) => showNotification(res))
+		}).then((res) => showNotification(res))
 	}
 
 	// Show notification Function
@@ -144,6 +143,7 @@ export default function Signup() {
 							<input
 								className='form-input'
 								onChange={(e) => setConfirmPasswordInputValue(e.target.value)}
+								onKeyDown={(e) => e.code == 'Enter' && register()}
 								type='password'
 								placeholder='تایید رمز عبور'
 							/>

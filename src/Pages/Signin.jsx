@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { isLoggedIn } from '../utils/utils'
-import { CiUser, CiLock } from 'react-icons/ci'
+import { CiUser, CiLock, CiGlass } from 'react-icons/ci'
 import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signin() {
@@ -102,6 +102,7 @@ export default function Signin() {
 							<input
 								className='form-input'
 								onChange={(e) => setPasswordInputValue(e.target.value)}
+								onKeyDown={(e) => e.code == 'Enter' && login()}
 								type='password'
 								placeholder='رمز عبور'
 							/>
