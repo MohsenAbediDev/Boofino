@@ -17,7 +17,7 @@ export default function Signup() {
 	useEffect(() => {
 		if (isSuccess) {
 			window.location.href = '/school'
-			console.log(isSuccess);
+			console.log(isSuccess)
 		}
 	}, [isSuccess])
 
