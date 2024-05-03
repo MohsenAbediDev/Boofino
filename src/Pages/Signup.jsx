@@ -45,15 +45,11 @@ export default function Signup() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
-<<<<<<< HEAD
 		})
 			.then((res) => {
 				setIsSuccess(res.ok)
 				showNotification(res)
 			})
-=======
-		}).then((res) => showNotification(res))
->>>>>>> f153d5f92b6c53ccf38b7b053f6d8e6f9e89fb0a
 	}
 
 	// Show notification Function
