@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productDatas from '../../../datas'
-import { addToCart, removeProduct } from '../../utils/utils'
+import { addToCart, getUser, removeProduct } from '../../utils/utils'
 
 //? Toggle Hoc
 import withToggle from '../Hocs/withToggle'
@@ -24,6 +24,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 	const [showSearchResult, setShowSearchResult] = useState(false)
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
+	const [fullName, setFullName] = useState('')
 
 	const performSearch = (value) => {
 		const results = products.filter((data) => data.title.includes(value.trim()))
@@ -34,6 +35,16 @@ function Navbar({ toggleValue, toggleHandler }) {
 	useEffect(() => {
 		getIds()
 	}, [])
+
+	useEffect(() => {
+		userData()
+	}, [])
+
+	const userData = async () => {
+		const data = await getUser()
+		setFullName(data[0].fullname)
+	}
+
 
 	const getIds = () => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
@@ -83,7 +94,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 						to='/'
 						className='text-white font-normal text-[20px] font-shabnam cp'
 					>
-						<img className="w-24" src="icons/logo.png" alt="boofino" /> 
+						<img className="w-24" src="icons/logo.png" alt="boofino" />
 					</Link>
 
 					{/* Search */}
@@ -190,7 +201,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 									<div className='mr-2.5 flex flex-col gap-y-1 overflow-hidden'>
 										<span className='text-lg text-zinc-700 inline-block font-shabnam truncate'>
-											یوسف حاجی پور
+											{fullName}
 										</span>
 										<p className='text-sm text-sky-500 inline-block font-shabnam text-primaryBTN'>
 											موجودی:

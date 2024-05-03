@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { getUserAdmin } from '../utils/utils'
+import { getUserAdmin, getUser } from '../utils/utils'
 
 //? Icons
 import { Outlet, NavLink, useParams } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { MdOutlineModeEditOutline } from 'react-icons/md'
 
 export default function Dashboard() {
 	const [isAdmin, setIsAdmin] = useState(false)
+	const [fullName, setFullName] = useState('')
 	const params = useParams()
 	const dashboardRoute = useRef()
 
@@ -31,6 +32,15 @@ export default function Dashboard() {
 		}
 	}, [params])
 
+	useEffect(() => {
+		userData()
+	}, [])
+
+	const userData = async () => {
+		const data = await getUser()
+		setFullName(data[0].fullname)
+	}
+
 	return (
 		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-6 lg:px-6 h-[calc(100vh-144px)] lg:flex-col'>
 			<div
@@ -49,7 +59,7 @@ export default function Dashboard() {
 
 						{/* Username */}
 						<div className='w-full text-xl flex items-center justify-between'>
-							<p className='font-bold ms-2'>یوسف حاجی پور</p>
+							<p className='font-bold ms-2'>{fullName}</p>
 							<MdOutlineArrowBackIos />
 						</div>
 					</NavLink>

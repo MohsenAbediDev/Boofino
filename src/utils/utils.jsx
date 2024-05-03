@@ -123,4 +123,5 @@ export {
 	isLoggedIn,
 	isNotLoggedIn,
 	getUserAdmin,
+	getUser
 }

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getUser } from '../utils/utils'
 import { IoCameraOutline } from 'react-icons/io5'
 import { LuPencil } from 'react-icons/lu'
 
@@ -15,6 +16,22 @@ export default function EditUser() {
 	const [isShowPictureModal, setIsShowPictureModal] = useState(false)
 	const [filePath, setFilePath] = useState(null)
 	const [selectedPic, setSelectedPic] = useState(null)
+
+	const [fullName, setFullName] = useState('')
+	const [phonenumber, setPhonenumber] = useState('')
+	const [username, setUsername] = useState('')
+
+	useEffect(() => {
+		userData()
+	}, [])
+
+	const userData = async () => {
+		const data = await getUser()
+		console.log(data);
+		setFullName(data[0].fullname)
+		setPhonenumber(data[0].phonenumber)
+		setUsername(data[0].username)
+	}
 
 	return (
 		<>
@@ -43,7 +60,7 @@ export default function EditUser() {
 						</div>
 						{/* user name */}
 						<div className='flex-1 flex justify-between items-center px-3 h-full'>
-							<p className='text-2xl sm:text-xl font-bold'>یوسف حاجی پور</p>
+							<p className='text-2xl sm:text-xl font-bold'>{fullName}</p>
 							<LuPencil
 								className='text-3xl sm:text-2xl cursor-pointer'
 								onClick={() => {
@@ -54,11 +71,11 @@ export default function EditUser() {
 						</div>
 					</div>
 					{/* email box */}
-					<div className='dashboard-item min-h-[96px] flex-1 flex justify-between dir-ltr bg-dashboardItem px-5 relative'>
+					<div className='dashboard-item min-h-[96px] flex-1 flex justify-between dir-rtl bg-dashboardItem px-5 relative'>
 						<div>
-							<span className='text-white text-xl absolute top-3'>Email:</span>
-							<p className='text-white text-2xl sm:text-xl absolute top-10 left-7'>
-								qeileyiyeyye@gmail.com
+							<span className='text-white text-xl absolute top-3'>نام کاربری</span>
+							<p className='text-white text-2xl sm:text-xl absolute top-10 left-16'>
+								{username}
 							</p>
 						</div>
 						<LuPencil
@@ -128,7 +145,7 @@ export default function EditUser() {
 				</InputModal>
 			) : isShowEmailModal ? (
 				<InputModal height={384}>
-					<h1 className='text-2xl text-white'>ایمیل جدید خود را وارد کنید</h1>
+					<h1 className='text-2xl text-white'>نام کاربری جدید خود را وارد کنید</h1>
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
 							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
