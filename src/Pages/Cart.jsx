@@ -28,8 +28,6 @@ export default function Cart() {
 		console.log(selectedTime);
 	}, [selectedTime])
 
-	console.log(new Date().getHours());
-
 	const removeHandler = () => {
 		setProductCart(JSON.parse(localStorage.getItem('productCart')))
 	}
@@ -142,7 +140,7 @@ export default function Cart() {
 				<IoArrowDown className='absolute left-6 top-6 text-4xl lg:text-3xl text-white' onClick={() => {
 					setIsShowPayment(false)
 				}} />
-				<div className='w-full h-full flex flex-col gap-y-10 md:mt-12 overflow-y-auto relative'>
+				<div className='w-3/4 h-full flex flex-col gap-y-10 md:mt-12 overflow-y-auto relative'>
 					<div className='flex gap-x-2 md:flex-col md:gap-y-3'>
 						<p className='text-white text-3xl md:text-3xl'>
 							ملبغ قابل پرداخت:‌
