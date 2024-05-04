@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { getUser } from "../utils/utils"
+import { NavLink } from "react-router-dom"
 
 export default function InfoUser() {
 
@@ -20,41 +21,49 @@ export default function InfoUser() {
 	}
 
 	return (
-		<div className='w-full h-1/2 lg:h-full px-2 py-5 flex flex-col rounded-2xl text-xl text-white bg-secondary'>
+		<div className='w-full h-fit px-2 py-5 flex flex-col rounded-2xl text-xl text-white bg-secondary'>
 			<div className='flex items-center justify-between'>
 				<div className='flex items-center'>
 					<img
 						src='images/blankUserProfile.png'
-						className='w-[45px] h-[45px] rounded-full'
+						className='w-[60px] h-[60px] rounded-full'
 					/>
 					<p className='mr-2'>مشخصات کاربر</p>
 				</div>
 
-				<a href='dashboard/editprofile' className='text-lg bg-primaryBTN p-2 rounded-lg'>
+				<NavLink to='dashboard/editprofile' className='text-lg bg-primaryBTN p-2 rounded-lg'>
 					ویرایش اطلاعات
-				</a>
+				</NavLink>
 			</div>
 
-			<div className='border mt-5 rounded-lg flex lg:flex-col p-2'>
-				<div className='border-l lg:border-l-0 lg:border-b border-white p-2 mb-5'>
-					<p className='text-lg sm:text-sm text-[#c7c6c6]'>
+			<div className='border mt-5 rounded-lg flex flex-col p-2 divide-y-2 divide-white bg-primary'>
+				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>
 						نام و نام خانوادگی
 					</p>
 
-					<span className='text-lg text-white mt-1'>{fullName}</span>
+					<span className='text-xl text-white md:text-lg'>{fullName}</span>
 				</div>
 
-				<div className='border-l lg:border-l-0 lg:border-b border-white p-2 mb-5'>
-					<p className='text-lg sm:text-sm text-[#c7c6c6]'>شماره همراه</p>
+				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>شماره همراه</p>
 
-					<span className='text-lg text-white mt-1'>{phonenumber}</span>
+					<span className='text-xl text-white md:text-lg'>{phonenumber}</span>
 				</div>
 
-				<div className='p-2 mb-5'>
-					<p className='text-lg sm:text-sm text-[#c7c6c6]'>نام کاربری</p>
+				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>نام کاربری</p>
 
-					<span className='text-lg text-white mt-1'>
+					<span className='text-xl text-white md:text-lg'>
 						{username}
+					</span>
+				</div>
+
+				<div className='border-white p-2 flex gap-x-3 items-center lg:flex-col lg:items-start lg:gap-y-2 py-10 md:py-4'>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>مدرسه</p>
+
+					<span className='text-xl text-white md:text-lg'>
+						هنرستان فنی جابر ابن حیان
 					</span>
 				</div>
 			</div>
