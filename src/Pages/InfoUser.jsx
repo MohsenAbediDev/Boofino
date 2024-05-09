@@ -31,7 +31,7 @@ export default function InfoUser() {
 					<p className='mr-2'>مشخصات کاربر</p>
 				</div>
 
-				<NavLink to='dashboard/editprofile' className='text-lg bg-primaryBTN p-2 rounded-lg'>
+				<NavLink to='editprofile' className='text-lg bg-primaryBTN p-2 rounded-lg'>
 					ویرایش اطلاعات
 				</NavLink>
 			</div>

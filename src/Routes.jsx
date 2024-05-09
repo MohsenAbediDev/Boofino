@@ -8,6 +8,7 @@ import Cart from './Pages/Cart'
 import EditUser from './Pages/EditUser'
 import InfoUser from './Pages/InfoUser'
 import SelectionSchool from './Pages/SelectionSchool'
+import AddProduct from './Pages/AddProduct'
 
 const routes = [
 	{ path: '/', element: <Home /> },
@@ -24,6 +25,7 @@ const routes = [
 			{ path: '', element: <InfoUser /> },
 			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
+			{ path: 'add-product', element: <AddProduct/> },
 		],
 	},
 ]
