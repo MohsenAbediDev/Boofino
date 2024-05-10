@@ -1,7 +1,8 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState } from 'react'
 import { isLoggedIn } from '../utils/utils'
-import { CiUser, CiLock, CiGlass } from 'react-icons/ci'
-import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
+import Notification from '../Common/Components/Notification'
+import { Link } from 'react-router-dom'
+import { CiUser, CiLock } from 'react-icons/ci'
 
 export default function Signin() {
 	const [usernameInputValue, setUsernameInputValue] = useState('')
@@ -10,7 +11,7 @@ export default function Signin() {
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
-	const notificationBoxRef = useRef()
+	const [isShowNotification, setIsShowNotification] = useState(false)
 
 	// When user is logged in redirected to home page
 	isLoggedIn()
@@ -36,26 +37,16 @@ export default function Signin() {
 
 	// Show notification function
 	const showNotification = (response) => {
-		const notification = notificationBoxRef.current
-
 		const handleResponse = (data) => {
 			if (response.ok) {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
-
-				// isLoggedIn()
+				setIsShowNotification(true)
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)
+				setIsShowNotification(true)
 			}
-
-			// Show Notification
-			notification.classList.add('notification--show')
-
-			// Hide Notification
-			setTimeout(() => {
-				notification.classList.remove('notification--show')
-			}, 3000)
 		}
 
 		const handleFailure = (error) => {
@@ -77,9 +68,9 @@ export default function Signin() {
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
 						ثبت نام نکردی؟
-						<a href='/signup' className='mr-1.5 text-red'>
+						<Link to='/signup' className='mr-1.5 text-red'>
 							ثبت نام کن
-						</a>
+						</Link>
 					</div>
 
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
@@ -119,21 +110,12 @@ export default function Signin() {
 				</div>
 			</div>
 
-			<div className='notification' ref={notificationBoxRef}>
-				{errorMessage && <MdErrorOutline className='notification--error' />}
-				{successMessage && <MdOutlineCheck className='notification--success' />}
-
-				<div className='w-full h-full flex flex-col'>
-					<span className='font-bold text-xl'>
-						{errorMessage && 'خطا'}
-						{successMessage && 'موفق'}
-					</span>
-					<p className='font-light text-sm'>
-						{errorMessage && <span>{errorMessage}</span>}
-						{successMessage && <span>{successMessage}</span>}
-					</p>
-				</div>
-			</div>
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
 		</>
 	)
 }

@@ -185,7 +185,7 @@ export default function AddProduct() {
 				<div className='flex flex-col gap-y-4'>
 					{/* Input title */}
 					<label htmlFor='name' className='text-xl text-white'>
-						افزودن تخفیف (به عدد)
+						افزودن تخفیف (عدد)
 					</label>
 
 					{/* Input */}

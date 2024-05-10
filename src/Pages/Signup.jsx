@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
+import Notification from '../Common/Components/Notification'
+import { Link } from 'react-router-dom'
 import { isLoggedIn } from '../utils/utils'
-import { MdErrorOutline, MdOutlineCheck } from 'react-icons/md'
 
 export default function Signup() {
 	const [nameInputValue, setNameInputValue] = useState('')
@@ -13,6 +14,8 @@ export default function Signup() {
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 
+	const [isShowNotification, setIsShowNotification] = useState(false)
+
 	const [isSuccess, setIsSuccess] = useState(false)
 	useEffect(() => {
 		if (isSuccess) {
@@ -20,8 +23,6 @@ export default function Signup() {
 			console.log(isSuccess)
 		}
 	}, [isSuccess])
-
-	const notificationBoxRef = useRef()
 
 	// When user is logged in redirected to home page
 	isLoggedIn()
@@ -45,34 +46,24 @@ export default function Signup() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
+		}).then((res) => {
+			setIsSuccess(res.ok)
+			showNotification(res)
 		})
-			.then((res) => {
-				setIsSuccess(res.ok)
-				showNotification(res)
-			})
 	}
 
 	// Show notification Function
 	const showNotification = (response) => {
-		const notification = notificationBoxRef.current
-
 		const handleResponse = (data) => {
-			if (response.status >= 200 && response.status <= 299) {
+			if (response.ok) {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
-				// setLoginCookie(usernameInputValue, 1903625812833)
+				setIsShowNotification(true)
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)
+				setIsShowNotification(true)
 			}
-
-			// Show Notification
-			notification.classList.add('notification--show')
-
-			// Hide Notification
-			setTimeout(() => {
-				notification.classList.remove('notification--show')
-			}, 3000)
 		}
 
 		const handleFailure = (error) => {
@@ -94,9 +85,9 @@ export default function Signup() {
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
 						قبلا ثبت نام کردی؟
-						<a href='/login' className='mr-1.5 text-red'>
+						<Link to='/login' className='mr-1.5 text-red'>
 							وارد شو
-						</a>
+						</Link>
 					</div>
 
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
@@ -181,21 +172,12 @@ export default function Signup() {
 				</p>
 			</div>
 
-			<div className='notification' ref={notificationBoxRef}>
-				{errorMessage && <MdErrorOutline className='notification--error' />}
-				{successMessage && <MdOutlineCheck className='notification--success' />}
-
-				<div className='w-full h-full flex flex-col'>
-					<span className='font-bold text-xl'>
-						{errorMessage && 'خطا'}
-						{successMessage && 'موفق'}
-					</span>
-					<p className='font-light text-sm'>
-						{errorMessage && <span>{errorMessage}</span>}
-						{successMessage && <span>{successMessage}</span>}
-					</p>
-				</div>
-			</div>
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
 		</>
 	)
 }
