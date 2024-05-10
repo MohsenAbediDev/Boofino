@@ -14,7 +14,6 @@ export default function InfoUser() {
 
 	const userData = async () => {
 		const data = await getUser()
-		console.log(data);
 		setFullName(data[0].fullname)
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
