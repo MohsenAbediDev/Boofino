@@ -38,20 +38,20 @@ export default function InfoUser() {
 			<div className='border mt-5 rounded-lg flex flex-col p-2 divide-y-2 divide-white bg-primary'>
 				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
 					<p className='text-xl sm:text-sm text-[#c7c6c6]'>
-						نام و نام خانوادگی
+						نام و نام خانوادگی:
 					</p>
 
 					<span className='text-xl text-white md:text-lg'>{fullName}</span>
 				</div>
 
 				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
-					<p className='text-xl sm:text-sm text-[#c7c6c6]'>شماره همراه</p>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>شماره همراه:</p>
 
 					<span className='text-xl text-white md:text-lg'>{phonenumber}</span>
 				</div>
 
 				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
-					<p className='text-xl sm:text-sm text-[#c7c6c6]'>نام کاربری</p>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>نام کاربری:</p>
 
 					<span className='text-xl text-white md:text-lg'>
 						{username}
@@ -59,7 +59,7 @@ export default function InfoUser() {
 				</div>
 
 				<div className='border-white p-2 flex gap-x-3 items-center lg:flex-col lg:items-start lg:gap-y-2 py-10 md:py-4'>
-					<p className='text-xl sm:text-sm text-[#c7c6c6]'>مدرسه</p>
+					<p className='text-xl sm:text-sm text-[#c7c6c6]'>مدرسه:</p>
 
 					<span className='text-xl text-white md:text-lg'>
 						هنرستان فنی جابر ابن حیان

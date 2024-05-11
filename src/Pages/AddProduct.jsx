@@ -37,7 +37,7 @@ export default function AddProduct() {
 		if (!group == '') {
 			fetch('http://localhost:3000/addcategory', {
 				method: 'POST',
-				body: JSON.stringify({name: group}),
+				body: JSON.stringify({"name": group}),
 			})
 				.then((res) => res.json())
 				.then((data) => console.log(data))

@@ -1,14 +1,16 @@
 import { useRef, useEffect, useState } from 'react'
 import { getUserAdmin, getUser } from '../utils/utils'
+import { Outlet, NavLink, useParams } from 'react-router-dom'
 
 //? Icons
-import { Outlet, NavLink, useParams } from 'react-router-dom'
-import { IoWalletOutline } from 'react-icons/io5'
+import { IoWalletOutline, IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { IoDocumentTextOutline } from 'react-icons/io5'
-import { MdOutlineArrowBackIos, MdExitToApp } from 'react-icons/md'
-import { MdAddCircleOutline } from 'react-icons/md'
-import { MdOutlineModeEditOutline } from 'react-icons/md'
+import {
+	MdOutlineArrowBackIos,
+	MdExitToApp,
+	MdAddCircleOutline,
+	MdOutlineModeEditOutline,
+} from 'react-icons/md'
 
 export default function Dashboard() {
 	const [isAdmin, setIsAdmin] = useState(false)

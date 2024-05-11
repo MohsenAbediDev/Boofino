@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import productDatas from '../../../datas'
-import { addToCart, getUser, removeProduct } from '../../utils/utils'
+import {
+	addToCart,
+	getUser,
+	removeProduct,
+	getUserAdmin,
+} from '../../utils/utils'
 
 //? Toggle Hoc
 import withToggle from '../Hocs/withToggle'
@@ -13,18 +18,33 @@ import {
 	AiOutlineShoppingCart,
 	AiOutlineDashboard,
 } from 'react-icons/ai'
+
+import {
+	MdExitToApp,
+	MdAddCircleOutline,
+	MdOutlineModeEditOutline,
+} from 'react-icons/md'
+
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { RiSearch2Line } from 'react-icons/ri'
-import { MdExitToApp } from 'react-icons/md'
 
 function Navbar({ toggleValue, toggleHandler }) {
+	// Product Variable's
 	const [products, setProducts] = useState(productDatas)
 	const [searchTerm, setSearchTerm] = useState('')
 	const [searchResults, setSearchResults] = useState([])
 	const [showSearchResult, setShowSearchResult] = useState(false)
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
+
+	// User Variable's
 	const [fullName, setFullName] = useState('')
+	const [isAdmin, setIsAdmin] = useState(false)
+
+	const checkAdmin = async () => {
+		const adminStatus = await getUserAdmin()
+		setIsAdmin(adminStatus)
+	}
 
 	const performSearch = (value) => {
 		const results = products.filter((data) => data.title.includes(value.trim()))
@@ -34,17 +54,14 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 	useEffect(() => {
 		getIds()
-	}, [])
-
-	useEffect(() => {
 		userData()
+		checkAdmin()
 	}, [])
 
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
 	}
-
 
 	const getIds = () => {
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
@@ -94,7 +111,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 						to='/'
 						className='text-white font-normal text-[20px] font-shabnam cp'
 					>
-						<img className="w-24" src="icons/logo.png" alt="boofino" />
+						<img className='w-24' src='icons/logo.png' alt='boofino' />
 					</Link>
 
 					{/* Search */}
@@ -231,6 +248,30 @@ function Navbar({ toggleValue, toggleHandler }) {
 										سبد خرید
 									</span>
 								</Link>
+
+								{isAdmin && (
+									<>
+										<Link
+											to='/dashboard/add-product'
+											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
+										>
+											<span className='flex items-center gap-x-3'>
+												<MdAddCircleOutline className='w-5 h-5' />
+												افزودن محصول
+											</span>
+										</Link>
+
+										<Link
+											to='/dashboard/add-product'
+											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
+										>
+											<span className='flex items-center gap-x-3'>
+												<MdOutlineModeEditOutline className='w-5 h-5' />
+												ویرایش محصول
+											</span>
+										</Link>
+									</>
+								)}
 
 								<Link
 									to='/dashboard'
