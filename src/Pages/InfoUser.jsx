@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react"
-import { getUser } from "../utils/utils"
-import { NavLink } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { getUser } from '../utils/utils'
+import { NavLink } from 'react-router-dom'
 
 export default function InfoUser() {
-
 	const [fullName, setFullName] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
@@ -30,7 +29,10 @@ export default function InfoUser() {
 					<p className='mr-2'>مشخصات کاربر</p>
 				</div>
 
-				<NavLink to='editprofile' className='text-lg bg-primaryBTN p-2 rounded-lg'>
+				<NavLink
+					to='editprofile'
+					className='text-lg bg-primaryBTN p-2 rounded-lg'
+				>
 					ویرایش اطلاعات
 				</NavLink>
 			</div>
@@ -53,9 +55,7 @@ export default function InfoUser() {
 				<div className='border-white p-2 flex gap-x-3 items-center lg:items-start lg:flex-col lg:gap-y-2 py-10 md:py-4'>
 					<p className='text-xl sm:text-sm text-[#c7c6c6]'>نام کاربری:</p>
 
-					<span className='text-xl text-white md:text-lg'>
-						{username}
-					</span>
+					<span className='text-xl text-white md:text-lg'>{username}</span>
 				</div>
 
 				<div className='border-white p-2 flex gap-x-3 items-center lg:flex-col lg:items-start lg:gap-y-2 py-10 md:py-4'>

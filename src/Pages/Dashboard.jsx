@@ -98,32 +98,33 @@ export default function Dashboard() {
 						<MdOutlineArrowBackIos />
 					</NavLink>
 
+					{/* Admin Link's */}
 					{isAdmin && (
-						<NavLink
-							to='./add-product'
-							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+						<>
+							<NavLink
+								to='./add-product'
+								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
                     hover:bg-dashboardItemActive transition-all duration-200'
-						>
-							<div className='flex items-center'>
-								<MdAddCircleOutline />
-								<span className='mx-2'>افزودن محصول</span>
-							</div>
-							<MdOutlineArrowBackIos />
-						</NavLink>
-					)}
+							>
+								<div className='flex items-center'>
+									<MdAddCircleOutline />
+									<span className='mx-2'>افزودن محصول</span>
+								</div>
+								<MdOutlineArrowBackIos />
+							</NavLink>
 
-					{isAdmin && (
-						<NavLink
-							to='./edit-product'
-							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+							<NavLink
+								to='./edit-product'
+								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
                     hover:bg-dashboardItemActive transition-all duration-200'
-						>
-							<div className='flex items-center'>
-								<MdOutlineModeEditOutline />
-								<span className='mx-2'>ویرایش محصول</span>
-							</div>
-							<MdOutlineArrowBackIos />
-						</NavLink>
+							>
+								<div className='flex items-center'>
+									<MdOutlineModeEditOutline />
+									<span className='mx-2'>ویرایش محصول</span>
+								</div>
+								<MdOutlineArrowBackIos />
+							</NavLink>
+						</>
 					)}
 
 					<NavLink
