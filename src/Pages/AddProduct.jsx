@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Notification from '../Common/Components/Notification'
+import BackToDashboard from '../Common/Components/BackToDashboard'
 
 export default function AddProduct() {
 	const groups = [
@@ -115,8 +116,10 @@ export default function AddProduct() {
 	}
 
 	return (
-		<>
+		<div className='w-full flex flex-col'>
+			<BackToDashboard title='افزودن محصول' />
 			<div className='dashboard-container h-fit py-5 flex flex-col gap-y-9 items-center justify-center'>
+
 				{/* Select image section */}
 				<div className='bg-dashboardItem shadow-xl w-40 h-40 rounded-dashboarditem flex justify-center items-center relative overflow-hidden'>
 					{/* Show image */}
@@ -263,6 +266,6 @@ export default function AddProduct() {
 					successMessage={successMessage}
 				/>
 			)}
-		</>
+		</div>
 	)
 }
