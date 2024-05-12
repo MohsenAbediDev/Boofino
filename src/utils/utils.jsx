@@ -85,6 +85,21 @@ const getUser = async () => {
 	}
 }
 
+const putUserData = async data => {
+	try {
+		const response = await fetch('http://localhost:3000/user', {
+			method: 'PUT',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 const getUserAdmin = async () => {
 	const user = await getUser()
 
@@ -123,5 +138,6 @@ export {
 	isLoggedIn,
 	isNotLoggedIn,
 	getUserAdmin,
-	getUser
+	getUser,
+	putUserData
 }

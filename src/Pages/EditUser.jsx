@@ -22,16 +22,44 @@ export default function EditUser() {
 	const [fullName, setFullName] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
+	const [school, setSchool] = useState('')
 
 	useEffect(() => {
 		userData()
-	}, [])
+	}, [school])
 
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
+
+		const userSchool = (data[0].schoolId).toString()
+
+		fetch('http://localhost:3000/schools')
+			.then(res => res.json())
+			.then(data => {
+				const findSchool = data.find(school => school.schoolId === userSchool)
+				setSchool(findSchool.name)
+			})
+			.catch(err => console.log(err))
+	}
+
+	const setUserSchool = async () => {
+		const data = await getUser()
+		setFullName(data[0].fullname)
+		setPhonenumber(data[0].phonenumber)
+		setUsername(data[0].username)
+
+		const userSchool = (data[0].schoolId).toString()
+
+		fetch('http://localhost:3000/schools')
+			.then(res => res.json())
+			.then(data => {
+				const findSchool = data.find(school => school.schoolId === userSchool)
+				return findSchool.name
+			})
+			.catch(() => 'نشد')
 	}
 
 	return (
@@ -94,7 +122,7 @@ export default function EditUser() {
 						<div>
 							<span className='text-white text-xl absolute top-3'>مدرسه:</span>
 							<p className='text-white text-2xl sm:text-xl absolute top-10 right-7'>
-								هنرستان فنی جابر ابن حیان
+								{school}
 							</p>
 						</div>
 						<LuPencil
@@ -123,9 +151,8 @@ export default function EditUser() {
 
 			{/* Overlay in Backdrop Navbar */}
 			<div
-				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${
-					isShowModal ? 'show' : 'hide'
-				}`}
+				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${isShowModal ? 'show' : 'hide'
+					}`}
 			></div>
 
 			{/* show input modals */}
@@ -189,7 +216,7 @@ export default function EditUser() {
 				<showModalContext.Provider
 					value={[setIsShowModal, setIsShowSchoolModal]}
 				>
-					<SchoolsList />
+					<SchoolsList onChangeName={setSchool} />
 				</showModalContext.Provider>
 			) : isShowPictureModal ? (
 				<InputModal height={384}>

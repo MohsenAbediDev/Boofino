@@ -6,10 +6,13 @@ export default function SelectionSchool() {
 
   const [isShowModal, setIsShowModal] = useState(false)
   const [isShowSchoolModal, setIsShowSchoolModal] = useState(false)
+  const foo = value => {
+
+  }
 
   return (<>
     <showModalContext.Provider value={[setIsShowModal, setIsShowSchoolModal]}>
-      <SchoolsList/>
+      <SchoolsList onChangeName={foo}/>
     </showModalContext.Provider>
   </>)
 }

@@ -6,16 +6,28 @@ export default function InfoUser() {
 	const [fullName, setFullName] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
+	const [school, setSchool] = useState('')
 
 	useEffect(() => {
 		userData()
-	}, [])
+	}, [school])
 
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
+
+		const userSchool = (data[0].schoolId).toString()
+
+		fetch('http://localhost:3000/schools')
+			.then(res => res.json())
+			.then(data => {
+				const findSchool = data.find(school => school.schoolId === userSchool)
+				setSchool(findSchool.name)
+		})
+			.catch(() => setSchool('نشد که بشه'))
+
 	}
 
 	return (
@@ -62,7 +74,7 @@ export default function InfoUser() {
 					<p className='text-xl sm:text-sm text-[#c7c6c6]'>مدرسه:</p>
 
 					<span className='text-xl text-white md:text-lg'>
-						هنرستان فنی جابر ابن حیان
+						{school}
 					</span>
 				</div>
 			</div>

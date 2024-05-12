@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { schools, supportedCities } from '../../../datas'
 import InputModal from './InputModal'
 import { useContext } from 'react'
 import { showModalContext } from '../contexts/showModalContext'
 import { cityList } from '../../provinces_cities'
+import { getUser } from '../../utils/utils'
+import { putUserData } from '../../utils/utils'
 
-export default function SchoolsList() {
+export default function SchoolsList({onChangeName}) {
 	const [allSchools, setALlSchools] = useState([])
 	const [states, setStates] = useState([])
 	const [cities, setCities] = useState([])
@@ -208,9 +209,11 @@ export default function SchoolsList() {
 							<button
 								className={`w-24 h-12 text-lg ${selectedSchool ? 'bg-primaryBTN' : 'bg-dashboardItemActive'
 									} font-bold rounded-md text-white`}
-								onClick={() => {
-									if (selectedSchool) console.log('hoooo')
-									// send school id to api👆
+								onClick={async () => {
+									if (selectedSchool) {
+										putUserData({schoolId: selectedSchool})
+										onChangeName(selectedSchool)
+									}
 									setShowModal(false)
 									setShowSchoolModal(false)
 									if (window.location.pathname === '/school')
