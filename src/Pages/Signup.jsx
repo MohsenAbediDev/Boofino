@@ -25,7 +25,7 @@ export default function Signup() {
 	}, [isSuccess])
 
 	// When user is logged in redirected to home page
-	isLoggedIn()
+	// isLoggedIn()
 
 	// Register user
 	const register = () => {
