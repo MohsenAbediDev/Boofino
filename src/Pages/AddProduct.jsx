@@ -4,17 +4,12 @@ import BackToDashboard from '../Common/Components/BackToDashboard'
 
 export default function AddProduct() {
 	const groups = [
-		{ id: 0, title: 'خوراکی' },
-		{ id: 1, title: 'غذای گرم' },
-		{ id: 2, title: 'غذای سرد' },
-		{ id: 3, title: 'نوشیدنی گرم' },
-		{ id: 4, title: 'نوشیدنی سرد' },
+		{ id: 0, title: 'خوراکی', value: 'edible' },
+		{ id: 1, title: 'غذای گرم', value: 'hotfood' },
+		{ id: 2, title: 'غذای سرد', value: 'coldfood' },
+		{ id: 3, title: 'نوشیدنی گرم', value: 'hotdrink' },
+		{ id: 4, title: 'نوشیدنی سرد', value: 'colddrink' },
 	]
-
-	// fetch('http://localhost:3000/categories')
-	// 	.then((res) => res.json())
-	// 	.then((data) => console.log(data))
-	// 	.catch((err) => console.log(err))
 
 	const [filePath, setFilePath] = useState(null)
 	const [selectedPic, setSelectedPic] = useState(null)
@@ -43,21 +38,6 @@ export default function AddProduct() {
 		setSelectedPic(selectedFile)
 	}
 
-	// send group
-	const senGroupHandler = () => {
-		if (!group == '') {
-			fetch('http://localhost:3000/addcategory', {
-				method: 'POST',
-				body: JSON.stringify({ _name: group }),
-			})
-				.then((res) => res.json())
-				.then((data) => console.log(data))
-				.catch((err) => console.log(err))
-		}
-	}
-
-	useEffect(() => senGroupHandler(), [group])
-
 	// send data to api
 	const uploadImage = async () => {
 		if (selectedPic) {
@@ -79,6 +59,7 @@ export default function AddProduct() {
 		}
 	}
 
+	// send product to api
 	const sendToApi = async () => {
 		const imgUrl = await uploadImage()
 
@@ -88,17 +69,19 @@ export default function AddProduct() {
 					method: 'POST',
 					body: JSON.stringify({
 						name: title,
-						price: price,
+						price: +price,
 						off: +off,
-						group: +group,
+						group: group,
 						itemCount: +count,
 						imgUrl: imgUrl.message,
 						isDiscount: off ? true : false,
 						oldPrice: +price,
 						freeTime: { 1: 1 },
+						finalPrice: +(price - ((off * price) / 100))
 					}),
 				})
 				const data = await res.json()
+				console.log(data);
 
 				setErrorMessage('')
 				setSuccessMessage('محصول با موفقیت افزوده شد')
@@ -199,7 +182,7 @@ export default function AddProduct() {
 								انتخاب کنید
 							</option>
 							{groups.map((group) => (
-								<option value={group.title} key={group.id}>
+								<option value={group.value} key={group.id}>
 									{group.title}
 								</option>
 							))}
@@ -254,18 +237,20 @@ export default function AddProduct() {
 						className='h-12 w-24 bg-primaryBTN rounded-lg text-xl text-white'
 						onClick={sendToApi}
 					>
-						افزودن
-					</button>
-				</div>
+					افزودن
+				</button>
 			</div>
-
-			{/* Show Notification */}
-			{isShowNotification && (
-				<Notification
-					errorMessage={errorMessage}
-					successMessage={successMessage}
-				/>
-			)}
 		</div>
+
+			{/* Show Notification */ }
+	{
+		isShowNotification && (
+			<Notification
+				errorMessage={errorMessage}
+				successMessage={successMessage}
+			/>
+		)
+	}
+		</div >
 	)
 }
