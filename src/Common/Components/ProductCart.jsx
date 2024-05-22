@@ -10,11 +10,28 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 
 	// get product cart items when component loeaded
 	useEffect(() => {
+		console.log(id);
+		getDatas()
 		if (count && id) {
 			const findProduct = datas.findIndex((data) => data.id === id)
 			setMainData(datas[findProduct])
 		}
 	}, [])
+
+	const getDatas = async () => {
+
+		try {
+			const res = await fetch('http://localhost:3000/products', {
+				method: 'GET',
+				credentials: 'include',
+			})
+
+			const data = await res.json()
+			setDatas(data)
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	// add count of product from Cart
 	const addProductCount = () => {

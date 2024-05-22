@@ -1,7 +1,7 @@
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
 import { useEffect, useState } from 'react'
-import products from '../../datas'
+// import products from '../../datas'
 import { IoArrowDown } from "react-icons/io5";
 import { breakeTime } from '../../datas';
 
@@ -22,6 +22,7 @@ export default function Cart() {
 		document.querySelector('.order-btn').addEventListener('click', () => {
 			setIsShowPayment(true)
 		})
+		console.log(productCart);
 	}, [])
 
 	useEffect(() => {
@@ -34,17 +35,28 @@ export default function Cart() {
 
 
 	// total price and discount
-	const totalPriceHandler = () => {
+	const totalPriceHandler = async () => {
 		const mainProductCard = JSON.parse(localStorage.getItem('productCart'))
 		const productsData = []
 
 		// get products data with id
-		for (let product of products) {
-			for (let main of mainProductCard) {
-				if (product.id === main.id) {
-					productsData.push({ price: product.price, count: main.count, oldPrice: product.oldPrice })
+		try {
+			const res = await fetch('http://localhost:3000/products', {
+				method: 'GET',
+				credentials: 'include',
+			})
+			const products = await res.json()
+
+			for (let product of products) {
+				for (let main of mainProductCard) {
+					if (product._id === main._id) {
+						// productsData.push({ price: product.price, count: main.count, oldPrice: product.oldPrice })
+						console.log(product._id);
+					}
 				}
 			}
+		} catch (err) {
+			console.log(err);
 		}
 
 		// computing total price 
@@ -86,8 +98,8 @@ export default function Cart() {
 						{productCart &&
 							productCart.map((product) => (
 								<ProductCart
-									key={product.id}
-									id={product.id}
+									key={product._id}
+									id={product._id}
 									count={product.count}
 									onRemove={removeHandler}
 									totalPrice={totalPriceHandler}

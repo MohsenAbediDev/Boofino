@@ -20,7 +20,7 @@ export default function Menus() {
 	}
 
 	useEffect(() => {
-		kos()
+		getDatas()
 	}, [])
 
 	useEffect(()=> {
@@ -31,7 +31,7 @@ export default function Menus() {
 		setGroups(Array.from(filteredGroups))
 	} ,[datas])
 
-	const kos = async () => {
+	const getDatas = async () => {
 
 		try {
 			const res = await fetch('http://localhost:3000/products', {

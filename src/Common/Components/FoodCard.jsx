@@ -41,7 +41,7 @@ export default function FoodCard({
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 
 		const mainProductCartID = mainProductCart
-			? mainProductCart.map((product) => product._id)
+			? mainProductCart.map((product) => product.id)
 			: []
 
 		setProductsID(mainProductCartID)
@@ -49,7 +49,7 @@ export default function FoodCard({
 		setCount((prevCount) => {
 			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 			const mainProductIndex = mainProductCart
-				? mainProductCart.findIndex((product) => product._id === _id)
+				? mainProductCart.findIndex((product) => product.id === _id)
 				: -1
 
 			if (mainProductIndex !== -1) {
