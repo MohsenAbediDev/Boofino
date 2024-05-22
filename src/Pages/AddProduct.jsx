@@ -24,10 +24,24 @@ export default function AddProduct() {
 	const [errorMessage, setErrorMessage] = useState('')
 	const [isShowNotification, setIsShowNotification] = useState(false)
 
-	const showingNotification = () => {
-		setIsShowNotification(true)
+	const showNotification = (response) => {
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+				setIsShowNotification(true)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+				setIsShowNotification(true)
+			}
+		}
 
-		setTimeout(() => setIsShowNotification(false), 3000)
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
+		}
+
+		response.json().then(handleResponse).catch(handleFailure)
 	}
 
 	// send picture
@@ -47,6 +61,7 @@ export default function AddProduct() {
 			try {
 				const res = await fetch('http://localhost:3000/uploadimg', {
 					method: 'POST',
+					credentials: 'include',
 					body: formData,
 				})
 				const data = await res.json()
@@ -54,7 +69,7 @@ export default function AddProduct() {
 			} catch (err) {
 				setSuccessMessage('')
 				setErrorMessage('مشکلی در بارگذاری عکس پیش آمده')
-				showingNotification()
+				setIsShowNotification(true)
 			}
 		}
 	}
@@ -63,38 +78,34 @@ export default function AddProduct() {
 	const sendToApi = async () => {
 		const imgUrl = await uploadImage()
 
-		if (imgUrl && title && price && count) {
+		if (imgUrl && title.trim() && price && count) {
+			const productData = {
+				name: title.trim(),
+				price: +price,
+				off: +off,
+				group: group,
+				finalPrice: +Math.floor(price - (off * price) / 100),
+				itemCount: +count,
+				imgUrl: imgUrl.message,
+				isDiscount: off ? true : false,
+				oldPrice: +price,
+				freeTime: { 1: 1 },
+			}
+
 			try {
 				const res = await fetch('http://localhost:3000/addproduct', {
 					method: 'POST',
-					body: JSON.stringify({
-						name: title,
-						price: +price,
-						off: +off,
-						group: group,
-						itemCount: +count,
-						imgUrl: imgUrl.message,
-						isDiscount: off ? true : false,
-						oldPrice: +price,
-						freeTime: { 1: 1 },
-						finalPrice: +(price - ((off * price) / 100))
-					}),
-				})
-				const data = await res.json()
-				console.log(data);
-
-				setErrorMessage('')
-				setSuccessMessage('محصول با موفقیت افزوده شد')
-				showingNotification()
-			} catch (err) {
-				setSuccessMessage('')
-				setErrorMessage('خطا در اضافه کردن محصول! دوباره تلاش کنید')
-				showingNotification()
-			}
+					credentials: 'include',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(productData),
+				}).then((res) => showNotification(res))
+			} catch (err) {}
 		} else {
 			setSuccessMessage('')
 			setErrorMessage('لطفا تمام فیلد هارا پر کنید')
-			showingNotification()
+			setIsShowNotification(true)
 		}
 	}
 
@@ -102,7 +113,6 @@ export default function AddProduct() {
 		<div className='w-full flex flex-col'>
 			<BackToDashboard title='افزودن محصول' />
 			<div className='dashboard-container h-fit py-5 flex flex-col gap-y-9 items-center justify-center'>
-
 				{/* Select image section */}
 				<div className='bg-dashboardItem shadow-xl w-40 h-40 rounded-dashboarditem flex justify-center items-center relative overflow-hidden'>
 					{/* Show image */}
@@ -237,20 +247,18 @@ export default function AddProduct() {
 						className='h-12 w-24 bg-primaryBTN rounded-lg text-xl text-white'
 						onClick={sendToApi}
 					>
-					افزودن
-				</button>
+						افزودن
+					</button>
+				</div>
 			</div>
-		</div>
 
-			{/* Show Notification */ }
-	{
-		isShowNotification && (
-			<Notification
-				errorMessage={errorMessage}
-				successMessage={successMessage}
-			/>
-		)
-	}
-		</div >
+			{/* Show Notification */}
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
+		</div>
 	)
 }
