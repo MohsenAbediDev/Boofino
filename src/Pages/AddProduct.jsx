@@ -100,8 +100,19 @@ export default function AddProduct() {
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify(productData),
-				}).then((res) => showNotification(res))
-			} catch (err) {}
+				}).then((res) => {
+					showNotification(res)
+					if(res.ok){
+						setFilePath(null)
+						setSelectedPic(null)
+						setTitle('')
+						setPrice('')
+						setGroup('')
+						setOff('')
+						setCount('')
+					}
+				})
+			} catch (err) { }
 		} else {
 			setSuccessMessage('')
 			setErrorMessage('لطفا تمام فیلد هارا پر کنید')

@@ -8,7 +8,7 @@ import products from '../../../datas'
 import { getUser } from '../../utils/utils'
 
 export default function Menus() {
-	const [datas, setDatas] = useState(products)
+	const [datas, setDatas] = useState([])
 	const [userSchool, setUserSchool] = useState()
 	const [groups, setGroups] = useState([])
 
@@ -20,12 +20,31 @@ export default function Menus() {
 	}
 
 	useEffect(() => {
+		kos()
+	}, [])
+
+	useEffect(()=> {
 		const allGroups = datas.map((data) => data.group)
 		const filteredGroups = new Set(allGroups)
 
 		userData()
 		setGroups(Array.from(filteredGroups))
-	}, [])
+	} ,[datas])
+
+	const kos = async () => {
+
+		try {
+			const res = await fetch('http://localhost:3000/products', {
+				method: 'GET',
+				credentials: 'include',
+			})
+
+			const data = await res.json()
+			setDatas(data)
+		} catch (err){
+			console.log(err);
+		}
+	}
 
 	return (
 		<div className='container flex flex-col items-center justify-center mt-5'>

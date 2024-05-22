@@ -63,20 +63,20 @@ export default function Menu({ children, grouping }) {
 						md:text-[28px] md:mt-2 select-none'
 					>
 						{/* Insert Food Menu Grouping */}
-						{grouping == 'hotFood' && 'غذای گرم'}
-						{grouping == 'coldFood' && 'غذای سرد'}
-						{grouping == 'hotDrink' && 'نوشیدنی داغ'}
-						{grouping == 'coldDrink' && 'نوشیدنی خنک'}
+						{grouping == 'hotfood' && 'غذای گرم'}
+						{grouping == 'coldfood' && 'غذای سرد'}
+						{grouping == 'hotdrink' && 'نوشیدنی داغ'}
+						{grouping == 'colddrink' && 'نوشیدنی خنک'}
 						{grouping == 'edible' && 'خوراکی'}
 					</p>
 
 					{/* Insert Food Menu Image's */}
 					<img
 						src={`./images/${
-							(grouping == 'hotFood' && 'hotfood.png') ||
-							(grouping == 'coldFood' && 'coldfood.png') ||
-							(grouping == 'hotDrink' && 'hotdrink.png') ||
-							(grouping == 'coldDrink' && 'colddrink.png') ||
+							(grouping == 'hotfood' && 'hotfood.png') ||
+							(grouping == 'coldfood' && 'coldfood.png') ||
+							(grouping == 'hotdrink' && 'hotdrink.png') ||
+							(grouping == 'colddrink' && 'colddrink.png') ||
 							(grouping == 'edible' && 'edible.png')
 						}`}
 						alt='Boofino Food Menu'

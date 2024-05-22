@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { addCount, minCount, addToCart } from '../../utils/utils'
 
 export default function FoodCard({
-	id,
+	_id,
 	group,
-	title,
-	image,
-	price,
+	name,
+	imgUrl,
+	finalPrice,
 	isDiscount,
 	oldPrice,
 }) {
@@ -16,15 +16,15 @@ export default function FoodCard({
 
 	// add product to Cart
 	const addProductToCart = () => {
-		addToCart(setCount, setProductsID, id)
+		addToCart(setCount, setProductsID, _id)
 	}
 
 	const addProductCount = () => {
-		addCount(setCount, id)
+		addCount(setCount, _id)
 	}
 
 	const minProductCount = () => {
-		minCount(setCount, id)
+		minCount(setCount, _id)
 	}
 
 
@@ -32,7 +32,7 @@ export default function FoodCard({
 	useEffect(() => {
 		if (count < 1) {
 			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-			const productsId = mainProductCart.map(product => product.id)
+			const productsId = mainProductCart.map(product => product._id)
 			setProductsID(productsId)
 		}
 	}, [count])
@@ -41,7 +41,7 @@ export default function FoodCard({
 		const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 
 		const mainProductCartID = mainProductCart
-			? mainProductCart.map((product) => product.id)
+			? mainProductCart.map((product) => product._id)
 			: []
 
 		setProductsID(mainProductCartID)
@@ -49,7 +49,7 @@ export default function FoodCard({
 		setCount((prevCount) => {
 			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 			const mainProductIndex = mainProductCart
-				? mainProductCart.findIndex((product) => product.id === id)
+				? mainProductCart.findIndex((product) => product._id === _id)
 				: -1
 
 			if (mainProductIndex !== -1) {
@@ -69,13 +69,13 @@ export default function FoodCard({
 				<div className='w-full h-full relative'>
 					<img
 						className={`h-[150px] w-full mx-auto bg-cover rounded-md`}
-						src={image}
+						src={imgUrl}
 					></img>
 					<h1
 						className='text-black mt-1 text-lg font-extrabold font-shabnam
 					md:text-md md:mt-0.5'
 					>
-						{title}
+						{name}
 					</h1>
 
 					{/* price */}
@@ -84,7 +84,7 @@ export default function FoodCard({
 							className='text-price mt-1 text-sm font-extrabold font-shabnam
 								md:mt-1'
 						>
-							{price} تومان
+							{finalPrice} تومان
 						</h3>
 					) : (
 						<div
@@ -95,7 +95,7 @@ export default function FoodCard({
 								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
 									md:mt-1'
 							>
-								{price} تومان
+								{finalPrice} تومان
 							</h3>
 							<h3
 								className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
@@ -106,7 +106,7 @@ export default function FoodCard({
 						</div>
 					)}
 
-					{!productsID.includes(id) ? (
+					{!productsID.includes(_id) ? (
 						<button
 							className='bg-primaryBTN hover:bg-hoverBTN transition-colors w-full h-8 font-shabnam text-white rounded-md absolute bottom-0'
 							onClick={addProductToCart}
