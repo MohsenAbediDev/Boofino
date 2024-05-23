@@ -9,6 +9,8 @@ import EditUser from './Pages/EditUser'
 import InfoUser from './Pages/InfoUser'
 import SelectionSchool from './Pages/SelectionSchool'
 import AddProduct from './Pages/AddProduct'
+import ProductsList from './Pages/ProductsList'
+import EditProduct from './Pages/EditProduct'
 
 const routes = [
 	{ path: '/', element: <Home /> },
@@ -26,8 +28,10 @@ const routes = [
 			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
 			{ path: 'add-product', element: <AddProduct/> },
+			{ path: 'product-list', element: <ProductsList/>},
 		],
 	},
+	{path:'/edit-product/:name' , element: <EditProduct/>}
 ]
 
 export default routes

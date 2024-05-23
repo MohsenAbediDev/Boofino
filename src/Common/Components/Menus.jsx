@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import Menu from './Menu'
 import MenuTitles from './MenuTitles'
 import FoodCard from './FoodCard'
-import products from '../../../datas'
 import { getUser } from '../../utils/utils'
 
 export default function Menus() {
@@ -23,14 +22,14 @@ export default function Menus() {
 		getDatas()
 	}, [])
 
-	useEffect(()=> {
+	useEffect(() => {
 		const allGroups = datas.map((data) => data.group)
 		const filteredGroups = new Set(allGroups)
 
 		userData()
 		setGroups(Array.from(filteredGroups))
 		console.log(datas);
-	} ,[datas])
+	}, [datas])
 
 	const getDatas = async () => {
 
@@ -42,7 +41,7 @@ export default function Menus() {
 
 			const data = await res.json()
 			setDatas(data)
-		} catch (err){
+		} catch (err) {
 			console.log(err);
 		}
 	}
@@ -75,7 +74,7 @@ export default function Menus() {
 									{/* Show products in their own group */}
 									{datas.map(
 										(data) =>
-											data.group === group && (
+											data.group === group && data.itemCount > 0 && (
 												<FoodCard {...data} key={data.id} />
 											)
 									)}

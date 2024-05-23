@@ -73,7 +73,7 @@ export default function FoodCard({
 						src={imgUrl}
 					></img>
 					<h1
-						className='text-black mt-1 text-lg font-extrabold font-shabnam
+						className='text-black mt-1 text-[17px] font-extrabold font-shabnam
 					md:text-md md:mt-0.5'
 					>
 						{name}

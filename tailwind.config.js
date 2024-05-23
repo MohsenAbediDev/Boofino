@@ -50,7 +50,8 @@ export default {
 			dashboardItem: '#494949',
 			dashboardItemActive: '#6F6F6F',
 			hoverConfirmBTN: '#689F38',
-			red: '#F66B6B'
+			red: '#F66B6B',
+			green: '#10DD60'
 		},
 	},
 	plugins: [],

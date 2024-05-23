@@ -263,7 +263,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 										</Link>
 
 										<Link
-											to='/dashboard/add-product'
+											to='/dashboard/product-list'
 											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
 										>
 											<span className='flex items-center gap-x-3'>

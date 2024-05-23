@@ -114,7 +114,7 @@ export default function Dashboard() {
 							</NavLink>
 
 							<NavLink
-								to='./edit-product'
+								to='./product-list'
 								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
                     hover:bg-dashboardItemActive transition-all duration-200'
 							>

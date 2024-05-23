@@ -52,7 +52,7 @@ export default function AddProduct() {
 		setSelectedPic(selectedFile)
 	}
 
-	// send data to api
+	// send image to api
 	const uploadImage = async () => {
 		if (selectedPic) {
 			const formData = new FormData()
