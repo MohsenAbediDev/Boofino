@@ -9,6 +9,7 @@ export default function FoodCard({
 	finalPrice,
 	isDiscount,
 	oldPrice,
+	itemCount
 }) {
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
@@ -20,7 +21,7 @@ export default function FoodCard({
 	}
 
 	const addProductCount = () => {
-		addCount(setCount, _id)
+		addCount(setCount, _id, itemCount)
 	}
 
 	const minProductCount = () => {

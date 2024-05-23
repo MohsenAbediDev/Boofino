@@ -29,6 +29,7 @@ export default function Menus() {
 
 		userData()
 		setGroups(Array.from(filteredGroups))
+		console.log(datas);
 	} ,[datas])
 
 	const getDatas = async () => {

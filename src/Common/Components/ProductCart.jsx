@@ -1,5 +1,4 @@
 import { FaMinus } from 'react-icons/fa'
-import products from '../../../datas'
 import { useEffect, useState } from 'react'
 import { addCount, minCount, removeProduct } from '../../utils/utils'
 
@@ -36,7 +35,7 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 
 	// add count of product from Cart
 	const addProductCount = () => {
-		addCount(setProductCount, id)
+		addCount(setProductCount, id, count)
 		totalPrice()
 	}
 

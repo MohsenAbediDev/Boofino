@@ -1,7 +1,7 @@
 //? Product function's
 
 // add count funcrion
-const addCount = (setCount, id) => {
+const addCount = (setCount, id, count) => {
 	// get current datas
 	const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
 	const mainProductIndex = mainProductCart
@@ -12,10 +12,13 @@ const addCount = (setCount, id) => {
 	if (mainProductIndex !== -1) {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
 		const mainDataInedx = productData.findIndex((product) => product.id === id)
-		productData[mainDataInedx].count = productData[mainDataInedx].count + 1
-		localStorage.setItem('productCart', JSON.stringify(productData))
 
-		setCount(productData[mainDataInedx].count)
+		if (productData[mainDataInedx].count < count) {
+			productData[mainDataInedx].count = productData[mainDataInedx].count + 1
+			localStorage.setItem('productCart', JSON.stringify(productData))
+
+			setCount(productData[mainDataInedx].count)
+		}
 	}
 }
 
