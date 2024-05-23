@@ -261,13 +261,14 @@ export default function EditProduct() {
 										/>
 									</div>
 								</div>
-								<div className='flex justify-end w-4/5 gap-x-5'>
+								<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
 									<button
 										className='h-12 w-24 bg-hoverBTN rounded-lg text-xl text-black'
 										onClick={reset}
 									>
 										لغو
 									</button>
+
 									<button
 										className='h-12 w-24 bg-primaryBTN outline-none rounded-lg text-xl text-white'
 										onClick={async () => {
@@ -310,7 +311,6 @@ export default function EditProduct() {
 															}),
 														}
 													)
-													console.log(res)
 													showNotification(res)
 												} catch (err) {
 													console.log(err)
