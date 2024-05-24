@@ -276,7 +276,7 @@ export default function EditProduct() {
                   </button>
 
                   <button
-                    className='h-12 w-24 bg-primaryBTN outline-none rounded-lg text-xl text-white'
+                    className='h-12 w-32 bg-primaryBTN outline-none rounded-lg text-xl text-white'
                     onClick={async () => {
                       const imgUrl = await uploadImage()
 
@@ -323,7 +323,7 @@ export default function EditProduct() {
                       }
                     }}
                   >
-                    افزودن
+                    به روز رسانی
                   </button>
                 </div>
               </>
