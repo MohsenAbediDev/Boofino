@@ -84,6 +84,7 @@ export default function EditProduct() {
 
       setDatas(product)
       setOff(product.off)
+      setCount(product.itemCount)
     } catch (err) {
       console.log(err)
     }
@@ -284,9 +285,9 @@ export default function EditProduct() {
                         (name && name !== datas.name) ||
                         (+price && +price !== +datas.price) ||
                         (group && group !== datas.group) ||
-                        (+off && +off == 0) ||
+                        (+off && +off === 0) ||
                         +off !== +datas.off ||
-                        (+count && +count !== +datas.itemCount)
+                        (+count === 0 && +count !== +datas.itemCount)
                       ) {
                         try {
                           const res = await fetch(
@@ -311,7 +312,7 @@ export default function EditProduct() {
                                 ),
                                 group: group || datas.group,
                                 off: off,
-                                itemCount: count || datas.itemCount,
+                                itemCount: count,
                               }),
                             }
                           )
