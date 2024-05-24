@@ -287,7 +287,7 @@ export default function EditProduct() {
                         (group && group !== datas.group) ||
                         (+off && +off === 0) ||
                         +off !== +datas.off ||
-                        (+count === 0 && +count !== +datas.itemCount)
+                        (+count === 0 || +count !== +datas.itemCount)
                       ) {
                         try {
                           const res = await fetch(

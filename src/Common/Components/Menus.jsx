@@ -23,12 +23,12 @@ export default function Menus() {
 	}, [])
 
 	useEffect(() => {
-		const allGroups = datas.map((data) => data.group)
+		const allData = datas.filter((data) => data.itemCount > 0 )
+		const allGroups = allData.map(data => data.group)
 		const filteredGroups = new Set(allGroups)
 
 		userData()
 		setGroups(Array.from(filteredGroups))
-		console.log(datas);
 	}, [datas])
 
 	const getDatas = async () => {
