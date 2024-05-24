@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function EditProductCard({
 	_id,
@@ -23,7 +23,7 @@ export default function EditProductCard({
 							<p className='text-2xl md:text-xl'>{name}</p>
 						</div>
 						<div className='grid grid-cols-3 justify-items-center items-center w-1/2 md:w-5/6 md:mx-auto'>
-							<p className='md:text-lg'>{dateTime.split('T')[0]}</p>
+							<p className='md:text-lg'>{dateTime.split('T')[0].replace(/-/g,'/')}</p>
 							<p
 								className={`w-20 h-10 flex justify-center items-center rounded-lg ${
 									itemCount > 0 ? 'bg-green md:w-16' : 'bg-red md:w-[70px]'
