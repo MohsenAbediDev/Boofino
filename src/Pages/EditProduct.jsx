@@ -375,7 +375,7 @@ export default function EditProduct() {
 				</div>
 			</div>
 
-			{/* Show Notification */}
+			{/* Show Modal */}
 			<ConfirmationModal
 				isOpen={isModalOpen}
 				onClose={CloseModal}
