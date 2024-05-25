@@ -305,7 +305,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 			<div
 				ref={overlay}
 				onClick={userProfileDropdown}
-				className='app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all hide'
+				className='fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all hide'
 			></div>
 		</>
 	)

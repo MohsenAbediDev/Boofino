@@ -73,8 +73,9 @@ const removeProduct = (id) => {
 	localStorage.setItem('productCart', JSON.stringify(productData))
 }
 
-//? Check user is login or not
+//? Api function's
 
+//? Check user is login or not
 const getUser = async () => {
 	try {
 		const response = await fetch('http://localhost:3000/user', {
@@ -88,28 +89,44 @@ const getUser = async () => {
 	}
 }
 
-const putUserData = async data => {
+//? Update user information
+const putUserData = async (data) => {
 	try {
 		const response = await fetch('http://localhost:3000/user', {
 			method: 'PUT',
 			credentials: 'include',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(data)
+			body: JSON.stringify(data),
 		})
 	} catch (error) {
-		console.log(error);
+		console.log(error)
 	}
 }
 
+//? Delete product from database
+const deleteProduct = async (product) => {
+	try {
+		const res = await fetch(`http://localhost:3000/deleteproduct/${product}`, {
+			method: 'DELETE',
+			credentials: 'include',
+		})
+
+		return res
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+//? Get user isAdmid or No ?
 const getUserAdmin = async () => {
 	const user = await getUser()
 
 	return user[0].is_admin
 }
 
-// Function for when the user is not logged in
+//? Function for when the user is not logged in
 const isNotLoggedIn = async () => {
 	const user = await getUser()
 
@@ -124,7 +141,7 @@ const isNotLoggedIn = async () => {
 	}
 }
 
-// Function for when the user is logged in
+//? Function for when the user is logged in
 const isLoggedIn = async () => {
 	const user = await getUser()
 
@@ -142,5 +159,6 @@ export {
 	isNotLoggedIn,
 	getUserAdmin,
 	getUser,
-	putUserData
+	putUserData,
+	deleteProduct,
 }

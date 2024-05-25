@@ -51,6 +51,7 @@ export default {
 			dashboardItemActive: '#6F6F6F',
 			hoverConfirmBTN: '#689F38',
 			red: '#F66B6B',
+			redBTN: '#ff4e4e',
 			green: '#10DD60'
 		},
 	},
