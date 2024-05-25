@@ -34,8 +34,8 @@ export default function ProducstList() {
 							<p>تاریخ ایجاد</p>
 						</div>
 						<div className='h-full w-1/2 flex items-center gap-3 dir-rtl'>
-							<input type='checkbox' className='w-6 h-6 md:w-5 md:h-5' />
-							<p>انتخاب همه</p>
+							<input type='checkbox' id='select-all-products' className='w-6 h-6 md:w-5 md:h-5 cp' />
+							<label htmlFor="select-all-products" className='cp select-none'>انتخاب همه</label> 
 						</div>
 					</div>
 					<div>
