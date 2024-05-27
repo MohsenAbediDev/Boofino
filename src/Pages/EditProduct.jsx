@@ -349,9 +349,9 @@ export default function EditProduct() {
 																oldPrice: price || datas.price,
 																finalPrice: +Math.floor(
 																	(price || datas.price) -
-																		((off || datas.off) *
-																			(price || datas.price)) /
-																			100
+																	((off || datas.off) *
+																		(price || datas.price)) /
+																	100
 																),
 																group: group || datas.group,
 																off: off,

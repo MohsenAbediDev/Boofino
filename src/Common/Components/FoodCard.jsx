@@ -85,7 +85,7 @@ export default function FoodCard({
 							className='text-price mt-1 text-sm font-extrabold font-shabnam
 								md:mt-1'
 						>
-							{finalPrice} تومان
+							{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
 						</h3>
 					) : (
 						<div
@@ -96,13 +96,13 @@ export default function FoodCard({
 								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
 									md:mt-1'
 							>
-								{finalPrice} تومان
+								{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
 							</h3>
 							<h3
 								className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
 									md:mt-1 md:text-xs'
 							>
-								{oldPrice} تومان
+								{oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
 							</h3>
 						</div>
 					)}

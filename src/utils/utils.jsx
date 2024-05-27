@@ -9,7 +9,7 @@ const addCount = (setCount, id, count) => {
 		: -1
 
 	// add count of product from Cart
-	if (mainProductIndex !== -1) {
+	if (mainProductIndex != -1) {
 		const productData = JSON.parse(localStorage.getItem('productCart'))
 		const mainDataInedx = productData.findIndex((product) => product.id === id)
 

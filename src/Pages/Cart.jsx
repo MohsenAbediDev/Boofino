@@ -15,6 +15,7 @@ export default function Cart() {
 	const [isShowPatment, setIsShowPayment] = useState(false)
 	const [discountCode, setDiscountCode] = useState('')
 	const [selectedTime, setSelectedTime] = useState(0)
+	const [count, setCount] = useState([])
 
 	useEffect(() => {
 		totalPriceHandler()
@@ -37,6 +38,7 @@ export default function Cart() {
 	const totalPriceHandler = async () => {
 		const mainProductCard = JSON.parse(localStorage.getItem('productCart'))
 		const productsData = []
+		const itemCount = []
 
 		// get products data with id
 		try {
@@ -50,12 +52,15 @@ export default function Cart() {
 				for (let main of mainProductCard) {
 					if (product._id === main.id) {
 						productsData.push({ price: product.finalPrice, count: main.count, oldPrice: product.oldPrice })
+						itemCount.push(product.itemCount)
 					}
 				}
 			}
 		} catch (err) {
 			console.log(err);
 		}
+
+		setCount(itemCount)
 
 		// computing total price 
 		setTotalPrice(() => {
@@ -94,11 +99,11 @@ export default function Cart() {
 					{/* Products Purchased By The User */}
 					<div className='md:divide-y-2 divide-secondary'>
 						{productCart &&
-							productCart.map((product) => (
+							productCart.map((product, index) => (
 								<ProductCart
 									key={product.id}
 									id={product.id}
-									count={product.count}
+									count={count[index]}
 									onRemove={removeHandler}
 									totalPrice={totalPriceHandler}
 								/>
@@ -111,7 +116,7 @@ export default function Cart() {
 
 			{/* Mobile Purchase Container */}
 			{productCart.length > 0 ? (
-				<div className='hidden w-full p-2 bg-primary lg:flex flex-col sticky bottom-0 z-20'>
+				<div className='hidden w-full p-2 bg-primary lg:flex flex-col sticky bottom-0 z-20' key={productCart._id}>
 					<div className='text-base py-1 font-shabnam text-white flex items-center justify-between'>
 						<p>تخفیف:</p>
 						<div className=''>
