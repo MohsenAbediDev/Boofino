@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { deleteProduct } from '../utils/utils'
 import ConfirmationModal from '../Common/Components/Modals/ConfirmationModal'
-import Notification from '../Common/Components/Notification'
+import Notification from '../Common/Components/Notification/Notification'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 
 export default function EditProduct() {

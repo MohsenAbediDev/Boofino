@@ -14,8 +14,7 @@ export default function ProducstList() {
 
 	// remove products
 	const removeHandler = async () => {
-
-		console.log(selectedProducts);
+		console.log(selectedProducts)
 		if (selectedProducts.length > 0) {
 			// If it was a product
 			if (selectedProducts.length === 1) {
@@ -28,13 +27,13 @@ export default function ProducstList() {
 						method: 'DELETE',
 						body: JSON.stringify({ productNames: selectedProducts }),
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
 						},
 						credentials: 'include',
 					})
 					getDatas()
 				} catch (err) {
-					console.log(err);
+					console.log(err)
 				}
 			}
 		}
@@ -65,8 +64,14 @@ export default function ProducstList() {
 							<p>تاریخ ایجاد</p>
 						</div>
 						<div className='h-full w-1/2 flex items-center gap-3 dir-rtl'>
-							<input type='checkbox' id='select-all-products' className='w-6 h-6 md:w-5 md:h-5 cp' />
-							<label htmlFor="select-all-products" className='cp select-none'>انتخاب همه</label>
+							<input
+								type='checkbox'
+								id='select-all-products'
+								className='w-6 h-6 md:w-5 md:h-5 cp'
+							/>
+							<label htmlFor='select-all-products' className='cp select-none'>
+								انتخاب همه
+							</label>
 						</div>
 					</div>
 					<div>
@@ -80,7 +85,8 @@ export default function ProducstList() {
 					</div>
 				</div>
 				<div className='w-full h-20 bg-primary absolute bottom-0 flex items-center'>
-					<button className='bg-red rounded-md w-20 h-12 text-2xl absolute left-16 md:left-5 md:text-xl md:h-[45px]'
+					<button
+						className='bg-red rounded-md w-20 h-12 text-2xl absolute left-16 md:left-5 md:text-xl md:h-[45px]'
 						onClick={removeHandler}
 					>
 						حذف

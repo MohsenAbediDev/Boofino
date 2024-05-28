@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
-import Notification from '../Common/Components/Notification'
+import Notification from '../Common/Components/Notification/Notification'
 import { Link } from 'react-router-dom'
 import { isLoggedIn } from '../utils/utils'
 
