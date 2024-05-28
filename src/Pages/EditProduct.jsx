@@ -44,7 +44,7 @@ export default function EditProduct() {
 
 		setTimeout(() => {
 			navigate('/dashboard/product-list')
-		}, 3000)
+		}, 2000)
 	}
 
 	//? Notification Variable's

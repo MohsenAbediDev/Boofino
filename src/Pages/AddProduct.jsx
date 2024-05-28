@@ -93,7 +93,7 @@ export default function AddProduct() {
 			}
 
 			try {
-				const res = await fetch('http://localhost:3000/addproduct', {
+				await fetch('http://localhost:3000/addproduct', {
 					method: 'POST',
 					credentials: 'include',
 					headers: {

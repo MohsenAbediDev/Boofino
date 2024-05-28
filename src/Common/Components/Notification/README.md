@@ -17,7 +17,11 @@ import Notification from 'Notification/Notification'
 کاستوم تگ زیر را فرا بخوانید
 
 ```jsx
-<Notification errorMessage={errorMessage} successMessage={successMessage} />
+{
+	isShowNotification && (
+		<Notification errorMessage={errorMessage} successMessage={successMessage} />
+	)
+}
 ```
 
 ### مرحله 3: تعریف States

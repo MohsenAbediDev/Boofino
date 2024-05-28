@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import EditProductCard from '../Common/Components/EditProductCard'
+import Notification from '../Common/Components/Notification/Notification'
 import { selectedProduct } from '../Common/contexts/selectedProductsContext'
 import { deleteProduct } from '../utils/utils'
 
@@ -8,30 +8,60 @@ export default function ProducstList() {
 	const [datas, setDatas] = useState([])
 	const [selectedProducts, setSelectedProducts] = useState([])
 
+	//? Notification Variable's
+	const [successMessage, setSuccessMessage] = useState('')
+	const [errorMessage, setErrorMessage] = useState('')
+	const [isShowNotification, setIsShowNotification] = useState(false)
+
+	const showNotification = (response) => {
+		console.log(response)
+
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+				setIsShowNotification(true)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+				setIsShowNotification(true)
+			}
+		}
+
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
+		}
+
+		response.json().then(handleResponse).catch(handleFailure)
+	}
+
 	useEffect(() => {
 		getDatas()
 	}, [])
 
 	// remove products
 	const removeHandler = async () => {
-		console.log(selectedProducts)
 		if (selectedProducts.length > 0) {
 			// If it was a product
 			if (selectedProducts.length === 1) {
-				deleteProduct(selectedProducts[0])
-				getDatas()
+				deleteProduct(selectedProducts[0]).then((res) => {
+					getDatas()
+					showNotification(res)
+				})
 			} else {
 				// If it was more than one product
 				try {
 					await fetch('http://localhost:3000/deleteproducts', {
 						method: 'DELETE',
-						body: JSON.stringify({ productNames: selectedProducts }),
+						credentials: 'include',
 						headers: {
 							'Content-Type': 'application/json',
 						},
-						credentials: 'include',
+						body: JSON.stringify({ productNames: selectedProducts }),
+					}).then((res) => {
+						getDatas()
+						showNotification(res)
 					})
-					getDatas()
 				} catch (err) {
 					console.log(err)
 				}
@@ -93,6 +123,13 @@ export default function ProducstList() {
 					</button>
 				</div>
 			</div>
+
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
 		</>
 	)
 }
