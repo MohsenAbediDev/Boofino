@@ -11,24 +11,26 @@ import SelectionSchool from './Pages/SelectionSchool'
 import AddProduct from './Pages/AddProduct'
 import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
+import Statistic from './Pages/Statistic'
 
 const routes = [
-	{ path: '/', element: <Home /> },
-	{ path: '/*', element: <NotFound /> },
-	{ path: '/signup', element: <Signup /> },
-	{ path: '/login', element: <Signin /> },
-	{ path: '/logout', element: <Logout /> },
-	{ path: '/school', element: <SelectionSchool /> },
+	{ path: '/', element: <Home/> },
+	{ path: '/*', element: <NotFound/> },
+	{ path: '/signup', element: <Signup/> },
+	{ path: '/login', element: <Signin/> },
+	{ path: '/logout', element: <Logout/> },
+	{ path: '/school', element: <SelectionSchool/> },
 	
 	{
 		path: '/dashboard/*',
 		element: <Dashboard />,
 		children: [
 			{ path: '', element: <InfoUser /> },
-			{ path: 'editprofile', element: <EditUser /> },
+			{ path: 'editprofile', element: <EditUser/> },
 			{ path: 'cart', element: <Cart /> },
 			{ path: 'add-product', element: <AddProduct/> },
 			{ path: 'product-list', element: <ProductsList/>},
+			{ path: 'statistic', element: <Statistic/>},
 		],
 	},
 	{path:'/edit-product/:name' , element: <EditProduct/>}

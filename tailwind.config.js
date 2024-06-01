@@ -52,7 +52,10 @@ export default {
 			hoverConfirmBTN: '#689F38',
 			red: '#F66B6B',
 			redBTN: '#ff4e4e',
-			green: '#10DD60'
+			green: '#10DD60',
+			incomeStat: '#405189',
+			userStat: '#A32B40',
+			premierFoodStat: '#BB7809'
 		},
 	},
 	plugins: [],

@@ -10,6 +10,7 @@ import {
 	MdExitToApp,
 	MdAddCircleOutline,
 	MdOutlineModeEditOutline,
+	MdOutlineQueryStats,
 } from 'react-icons/md'
 
 export default function Dashboard() {
@@ -86,6 +87,22 @@ export default function Dashboard() {
 
 				{/* Dashboard Links */}
 				<div className='dashboard-container flex flex-col gap-y-3'>
+					{/* My Statistics */}
+					{isAdmin && (
+						<NavLink
+							to='./statistic'
+							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+                    hover:bg-dashboardItemActive transition-all duration-200'
+						>
+							<div className='flex items-center'>
+								<MdOutlineQueryStats />
+								<span className='mx-2'>آمارهای من</span>
+							</div>
+							<MdOutlineArrowBackIos />
+						</NavLink>
+					)}
+
+					{/* My Orders */}
 					<NavLink
 						to='./shopping-history'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
