@@ -33,7 +33,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 	const [products, setProducts] = useState(productDatas)
 	const [searchTerm, setSearchTerm] = useState('')
 	const [searchResults, setSearchResults] = useState([])
-	const [showSearchResult, setShowSearchResult] = useState(false)
+	const [isShowSearchResult, setIsShowSearchResult] = useState(false)
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
 
@@ -58,6 +58,24 @@ function Navbar({ toggleValue, toggleHandler }) {
 		checkAdmin()
 	}, [])
 
+	useEffect(() => {
+		searchHandler(searchTerm)
+	}, [isShowSearchResult])
+
+	const searchHandler = async name => {
+		try {
+			const res = await fetch(`http://localhost:3000/search-products/${name}`, {
+				method: 'GET',
+				credentials: 'include',
+			})
+			const data = await res.json()
+
+			setSearchResults(data)
+		} catch (err) {
+			return err
+		}
+	}
+
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
@@ -70,6 +88,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 			? mainProductCart.map((product) => product.id)
 			: []
 
+		console.log(newProductsId);
 		setProductsID(newProductsId)
 	}
 
@@ -125,65 +144,69 @@ function Navbar({ toggleValue, toggleHandler }) {
 							placeholder='جستجوی غذا'
 							value={searchTerm}
 							onChange={handleSearchChange}
-							onFocus={() => {
-								setShowSearchResult(true)
-								getIds()
+							onKeyDown={e => {
+								if(e.key === 'Enter') {
+									setIsShowSearchResult(true)
+									getIds()
+								}
 							}}
 							onBlur={(e) => {
-								e.relatedTarget ? e.target.focus() : setShowSearchResult(false)
+								e.relatedTarget ? e.target.focus() : setIsShowSearchResult(false)
 							}}
 						/>
 
 						{/* Show Search Result */}
-						{searchResults.length > 0 && showSearchResult && (
+						{searchResults.length > 0 && isShowSearchResult && (
 							<div
 								className='absolute w-full max-h-[60vh] overflow-y-scroll scroll top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg 
 							md:no-scroll'
 							>
 								<ul className='divide-y-[1px] divide-price'>
-									{searchResults.map((result, index) => (
-										<li
-											className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
-											key={index}
-										>
-											<div className='flex items-center'>
-												<img
-													className='w-14 h-14 bg-cover rounded-lg border border-white'
-													src={result.image}
-												/>
-												<p className='font-b text-xl mx-2 md:text-lg'>
-													{result.title}
-												</p>
-											</div>
-											<div className='flex w-full flex-col my-1'>
-												<p className='text-xl sm:text-lg text-center'>
-													{result.price} تومان
-												</p>
-												{!productsID.includes(result.id) ? (
-													<button
-														className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200 
-														md:text-xs md:h-7 md:px-2'
-														onClick={() => {
-															addToCart(setCount, setProductsID, result.id)
-														}}
-													>
-														افزودن به سبد خرید
-													</button>
-												) : (
-													<button
-														className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200 
-														md:text-xs md:h-7 md:px-2'
-														onClick={() => {
-															removeProduct(result.id)
-															getIds()
-														}}
-													>
-														حذف از سبد خرید
-													</button>
-												)}
-											</div>
-										</li>
-									))}
+									{
+										searchResults.map(result => (
+											<li
+												className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
+												key={result._id}
+											>
+												<div className='flex items-center'>
+													<img
+														className='w-14 h-14 bg-cover rounded-lg border border-white'
+														src={result.imgUrl}
+													/>
+													<p className='font-b text-xl mx-2 md:text-lg'>
+														{result.name}
+													</p>
+												</div>
+												<div className='flex w-full flex-col my-1'>
+													<p className='text-xl sm:text-lg text-center'>
+														{result.finalPrice} تومان
+													</p>
+													{!productsID.includes(result._id) ? (
+														<button
+															className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200
+															md:text-xs md:h-7 md:px-2'
+															onClick={() => {
+																addToCart(setCount, setProductsID, result._id)
+															}}
+														>
+															افزودن به سبد خرید
+														</button>
+													) : (
+														<button
+															className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200
+															md:text-xs md:h-7 md:px-2'
+															onClick={() => {
+																removeProduct(result.ـid)
+																getIds()
+															}}
+														>
+															حذف از سبد خرید
+														</button>
+													)}
+												</div>
+											</li>
+										))
+									}
 								</ul>
 							</div>
 						)}
@@ -312,3 +335,46 @@ function Navbar({ toggleValue, toggleHandler }) {
 }
 
 export default withToggle(Navbar)
+
+
+{/* <li
+className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
+key={index}
+>
+<div className='flex items-center'>
+	<img
+		className='w-14 h-14 bg-cover rounded-lg border border-white'
+		src={result.image}
+	/>
+	<p className='font-b text-xl mx-2 md:text-lg'>
+		{result.title}
+	</p>
+</div>
+<div className='flex w-full flex-col my-1'>
+	<p className='text-xl sm:text-lg text-center'>
+		{result.price} تومان
+	</p>
+	{!productsID.includes(result.id) ? (
+		<button
+			className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200
+			md:text-xs md:h-7 md:px-2'
+			onClick={() => {
+				addToCart(setCount, setProductsID, result.id)
+			}}
+		>
+			افزودن به سبد خرید
+		</button>
+	) : (
+		<button
+			className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200
+			md:text-xs md:h-7 md:px-2'
+			onClick={() => {
+				removeProduct(result.id)
+				getIds()
+			}}
+		>
+			حذف از سبد خرید
+		</button>
+	)}
+</div>
+</li> */}
