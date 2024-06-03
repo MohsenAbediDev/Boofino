@@ -88,7 +88,6 @@ function Navbar({ toggleValue, toggleHandler }) {
 			? mainProductCart.map((product) => product.id)
 			: []
 
-		console.log(newProductsId);
 		setProductsID(newProductsId)
 	}
 
@@ -148,6 +147,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 								if(e.key === 'Enter') {
 									setIsShowSearchResult(true)
 									getIds()
+								} else {
+									setIsShowSearchResult(false)
 								}
 							}}
 							onBlur={(e) => {
