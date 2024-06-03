@@ -1,6 +1,5 @@
 import Menus from '../Common/Components/Menus'
 import Footer from '../Common/Components/Footer'
-// import Banner from '../Common/Components/Banner'
 
 export default function Home() {
 	return (

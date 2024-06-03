@@ -71,6 +71,7 @@ export default function FoodCard({
 					<img
 						className={`h-[150px] w-full mx-auto bg-cover rounded-md`}
 						src={imgUrl}
+						loading='lazy'
 					></img>
 					<h1
 						className='text-black mt-1 text-[17px] font-extrabold font-shabnam

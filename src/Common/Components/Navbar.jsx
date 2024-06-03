@@ -62,7 +62,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 		searchHandler(searchTerm)
 	}, [isShowSearchResult])
 
-	const searchHandler = async name => {
+	const searchHandler = async (name) => {
 		try {
 			const res = await fetch(`http://localhost:3000/search-products/${name}`, {
 				method: 'GET',
@@ -143,8 +143,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 							placeholder='جستجوی غذا'
 							value={searchTerm}
 							onChange={handleSearchChange}
-							onKeyDown={e => {
-								if(e.key === 'Enter') {
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
 									setIsShowSearchResult(true)
 									getIds()
 								} else {
@@ -152,7 +152,9 @@ function Navbar({ toggleValue, toggleHandler }) {
 								}
 							}}
 							onBlur={(e) => {
-								e.relatedTarget ? e.target.focus() : setIsShowSearchResult(false)
+								e.relatedTarget
+									? e.target.focus()
+									: setIsShowSearchResult(false)
 							}}
 						/>
 
@@ -163,51 +165,49 @@ function Navbar({ toggleValue, toggleHandler }) {
 							md:no-scroll'
 							>
 								<ul className='divide-y-[1px] divide-price'>
-									{
-										searchResults.map(result => (
-											<li
-												className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
-												key={result._id}
-											>
-												<div className='flex items-center'>
-													<img
-														className='w-14 h-14 bg-cover rounded-lg border border-white'
-														src={result.imgUrl}
-													/>
-													<p className='font-b text-xl mx-2 md:text-lg'>
-														{result.name}
-													</p>
-												</div>
-												<div className='flex w-full flex-col my-1'>
-													<p className='text-xl sm:text-lg text-center'>
-														{result.finalPrice} تومان
-													</p>
-													{!productsID.includes(result._id) ? (
-														<button
-															className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200
+									{searchResults.map((result) => (
+										<li
+											className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
+											key={result._id}
+										>
+											<div className='flex items-center'>
+												<img
+													className='w-14 h-14 bg-cover rounded-lg border border-white'
+													src={result.imgUrl}
+												/>
+												<p className='font-b text-xl mx-2 md:text-lg'>
+													{result.name}
+												</p>
+											</div>
+											<div className='flex w-full flex-col my-1'>
+												<p className='text-xl sm:text-lg text-center'>
+													{result.finalPrice} تومان
+												</p>
+												{!productsID.includes(result._id) ? (
+													<button
+														className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200
 															md:text-xs md:h-7 md:px-2'
-															onClick={() => {
-																addToCart(setCount, setProductsID, result._id)
-															}}
-														>
-															افزودن به سبد خرید
-														</button>
-													) : (
-														<button
-															className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200
+														onClick={() => {
+															addToCart(setCount, setProductsID, result._id)
+														}}
+													>
+														افزودن به سبد خرید
+													</button>
+												) : (
+													<button
+														className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200
 															md:text-xs md:h-7 md:px-2'
-															onClick={() => {
-																removeProduct(result.ـid)
-																getIds()
-															}}
-														>
-															حذف از سبد خرید
-														</button>
-													)}
-												</div>
-											</li>
-										))
-									}
+														onClick={() => {
+															removeProduct(result.ـid)
+															getIds()
+														}}
+													>
+														حذف از سبد خرید
+													</button>
+												)}
+											</div>
+										</li>
+									))}
 								</ul>
 							</div>
 						)}
@@ -337,8 +337,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 export default withToggle(Navbar)
 
-
-{/* <li
+{
+	/* <li
 className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
 key={index}
 >
@@ -378,4 +378,5 @@ key={index}
 		</button>
 	)}
 </div>
-</li> */}
+</li> */
+}
