@@ -119,7 +119,7 @@ const deleteProduct = async (product) => {
 	}
 }
 
-//? Get user isAdmid or No ?
+//? Get user isAdmin or No ?
 const getUserAdmin = async () => {
 	const user = await getUser()
 
@@ -150,6 +150,22 @@ const isLoggedIn = async () => {
 	}
 }
 
+//? Function for when the user is not admin
+const isNotAdmin = async () => {
+	const user = await getUser()
+
+	if (!user.is_admin) {
+		if (
+			window.location.pathname == '/dashboard/add-product' ||
+			window.location.pathname == '/dashboard/product-list' ||
+			window.location.pathname.include('edit-product') ||
+			window.location.pathname == '/dashboard/statistic'
+		) {
+			window.location.href = '/'
+		}
+	}
+}
+
 export {
 	addCount,
 	minCount,
@@ -161,4 +177,5 @@ export {
 	getUser,
 	putUserData,
 	deleteProduct,
+	isNotAdmin
 }
