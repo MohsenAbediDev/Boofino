@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+
 const pwaConfigs = {
 	manifest: {
 		name: 'Boofino',
@@ -55,7 +56,7 @@ const pwaConfigs = {
 				src: 'icons/icon-152x152.png',
 				sizes: '152x152',
 				type: 'image/png',
-				purpose: 'maskable any', 
+				purpose: 'maskable any',
 			},
 			{
 				src: 'icons/icon-192x192.png',
@@ -81,4 +82,8 @@ const pwaConfigs = {
 
 export default defineConfig({
 	plugins: [react(), VitePWA(pwaConfigs)],
+	build: {
+		sourcemap: false,
+  },
 })
+
