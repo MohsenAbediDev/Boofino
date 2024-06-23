@@ -12,6 +12,7 @@ import AddProduct from './Pages/AddProduct'
 import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
 import Statistic from './Pages/Statistic'
+import SuccessPay from './Pages/SuccessPay'
 
 const routes = [
 	{ path: '/', element: <Home/> },
@@ -20,6 +21,7 @@ const routes = [
 	{ path: '/login', element: <Signin/> },
 	{ path: '/logout', element: <Logout/> },
 	{ path: '/school', element: <SelectionSchool/> },
+	{ path: '/successfull-payment', element: <SuccessPay/> },
 	
 	{
 		path: '/dashboard/*',
