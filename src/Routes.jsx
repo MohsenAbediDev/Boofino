@@ -13,6 +13,7 @@ import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
 import Statistic from './Pages/Statistic'
 import SuccessPay from './Pages/SuccessPay'
+import PayFailed from './Pages/PayFailed'
 
 const routes = [
 	{ path: '/', element: <Home/> },
@@ -21,7 +22,8 @@ const routes = [
 	{ path: '/login', element: <Signin/> },
 	{ path: '/logout', element: <Logout/> },
 	{ path: '/school', element: <SelectionSchool/> },
-	{ path: '/successfull-payment', element: <SuccessPay/> },
+	{ path: '/successful-payment', element: <SuccessPay/> },
+	{ path: '/payment-failed', element: <PayFailed/> },
 	
 	{
 		path: '/dashboard/*',
