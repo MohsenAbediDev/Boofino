@@ -209,12 +209,15 @@ export default function EditProduct() {
 
 								<div className='w-4/5 grid grid-cols-2 gap-5 lg:grid-cols-1 mx-auto'>
 									<div className='flex flex-col gap-y-4'>
-										<label htmlFor='name' className='text-xl text-white'>
+										<label
+											htmlFor='edit-product-name'
+											className='text-xl text-white'
+										>
 											تغییر نام
 										</label>
 										<input
 											type='text'
-											id='name'
+											id='edit-product-name'
 											placeholder='ساندویچ همبرگر'
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 											value={name ? name : datas.name}
@@ -226,14 +229,15 @@ export default function EditProduct() {
 									{/* Add product price */}
 									<div className='flex flex-col gap-y-4'>
 										{/* Input title */}
-										<label htmlFor='name' className='text-xl text-white'>
+										<label htmlFor='edit-price' className='text-xl text-white'>
 											تغییر قیمت (تومان)
 										</label>
 
 										{/* Input */}
 										<input
 											type='number'
-											id='name'
+											inputmode='numeric'
+											id='edit-product-price'
 											min='0'
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 											value={price ? price : datas.price}
@@ -244,7 +248,10 @@ export default function EditProduct() {
 									{/* Add product group */}
 									<div className='flex flex-col gap-y-4'>
 										{/* Input title */}
-										<label htmlFor='name' className='text-xl text-white'>
+										<label
+											htmlFor='edit-product-group'
+											className='text-xl text-white'
+										>
 											تغییر دسته بندی
 										</label>
 
@@ -265,14 +272,18 @@ export default function EditProduct() {
 									{/* Add product off */}
 									<div className='flex flex-col gap-y-4'>
 										{/* Input title */}
-										<label htmlFor='name' className='text-xl text-white'>
+										<label
+											htmlFor='edit-product-discount'
+											className='text-xl text-white'
+										>
 											تغییر تخفیف
 										</label>
 
 										{/* Input */}
 										<input
 											type='number'
-											id='name'
+											inputMode='numeric'
+											id='edit-product-discount'
 											min='0'
 											max='100'
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
@@ -287,14 +298,18 @@ export default function EditProduct() {
 									{/* Add product count */}
 									<div className='flex flex-col gap-y-4'>
 										{/* Input title */}
-										<label htmlFor='name' className='text-xl text-white'>
+										<label
+											htmlFor='edit-product-count'
+											className='text-xl text-white'
+										>
 											تغییر تعداد محصول
 										</label>
 
 										{/* Input */}
 										<input
 											type='number'
-											id='name'
+											inputMode='numeric'
+											id='edit-product-count'
 											min='0'
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 											value={count ? count : datas.itemCount}
@@ -349,9 +364,9 @@ export default function EditProduct() {
 																oldPrice: price || datas.price,
 																finalPrice: +Math.floor(
 																	(price || datas.price) -
-																	((off || datas.off) *
-																		(price || datas.price)) /
-																	100
+																		((off || datas.off) *
+																			(price || datas.price)) /
+																			100
 																),
 																group: group || datas.group,
 																off: off,

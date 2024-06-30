@@ -152,14 +152,14 @@ export default function AddProduct() {
 					{/* Add product name */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='name' className='text-xl text-white'>
+						<label htmlFor='add-product-name' className='text-xl text-white'>
 							افزودن نام
 						</label>
 
 						{/* Input */}
 						<input
 							type='text'
-							id='name'
+							id='add-product-name'
 							placeholder='ساندویچ همبرگر'
 							className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 							value={title}
@@ -170,14 +170,15 @@ export default function AddProduct() {
 					{/* Add product price */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='name' className='text-xl text-white'>
+						<label htmlFor='add-product-price' className='text-xl text-white'>
 							افزودن قیمت (تومان)
 						</label>
 
 						{/* Input */}
 						<input
 							type='number'
-							id='name'
+							inputMode='numeric'
+							id='add-product-price'
 							min='0'
 							placeholder='12000'
 							className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
@@ -189,7 +190,7 @@ export default function AddProduct() {
 					{/* Add product group */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='name' className='text-xl text-white'>
+						<label htmlFor='add-product-group' className='text-xl text-white'>
 							دسته بندی
 						</label>
 
@@ -213,14 +214,15 @@ export default function AddProduct() {
 					{/* Add product off */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='name' className='text-xl text-white'>
+						<label htmlFor='add-product-discount' className='text-xl text-white'>
 							افزودن تخفیف (عدد)
 						</label>
 
 						{/* Input */}
 						<input
 							type='number'
-							id='name'
+							inputMode='numeric'
+							id='add-product-discount'
 							min='0'
 							max='100'
 							placeholder='10٪'
@@ -233,14 +235,15 @@ export default function AddProduct() {
 					{/* Add product count */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='name' className='text-xl text-white'>
+						<label htmlFor='add-product-count' className='text-xl text-white'>
 							تعداد محصول
 						</label>
 
 						{/* Input */}
 						<input
 							type='number'
-							id='name'
+							inputMode='numeric'
+							id='add-product-count'
 							min='0'
 							placeholder='25'
 							className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'

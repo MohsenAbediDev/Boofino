@@ -119,7 +119,9 @@ export default function Signup() {
 							<input
 								className='form-input'
 								onChange={(e) => setPhoneInputValue(e.target.value)}
-								type='text'
+								type='tel'
+								pattern="[0-9]*" 
+								inputmode="numeric"
 								placeholder='شماره همراه'
 							/>
 						</div>

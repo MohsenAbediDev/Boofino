@@ -72,7 +72,6 @@ export default function EditUser() {
 							{/* user profile pic */}
 							<img
 								src='../images/blankUserProfile.png'
-								alt=''
 								className='w-full h-full'
 							/>
 							{/* change profile pic button */}
