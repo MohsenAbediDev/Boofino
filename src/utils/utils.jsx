@@ -152,9 +152,9 @@ const isLoggedIn = async () => {
 
 //? Function for when the user is not admin
 const isNotAdmin = async () => {
-	const user = await getUser()
+	const isUserAdmin = await getUserAdmin()
 
-	if (!user.is_admin) {
+	if (!isUserAdmin) {
 		if (
 			window.location.pathname == '/dashboard/add-product' ||
 			window.location.pathname == '/dashboard/product-list' ||
@@ -177,5 +177,5 @@ export {
 	getUser,
 	putUserData,
 	deleteProduct,
-	isNotAdmin
+	isNotAdmin,
 }
