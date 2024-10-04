@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { getUserAdmin, getUser } from '../utils/utils'
+import { getUserAdmin, getUser, getUserWallet } from '../utils/utils'
 import { Outlet, NavLink, useParams } from 'react-router-dom'
 
 //? Icons
@@ -16,6 +16,7 @@ import {
 export default function Dashboard() {
 	const [isAdmin, setIsAdmin] = useState(false)
 	const [fullName, setFullName] = useState('')
+	const [walletValue, setwalletValue] = useState(0)
 	const params = useParams()
 	const dashboardRoute = useRef()
 
@@ -37,11 +38,18 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		userData()
+		getWalletValue()
 	}, [])
 
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
+	}
+
+	const getWalletValue = async () => {
+		const wallet = await getUserWallet()
+		const formattedNumber = wallet.toLocaleString('en-US').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		setwalletValue(formattedNumber)
 	}
 
 	return (
@@ -79,7 +87,7 @@ export default function Dashboard() {
 
 						{/* Wallet Price */}
 						<div className='text-white'>
-							<span className='text-xl mx-2'>۲۰۰,۰۰۰</span>
+							<span className='text-xl mx-2'>{walletValue}</span>
 							<span className='text-lg'>تومان</span>
 						</div>
 					</NavLink>

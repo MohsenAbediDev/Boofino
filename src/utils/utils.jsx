@@ -125,6 +125,12 @@ const getUserAdmin = async () => {
 
 	return user[0].is_admin
 }
+//? Get user isAdmin or No ?
+const getUserWallet = async () => {
+	const user = await getUser()
+
+	return user[0].wallet
+}
 
 //? Function for when the user is not logged in
 const isNotLoggedIn = async () => {
@@ -178,4 +184,5 @@ export {
 	putUserData,
 	deleteProduct,
 	isNotAdmin,
+	getUserWallet,
 }

@@ -6,6 +6,7 @@ import {
 	getUser,
 	removeProduct,
 	getUserAdmin,
+	getUserWallet
 } from '../../utils/utils'
 
 //? Toggle Hoc
@@ -40,10 +41,16 @@ function Navbar({ toggleValue, toggleHandler }) {
 	// User Variable's
 	const [fullName, setFullName] = useState('')
 	const [isAdmin, setIsAdmin] = useState(false)
+	const [walletValue, setwalletValue] = useState(0)
 
 	const checkAdmin = async () => {
 		const adminStatus = await getUserAdmin()
 		setIsAdmin(adminStatus)
+	}
+	const getWalletValue = async () => {
+		const wallet = await getUserWallet()
+		const formattedNumber = wallet.toLocaleString('en-US').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		setwalletValue(formattedNumber)
 	}
 
 	const performSearch = (value) => {
@@ -56,6 +63,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 		getIds()
 		userData()
 		checkAdmin()
+		getWalletValue()
 	}, [])
 
 	useEffect(() => {
@@ -246,7 +254,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 										</span>
 										<p className='text-sm text-sky-500 inline-block font-shabnam text-primaryBTN'>
 											موجودی:
-											<span className='px-1'>200,000</span>
+											<span className='px-1'>{walletValue}</span>
 											تومان
 										</p>
 									</div>
