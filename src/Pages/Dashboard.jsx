@@ -77,7 +77,7 @@ export default function Dashboard() {
 
 					{/* Wallet Container */}
 					<NavLink
-						to='./wallet-management'
+						to='./wallet'
 						className='w-full flex items-center mt-2 justify-between text-white text-xl transition-all duration-200 h-1/2'
 					>
 						<div className='text-white text-xl flex items-center'>

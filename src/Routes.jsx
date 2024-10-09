@@ -14,30 +14,32 @@ import EditProduct from './Pages/EditProduct'
 import Statistic from './Pages/Statistic'
 import SuccessPay from './Pages/SuccessPay'
 import PayFailed from './Pages/PayFailed'
+import Wallet from './Pages/Wallet'
 
 const routes = [
-	{ path: '/', element: <Home/> },
-	{ path: '/*', element: <NotFound/> },
-	{ path: '/signup', element: <Signup/> },
-	{ path: '/login', element: <Signin/> },
-	{ path: '/logout', element: <Logout/> },
-	{ path: '/school', element: <SelectionSchool/> },
-	{ path: '/successful-payment', element: <SuccessPay/> },
-	{ path: '/payment-failed', element: <PayFailed/> },
-	
+	{ path: '/', element: <Home /> },
+	{ path: '/*', element: <NotFound /> },
+	{ path: '/signup', element: <Signup /> },
+	{ path: '/login', element: <Signin /> },
+	{ path: '/logout', element: <Logout /> },
+	{ path: '/school', element: <SelectionSchool /> },
+	{ path: '/successful-payment', element: <SuccessPay /> },
+	{ path: '/payment-failed', element: <PayFailed /> },
+
 	{
 		path: '/dashboard/*',
 		element: <Dashboard />,
 		children: [
 			{ path: '', element: <InfoUser /> },
-			{ path: 'editprofile', element: <EditUser/> },
+			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
-			{ path: 'add-product', element: <AddProduct/> },
-			{ path: 'product-list', element: <ProductsList/>},
-			{ path: 'statistic', element: <Statistic/>},
+			{ path: 'add-product', element: <AddProduct /> },
+			{ path: 'product-list', element: <ProductsList /> },
+			{ path: 'statistic', element: <Statistic /> },
+			{ path: 'wallet', element: <Wallet /> },
 		],
 	},
-	{path:'/edit-product/:name' , element: <EditProduct/>}
+	{ path: '/edit-product/:name', element: <EditProduct /> },
 ]
 
 export default routes
