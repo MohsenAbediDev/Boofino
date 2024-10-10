@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getUser } from '../utils/utils'
 
-import InputModal from '../Common/Components/InputModal'
+import InputModal from '../Common/Components/Modals/InputModal'
 import SchoolsList from '../Common/Components/SchoolsList'
 import { showModalContext } from '../Common/contexts/showModalContext'
 

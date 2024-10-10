@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import InputModal from './InputModal'
+import InputModal from './Modals/InputModal'
 import { useContext } from 'react'
 import { showModalContext } from '../contexts/showModalContext'
 import { cityList } from '../../provinces_cities'
-import { getUser } from '../../utils/utils'
 import { putUserData } from '../../utils/utils'
 
-export default function SchoolsList({onChangeName}) {
+export default function SchoolsList({ onChangeName }) {
 	const [allSchools, setALlSchools] = useState([])
 	const [states, setStates] = useState([])
 	const [cities, setCities] = useState([])
@@ -20,32 +19,26 @@ export default function SchoolsList({onChangeName}) {
 
 	useEffect(() => {
 		getStates()
-
 	}, [])
 
 	useEffect(() => {
-
 		if (selectedState) {
 			let citiesOfState = []
 
-			const filteredCities = cityList.filter(city => city.provinceName === selectedState)
+			const filteredCities = cityList.filter(
+				(city) => city.provinceName === selectedState
+			)
 			for (let city of filteredCities) {
 				if (cities.includes(city.cityName)) {
 					citiesOfState.push(city.cityName)
 				}
 			}
 			setShowCities(citiesOfState)
-
 		}
 	}, [selectedState])
 
 	useEffect(() => {
-		// const schoolsInCity = schools.filter(
-		// 	(school) => school.city === selectedCity
-		// )
-		// setALlSchools(schoolsInCity)
-		if (pageNumber === 2)
-			getSchools()
+		if (pageNumber === 2) getSchools()
 	}, [pageNumber])
 
 	const getSchools = async () => {
@@ -62,9 +55,8 @@ export default function SchoolsList({onChangeName}) {
 			}
 
 			setALlSchools(schoolList)
-
 		} catch (err) {
-			console.log(err);
+			console.log(err)
 		}
 	}
 
@@ -76,7 +68,6 @@ export default function SchoolsList({onChangeName}) {
 			let supportedCities = []
 
 			for (let data of datas) {
-
 				if (!supportedStates.includes(data.state)) {
 					supportedStates.push(data.state)
 				}
@@ -84,14 +75,12 @@ export default function SchoolsList({onChangeName}) {
 				if (!supportedCities.includes(data.city)) {
 					supportedCities.push(data.city)
 				}
-
 			}
 
 			setStates(supportedStates)
 			setCities(supportedCities)
-
 		} catch (err) {
-			console.log(err);
+			console.log(err)
 		}
 	}
 
@@ -107,8 +96,7 @@ export default function SchoolsList({onChangeName}) {
 								</h1>
 								<select
 									onChange={(e) => setSelectedState(e.target.value)}
-									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'
-								>
+									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'>
 									<option value={0} disabled selected>
 										استان خود را انتخاب کنید
 									</option>
@@ -126,16 +114,16 @@ export default function SchoolsList({onChangeName}) {
 								</h1>
 								<select
 									onChange={(e) => setSelectedCity(e.target.value)}
-									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'
-								>
+									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'>
 									<option value={0} disabled selected>
 										شهر خود را انتخاب کنید
 									</option>
 									{selectedState &&
-										showCities.map((city, index) =>
-											<option value={city} key={index}>{city}</option>
-										)
-									}
+										showCities.map((city, index) => (
+											<option value={city} key={index}>
+												{city}
+											</option>
+										))}
 								</select>
 							</div>
 						</div>
@@ -145,15 +133,14 @@ export default function SchoolsList({onChangeName}) {
 								onClick={() => {
 									setShowModal(false)
 									setShowSchoolModal(false)
-								}}
-							>
+								}}>
 								لغو
 							</button>
 							<button
-								className={`w-24 h-12 text-lg ${selectedCity ? 'bg-primaryBTN' : 'bg-dashboardItemActive'
-									} font-bold rounded-md text-white`}
-								onClick={() => selectedCity && setPageNumber(2)}
-							>
+								className={`w-24 h-12 text-lg ${
+									selectedCity ? 'bg-primaryBTN' : 'bg-dashboardItemActive'
+								} font-bold rounded-md text-white`}
+								onClick={() => selectedCity && setPageNumber(2)}>
 								بعدی
 							</button>
 						</div>
@@ -167,13 +154,13 @@ export default function SchoolsList({onChangeName}) {
 							{allSchools.map((school) => (
 								<div
 									key={school.schoolId}
-									className={`transition-colors ${selectedSchool === school.schoolId
-										? 'bg-dashboardItemActive'
-										: 'bg-primary'
-										} min-h-[100px] rounded-md cp px-4
+									className={`transition-colors ${
+										selectedSchool === school.schoolId
+											? 'bg-dashboardItemActive'
+											: 'bg-primary'
+									} min-h-[100px] rounded-md cp px-4
                     md:min-h-[110px] md:px-2`}
-									onClick={() => setSelectedSchool(school.schoolId)}
-								>
+									onClick={() => setSelectedSchool(school.schoolId)}>
 									<div className='w-full h-full flex items-center'>
 										<img
 											src={school.imgUrl}
@@ -183,8 +170,7 @@ export default function SchoolsList({onChangeName}) {
 										<div className='w-full h-4/6 ms-2 text-white flex flex-col justify-between'>
 											<p
 												className='text-2xl
-                          md:text-lg'
-											>
+                          md:text-lg'>
 												{school.name}
 											</p>
 											<span className='text-sm md:text-xs'>
@@ -202,24 +188,23 @@ export default function SchoolsList({onChangeName}) {
 									setShowModal(false)
 									setShowSchoolModal(false)
 									selectedCity && setPageNumber(1)
-								}}
-							>
+								}}>
 								لغو
 							</button>
 							<button
-								className={`w-24 h-12 text-lg ${selectedSchool ? 'bg-primaryBTN' : 'bg-dashboardItemActive'
-									} font-bold rounded-md text-white`}
+								className={`w-24 h-12 text-lg ${
+									selectedSchool ? 'bg-primaryBTN' : 'bg-dashboardItemActive'
+								} font-bold rounded-md text-white`}
 								onClick={async () => {
 									if (selectedSchool) {
-										putUserData({schoolId: selectedSchool})
+										putUserData({ schoolId: selectedSchool })
 										onChangeName(selectedSchool)
 									}
 									setShowModal(false)
 									setShowSchoolModal(false)
 									if (window.location.pathname === '/school')
 										window.location.href = '/'
-								}}
-							>
+								}}>
 								تایید
 							</button>
 						</div>
