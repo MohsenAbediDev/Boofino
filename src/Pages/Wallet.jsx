@@ -12,28 +12,39 @@ export default function Wallet() {
 	const [inputWalletValue, setInputWalletValue] = useState(0)
 	const [isShowModal, setIsShowModal] = useState(false)
 	const [isShowDepositModal, setIsShowDepositModal] = useState(false)
+	const [depositSuccess, setDepositSuccess] = useState(false)
 
 	const getWalletValue = async () => {
 		const wallet = await getUserWallet()
-
 		const formattedNumber = wallet
 			.toLocaleString('en-US')
 			.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 		setWalletValue(formattedNumber)
 	}
 
-	const changeWalletValue = () => {
+	const changeWalletValue = async () => {
 		const newUserData = {
 			wallet: inputWalletValue,
 		}
 
-		putUserData(newUserData)
-		setWalletValue(inputWalletValue)
+		if (inputWalletValue > 0) {
+			await putUserData(newUserData)
+			setDepositSuccess(true)
+			setInputWalletValue(0)
+		}
 	}
 
 	useEffect(() => {
 		getWalletValue()
 	}, [])
+
+	useEffect(() => {
+		if (depositSuccess) {
+			getWalletValue() // Fetch the updated wallet value
+			setDepositSuccess(false) // Reset the success state
+		}
+	}, [depositSuccess])
+
 	return (
 		<div className='text-white dashboard-container h-screen flex flex-col items-center '>
 			<BackToDashboard title='کیف پول' />
