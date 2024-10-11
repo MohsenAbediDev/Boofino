@@ -9,8 +9,8 @@ export default function EditProductCard({
 	dateTime,
 	price,
 	itemCount,
+	selectedProducts,
 }) {
-
 	const setSelectedProducts = useContext(selectedProduct)
 
 	return (
@@ -19,21 +19,23 @@ export default function EditProductCard({
 				<input
 					type='checkbox'
 					className='w-6 h-6 md:h-5 md:w-5 mr-5 outline-none cp'
-
+					checked={selectedProducts.includes(name)} // تنظیم وضعیت چک‌باکس
 					// set product name to selectedProducts
-					onChange={e => {
+					onChange={(e) => {
 						if (e.target.checked) {
-							setSelectedProducts(prevProducts => {
+							setSelectedProducts((prevProducts) => {
 								// Checking the existence of the product
-								if(!prevProducts.includes(name)){
+								if (!prevProducts.includes(name)) {
 									return [...prevProducts, name]
 								}
 								return prevProducts
 							})
 						} else {
-							setSelectedProducts(prevProducts => {
-								if(prevProducts.includes(name)){
-									const newProducts = prevProducts.filter(product => product !== name)
+							setSelectedProducts((prevProducts) => {
+								if (prevProducts.includes(name)) {
+									const newProducts = prevProducts.filter(
+										(product) => product !== name
+									)
 									return newProducts
 								}
 								return prevProducts
@@ -59,13 +61,15 @@ export default function EditProductCard({
 								{dateTime.split('T')[0].replace(/-/g, '/')}
 							</p>
 							<p
-								className={`w-20 h-10 flex justify-center items-center rounded-lg ${itemCount > 0 ? 'bg-green md:w-16' : 'bg-red md:w-[70px]'
-									}
-               md:h- md:text-lg`}
-							>
+								className={`w-20 h-10 flex justify-center items-center rounded-lg ${
+									itemCount > 0 ? 'bg-green md:w-16' : 'bg-red md:w-[70px]'
+								}
+               md:h- md:text-lg`}>
 								{itemCount > 0 ? 'موجود' : 'ناموجود'}
 							</p>
-							<p className='md:text-xl'>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان</p>
+							<p className='md:text-xl'>
+								{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
+							</p>
 						</div>
 					</div>
 				</div>

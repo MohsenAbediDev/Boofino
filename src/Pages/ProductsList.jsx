@@ -14,8 +14,6 @@ export default function ProducstList() {
 	const [isShowNotification, setIsShowNotification] = useState(false)
 
 	const showNotification = (response) => {
-		console.log(response)
-
 		const handleResponse = (data) => {
 			if (response.ok) {
 				setErrorMessage('')
@@ -69,6 +67,17 @@ export default function ProducstList() {
 		}
 	}
 
+	const selectAll = (e) => {
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			const allProducts = datas.map((data) => data.name)
+			setSelectedProducts(allProducts)
+		} else {
+			setSelectedProducts([])
+		}
+	}
+
 	const getDatas = async () => {
 		try {
 			const res = await fetch('http://localhost:3000/products', {
@@ -97,6 +106,7 @@ export default function ProducstList() {
 							<input
 								type='checkbox'
 								id='select-all-products'
+								onChange={selectAll}
 								className='w-6 h-6 md:w-5 md:h-5 cp'
 							/>
 							<label htmlFor='select-all-products' className='cp select-none'>
@@ -108,20 +118,26 @@ export default function ProducstList() {
 						{datas.map((data) => (
 							<>
 								<selectedProduct.Provider value={setSelectedProducts}>
-									<EditProductCard {...data} />
+									<EditProductCard
+										{...data}
+										selectedProducts={selectedProducts}
+									/>
 								</selectedProduct.Provider>
 							</>
 						))}
 					</div>
 				</div>
-				<div className='w-full h-20 bg-primary absolute bottom-0 flex items-center'>
-					<button
-						className='bg-red rounded-md w-20 h-12 text-2xl absolute left-16 md:left-5 md:text-xl md:h-[45px]'
-						onClick={removeHandler}
-					>
-						حذف
-					</button>
-				</div>
+				{datas.length > 0 ? (
+					<div className='w-full bg-primary absolute bottom-0 flex items-center'>
+						<button
+							className='bg-red rounded-md w-20 h-12 text-2xl absolute left-16 md:left-5 md:text-xl md:h-[45px]'
+							onClick={removeHandler}>
+							حذف
+						</button>
+					</div>
+				) : (
+					''
+				)}
 			</div>
 
 			{isShowNotification && (
