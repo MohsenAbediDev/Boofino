@@ -1,8 +1,9 @@
 {
-  "name": "project-bf-ar-01",
+  "name": "boofino",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.8",
   "type": "module",
+  "license": "GPL-3.0-only",
   "scripts": {
     "start": "vite --host",
     "dev": "node ./node_modules/vite/bin/vite.js --host"
