@@ -121,7 +121,7 @@ export default function Signup() {
 								onChange={(e) => setPhoneInputValue(e.target.value)}
 								type='tel'
 								pattern="[0-9]*" 
-								inputmode="numeric"
+								inputMode="numeric"
 								placeholder='شماره همراه'
 							/>
 						</div>
