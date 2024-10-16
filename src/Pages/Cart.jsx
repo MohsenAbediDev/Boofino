@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 // import products from '../../datas'
 import { IoClose } from 'react-icons/io5'
 import { breakeTime } from '../../datas'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
@@ -101,6 +102,37 @@ export default function Cart() {
 		})
 	}
 
+	// order registration
+	const orderRegistration = () => {
+		const products = productCart.map((item) => ({
+			id: item.id,
+			count: Number(item.count),
+		}))
+
+		const data = { products, totalPrice }
+
+		console.log(data)
+
+		fetch('http://localhost:3000/buyproducts', {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((resData) => {
+				console.log(resData)
+
+				localStorage.setItem('productCart', [])
+				setIsShowPayment(false)
+			})
+			.catch((error) => {
+				console.error('Error:', error)
+			})
+	}
+
 	return (
 		<>
 			<div className='w-full h-full flex flex-col relative'>
@@ -172,8 +204,7 @@ export default function Cart() {
 				<div
 					className={`w-full bg-secondary absolute z-40 ${
 						isShowPatment ? 'visible h-full' : 'invisible h-0'
-					} rounded-dashboardcontainer transition-all
-			absolute bottom-0 duration-500 overflow-hidden p-7 md:p-4`}>
+					} rounded-dashboardcontainer transition-allabsolute bottom-0 duration-500 overflow-hidden p-7 md:p-4`}>
 					{/* Close payment section */}
 					<IoClose
 						className='absolute left-6 top-6 text-4xl lg:text-3xl text-white cp'
@@ -240,11 +271,12 @@ export default function Cart() {
 						</div>
 
 						{/* Complete purchase button */}
-						<a
-							href='#'
+						<Link
+							to='#'
+							onClick={orderRegistration}
 							className='w-full h-14 rounded-lg md:h-10 text-xl text-white md:rounded-sm bg-primaryBTN hover:bg-hoverConfirmBTN transition-colors duration-200 flex justify-center items-center absolute bottom-0 md:bottom-14'>
 							تکمیل خرید
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
