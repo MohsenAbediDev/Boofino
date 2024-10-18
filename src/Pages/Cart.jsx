@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
-import { useEffect, useState } from 'react'
-// import products from '../../datas'
+import { Link } from 'react-router-dom'
+import Notification from '../Common/Components/Notification/Notification'
+
 import { IoClose } from 'react-icons/io5'
 import { breakeTime } from '../../datas'
-import { Link } from 'react-router-dom'
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
@@ -17,7 +18,51 @@ export default function Cart() {
 	const [isShowPatment, setIsShowPayment] = useState(false)
 	const [discountCode, setDiscountCode] = useState('')
 	const [selectedTime, setSelectedTime] = useState(0)
+	const [trackingCode, setTrackingCode] = useState(0)
 	const [count, setCount] = useState([])
+
+	//? Notification Variable's
+	const [successMessage, setSuccessMessage] = useState('')
+	const [errorMessage, setErrorMessage] = useState('')
+	const [isShowNotification, setIsShowNotification] = useState(false)
+
+	const setNewTrackingCode = (newCode) => {
+		let existingArray = JSON.parse(localStorage.getItem('trackingOrderCode')) || []
+
+		existingArray.push(newCode)
+
+		localStorage.setItem('trackingOrderCode', JSON.stringify(existingArray))
+	}
+
+	const showNotification = (response) => {
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+				setIsShowNotification(true)
+
+				localStorage.setItem('productCart', JSON.stringify([]))
+
+				setNewTrackingCode(data.trackingCode)
+				setIsShowPayment(false)
+
+				setTimeout(
+					() => (window.location.pathname = '/successful-payment'),
+					1000
+				)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+				setIsShowNotification(true)
+			}
+		}
+
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
+		}
+
+		response.json().then(handleResponse).catch(handleFailure)
+	}
 
 	useEffect(() => {
 		// Calculate total price when component mounts
@@ -28,10 +73,6 @@ export default function Cart() {
 			setIsShowPayment(true)
 		})
 	}, [])
-
-	useEffect(() => {
-		// Handle changes when delivery time is selected (if any logic needed)
-	}, [selectedTime])
 
 	// Function to refresh product cart after removing items
 	const removeHandler = () => {
@@ -111,8 +152,6 @@ export default function Cart() {
 
 		const data = { products, totalPrice }
 
-		console.log(data)
-
 		fetch('http://localhost:3000/buyproducts', {
 			method: 'POST',
 			credentials: 'include',
@@ -121,13 +160,7 @@ export default function Cart() {
 			},
 			body: JSON.stringify(data),
 		})
-			.then((res) => res.json())
-			.then((resData) => {
-				console.log(resData)
-
-				localStorage.setItem('productCart', [])
-				setIsShowPayment(false)
-			})
+			.then((res) => showNotification(res))
 			.catch((error) => {
 				console.error('Error:', error)
 			})
@@ -280,6 +313,12 @@ export default function Cart() {
 					</div>
 				</div>
 			</div>
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
 		</>
 	)
 }

@@ -33,7 +33,7 @@ body {
 	}
 
 	.notification {
-		@apply invisible w-64 min-h-min transition-all duration-300 opacity-0 font-shabnam fixed gap-3 dir-rtl top-24 text-white bg-primaryBTN left-20 lg:left-14 rounded-lg p-3 flex;
+		@apply invisible w-64 min-h-min transition-all duration-300 opacity-0 font-shabnam fixed gap-3 dir-rtl top-24 text-white bg-primaryBTN left-20 lg:left-14 rounded-lg p-3 flex z-50;
 	}
 
 	.notification--show {
