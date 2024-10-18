@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 
 export default function SuccessPay() {
-	const orderCode = 4343
+	const trackingCode = JSON.parse(localStorage.getItem('trackingOrderCode'))?.slice(-1)[0];
+
 	return (
 		<div className='dashboard-container h-fit flex flex-col items-center justify-center py-5 px-5 mt-5'>
 			<div className='w-80 sm:w-full h-[514px] font-shabnam flex flex-col justify-center items-center bg-white py-5 rounded-xl dir-rtl'>
@@ -23,11 +24,11 @@ export default function SuccessPay() {
 						<span className='text-[22px] mr-1'>کد سفارش</span>
 					</div>
 
-					<span className='font-bold text-2xl'>{orderCode}</span>
+					<span className='font-bold text-2xl'>{trackingCode}</span>
 				</div>
 
 				{/* Show Info Btn */}
-				<Link to='/'>
+				<Link to='/dashboard/my-orders'>
 					<button className='w-32 bg-[#68AC50] text-white text-base py-4 rounded-md'>
 						جزئیات
 					</button>

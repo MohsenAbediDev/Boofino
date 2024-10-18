@@ -112,7 +112,7 @@ export default function Dashboard() {
 
 					{/* My Orders */}
 					<NavLink
-						to='./shopping-history'
+						to='./my-orders'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
                     hover:bg-dashboardItemActive transition-all duration-200'
 					>
