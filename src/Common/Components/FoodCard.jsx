@@ -9,7 +9,7 @@ export default function FoodCard({
 	finalPrice,
 	isDiscount,
 	oldPrice,
-	itemCount
+	itemCount,
 }) {
 	const [productsID, setProductsID] = useState([])
 	const [count, setCount] = useState(1)
@@ -28,12 +28,11 @@ export default function FoodCard({
 		minCount(setCount, _id)
 	}
 
-
 	// remove product from cart
 	useEffect(() => {
 		if (count < 1) {
 			const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-			const productsId = mainProductCart.map(product => product._id)
+			const productsId = mainProductCart.map((product) => product._id)
 			setProductsID(productsId)
 		}
 	}, [count])
@@ -65,18 +64,15 @@ export default function FoodCard({
 		<>
 			<div
 				className='bg-white h-72 max-w-[180px] min-w-[180px] rounded-md p-3 relative mx-3
-				md:min-w-[175px] md:max-w-[175px] md:h-[270px] select-none'
-			>
+				md:min-w-[175px] md:max-w-[175px] md:h-[270px] select-none'>
 				<div className='w-full h-full relative'>
 					<img
 						className={`h-[150px] w-full mx-auto bg-cover rounded-md`}
 						src={imgUrl}
-						loading='lazy'
-					></img>
+						loading='lazy'></img>
 					<h1
 						className='text-black mt-1 text-[17px] font-extrabold font-shabnam
-					md:text-md md:mt-0.5'
-					>
+					md:text-md md:mt-0.5'>
 						{name}
 					</h1>
 
@@ -84,26 +80,25 @@ export default function FoodCard({
 					{!isDiscount ? (
 						<h3
 							className='text-price mt-1 text-sm font-extrabold font-shabnam
-								md:mt-1'
-						>
-							{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
+								md:mt-1'>
+							{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+							تومان
 						</h3>
 					) : (
 						<div
 							className='flex flex-col leading-5
-							md:flex-row md:gap-x-2'
-						>
+							md:flex-row md:gap-x-2'>
 							<h3
 								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
-									md:mt-1'
-							>
-								{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
+									md:mt-1'>
+								{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+								تومان
 							</h3>
 							<h3
 								className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
-									md:mt-1 md:text-xs'
-							>
-								{oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
+									md:mt-1 md:text-xs'>
+								{oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+								تومان
 							</h3>
 						</div>
 					)}
@@ -111,16 +106,14 @@ export default function FoodCard({
 					{!productsID.includes(_id) ? (
 						<button
 							className='bg-primaryBTN hover:bg-hoverBTN transition-colors w-full h-8 font-shabnam text-white rounded-md absolute bottom-0'
-							onClick={addProductToCart}
-						>
+							onClick={addProductToCart}>
 							افزودن به سبد خرید
 						</button>
 					) : (
 						<div className='w-full h-8 font-shabnam text-white absolute bottom-0 flex justify-center gap-x-2'>
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={addProductCount}
-							>
+								onClick={addProductCount}>
 								+
 							</button>
 
@@ -136,8 +129,7 @@ export default function FoodCard({
 
 							<button
 								className='bg-primaryBTN hover:bg-hoverBTN w-1/4 rounded-md'
-								onClick={minProductCount}
-							>
+								onClick={minProductCount}>
 								-
 							</button>
 						</div>
