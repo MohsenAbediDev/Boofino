@@ -1,0 +1,444 @@
+/* Loader-1 Styles */
+.loader-1 {
+	width: 35px;
+	height: 80px;
+	position: relative;
+}
+.loader-1:after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	padding: 3px 5px;
+	border-top: 1px solid #444;
+	border-bottom: 4px solid #444;
+	background: linear-gradient(#d74e60 0 0) bottom no-repeat content-box, #333;
+	mix-blend-mode: lighten;
+	animation: l1 1.5s infinite linear;
+}
+.loader-1:before {
+	content: '';
+	position: absolute;
+	inset: -18px calc(50% - 2px) 8px;
+	background: #ff9466;
+	transform-origin: bottom;
+	transform: rotate(8deg);
+}
+@keyframes l1 {
+	0% {
+		background-size: 100% 100%;
+	}
+	100% {
+		background-size: 100% 5%;
+	}
+}
+
+/* Loader-2 Styles */
+.loader-2 {
+	width: 35px;
+	height: 80px;
+	position: relative;
+}
+.loader-2:after {
+	content: '';
+	position: absolute;
+	inset: 0 0 20px;
+	border-radius: 15px 15px 10px 10px;
+	padding: 1px;
+	background: repeating-linear-gradient(-45deg, #91d2e2 0 8px, #1296a7 0 12px)
+		content-box;
+	--c: radial-gradient(farthest-side, #000 94%, #0000);
+	-webkit-mask: linear-gradient(#0000 0 0), var(--c) -10px -10px,
+		var(--c) 15px -14px, var(--c) 9px -6px, var(--c) -12px 9px,
+		var(--c) 14px 9px, var(--c) 23px 27px, var(--c) -8px 35px, var(--c) 50% 50%,
+		linear-gradient(#000 0 0);
+	mask: linear-gradient(#000 0 0), var(--c) -10px -10px, var(--c) 15px -14px,
+		var(--c) 9px -6px, var(--c) -12px 9px, var(--c) 14px 9px, var(--c) 23px 27px,
+		var(--c) -8px 35px, var(--c) 50% 50%, linear-gradient(#0000 0 0);
+	-webkit-mask-composite: destination-out;
+	mask-composite: exclude, add, add, add, add, add, add, add, add;
+	-webkit-mask-repeat: no-repeat;
+	animation: l2 3s infinite;
+}
+.loader-2:before {
+	content: '';
+	position: absolute;
+	inset: 50% calc(50% - 4px) 0;
+	background: #e0a267;
+	border-radius: 50px;
+}
+@keyframes l2 {
+	0% {
+		-webkit-mask-size: auto, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	10% {
+		-webkit-mask-size: auto, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	20% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	30% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 0 0, 0 0, 0 0, 0 0,
+			0 0;
+	}
+	40% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px, 0 0,
+			0 0, 0 0, 0 0;
+	}
+	50% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 0 0, 0 0, 0 0;
+	}
+	60% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 0 0, 0 0;
+	}
+	70% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 0 0;
+	}
+	80%,
+	100% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 200% 200%;
+	}
+}
+
+/* Loader-3 Styles */
+.loader-3 {
+	width: 35px;
+	height: 80px;
+	position: relative;
+}
+.loader-3:after {
+	content: '';
+	position: absolute;
+	inset: 0 0 20px;
+	border-radius: 50px 50px 10px 10px;
+	padding: 1px;
+	background: linear-gradient(#ff4d80 33%, #ffa104 0 66%, #01ddc7 0) content-box;
+	--c: radial-gradient(farthest-side, #000 94%, #0000);
+	-webkit-mask: linear-gradient(#0000 0 0), var(--c) -10px -10px,
+		var(--c) 15px -14px, var(--c) 9px -6px, var(--c) -12px 9px,
+		var(--c) 14px 9px, var(--c) 23px 27px, var(--c) -8px 35px, var(--c) 50% 50%,
+		linear-gradient(#000 0 0);
+	mask: linear-gradient(#000 0 0), var(--c) -10px -10px, var(--c) 15px -14px,
+		var(--c) 9px -6px, var(--c) -12px 9px, var(--c) 14px 9px, var(--c) 23px 27px,
+		var(--c) -8px 35px, var(--c) 50% 50%, linear-gradient(#0000 0 0);
+	-webkit-mask-composite: destination-out;
+	mask-composite: exclude, add, add, add, add, add, add, add, add;
+	-webkit-mask-repeat: no-repeat;
+	animation: l3 3s infinite;
+}
+.loader-3:before {
+	content: '';
+	position: absolute;
+	inset: 50% calc(50% - 4px) 0;
+	background: #e0a267;
+	border-radius: 50px;
+}
+@keyframes l3 {
+	0% {
+		-webkit-mask-size: auto, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	10% {
+		-webkit-mask-size: auto, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	20% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	30% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 0 0, 0 0, 0 0, 0 0,
+			0 0;
+	}
+	40% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px, 0 0,
+			0 0, 0 0, 0 0;
+	}
+	50% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 0 0, 0 0, 0 0;
+	}
+	60% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 0 0, 0 0;
+	}
+	70% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 0 0;
+	}
+	80%,
+	100% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 200% 200%;
+	}
+}
+
+/* Loader-4 Styles */
+.loader-4 {
+	width: 35px;
+	height: 80px;
+	position: relative;
+}
+.loader-4:after {
+	content: '';
+	position: absolute;
+	inset: 0 0 20px;
+	border-radius: 50px 50px 10px 10px;
+	padding: 1px;
+	background: linear-gradient(#ff4d80 33%, #ffa104 0 66%, #01ddc7 0) content-box;
+	--c: radial-gradient(farthest-side, #000 94%, #0000);
+	-webkit-mask: linear-gradient(#0000 0 0), var(--c) -10px -10px,
+		var(--c) 15px -14px, var(--c) 9px -6px, var(--c) -12px 9px,
+		var(--c) 14px 9px, var(--c) 23px 27px, var(--c) -8px 35px, var(--c) 50% 50%,
+		linear-gradient(#000 0 0);
+	mask: linear-gradient(#000 0 0), var(--c) -10px -10px, var(--c) 15px -14px,
+		var(--c) 9px -6px, var(--c) -12px 9px, var(--c) 14px 9px, var(--c) 23px 27px,
+		var(--c) -8px 35px, var(--c) 50% 50%, linear-gradient(#0000 0 0);
+	-webkit-mask-composite: destination-out;
+	mask-composite: exclude, add, add, add, add, add, add, add, add;
+	-webkit-mask-repeat: no-repeat;
+	animation: l4 3s infinite;
+}
+.loader-4:before {
+	content: '';
+	position: absolute;
+	inset: 50% calc(50% - 4px) 0;
+	background: #e0a267;
+	border-radius: 50px;
+}
+@keyframes l4 {
+	0% {
+		-webkit-mask-size: auto, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	10% {
+		-webkit-mask-size: auto, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	20% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	30% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 0 0, 0 0, 0 0, 0 0,
+			0 0;
+	}
+	40% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px, 0 0,
+			0 0, 0 0, 0 0;
+	}
+	50% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 0 0, 0 0, 0 0;
+	}
+	60% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 0 0, 0 0;
+	}
+	70% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 0 0;
+	}
+	80%,
+	100% {
+		-webkit-mask-size: auto, 25px 25px, 25px 25px, 30px 30px, 30px 30px,
+			25px 25px, 25px 25px, 25px 25px, 200% 200%;
+	}
+}
+
+/* Loader-5 Styles */
+.loader-5 {
+	width: 80px;
+	height: 75px;
+	--c: no-repeat radial-gradient(farthest-side, #f7b261 85%, #b97850, #0000);
+	--b: no-repeat radial-gradient(farthest-side, #734b46 94%, #0000);
+	--s: 8px 8px, 8px 8px, 8px 8px, 40px 40px;
+	--e: 0 0, 0 0, 0 0, 0 0;
+	background: var(--b) 55% 47%, var(--b) 60% 66%, var(--b) 37% 43%,
+		var(--c) 50% 50%, var(--b) 15px 4px, var(--b) 4px 14px, var(--b) 27px 18px,
+		var(--c) 0 0, var(--b) calc(100% - 15px) 4px, var(--b) calc(100% - 4px) 14px,
+		var(--b) calc(100% - 27px) 18px, var(--c) 100% 0/40px 40px,
+		var(--b) 24px 47px, var(--b) 50% 43px, var(--b) 60% 58px, var(--c) 50% 100%;
+	animation: l5 3s infinite;
+}
+@keyframes l5 {
+	0%,
+	20% {
+		background-size: var(--s), var(--s), var(--s), var(--s);
+	}
+	20.01%,
+	40% {
+		background-size: var(--e), var(--s), var(--s), var(--s);
+	}
+	40.01%,
+	60% {
+		background-size: var(--e), var(--e), var(--s), var(--s);
+	}
+	60.01%,
+	80% {
+		background-size: var(--e), var(--e), var(--e), var(--s);
+	}
+	80.01%,
+	100% {
+		background-size: var(--e), var(--e), var(--e), var(--e);
+	}
+}
+
+/* Loader-6 Styles */
+.loader-6 {
+	width: 35px;
+	height: 80px;
+	position: relative;
+}
+.loader-6:before {
+	content: '';
+	position: absolute;
+	inset: 0 0 20px;
+	padding: 1px;
+	background: conic-gradient(
+			from -90deg at calc(100% - 3px) 3px,
+			#7e3c26 135deg,
+			#341612 0 270deg,
+			#0000 0
+		),
+		conic-gradient(
+			from 0deg at 3px calc(100% - 3px),
+			#0000 90deg,
+			#341612 0 225deg,
+			#7e3c26 0
+		),
+		#54281f;
+	background-size: 17px 17px;
+	background-clip: content-box;
+	--c: no-repeat linear-gradient(#000 0 0);
+	-webkit-mask: var(--c) 0 0, var(--c) 17px 0, var(--c) 0 17px,
+		var(--c) 17px 17px, var(--c) 0 34px, var(--c) 17px 34px,
+		linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	animation: l6 3s infinite;
+}
+.loader-6:after {
+	content: '';
+	position: absolute;
+	inset: 60% 0 0;
+	background: #b21b01;
+	border-top: 5px solid #c9c7c5;
+}
+@keyframes l6 {
+	0%,
+	14% {
+		-webkit-mask-size: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, auto;
+	}
+	15%,
+	29% {
+		-webkit-mask-size: 17px 17px, 0 0, 0 0, 0 0, 0 0, 0 0, auto;
+	}
+	30%,
+	44% {
+		-webkit-mask-size: 17px 17px, 17px 17px, 0 0, 0 0, 0 0, 0 0, auto;
+	}
+	45%,
+	59% {
+		-webkit-mask-size: 17px 17px, 17px 17px, 17px 17px, 0 0, 0 0, 0 0, auto;
+	}
+	60%,
+	74% {
+		-webkit-mask-size: 17px 17px, 17px 17px, 17px 17px, 17px 17px, 0 0, 0 0,
+			auto;
+	}
+	75%,
+	89% {
+		-webkit-mask-size: 17px 17px, 17px 17px, 17px 17px, 17px 17px, 17px 17px,
+			0 0, auto;
+	}
+	90%,
+	100% {
+		-webkit-mask-size: 17px 17px, 17px 17px, 17px 17px, 17px 17px, 17px 17px,
+			17px 17px, auto;
+	}
+}
+
+/* Loader-7 Styles */
+.loader-7 {
+	height: 35px;
+	width: 80px;
+	margin-left: 0px;
+	background: radial-gradient(farthest-side, #ffd1d1 94%, #0000) 4px 22px/5px
+			5px,
+		radial-gradient(farthest-side, #ffd1d1 94%, #0000) 12px 18px/5px 5px,
+		radial-gradient(farthest-side, #ffd1d1 94%, #0000) 3px 6px/8px 8px,
+		radial-gradient(farthest-side, #eb8594 90%, #0000 94%) left/20px 100%,
+		#bd3342;
+	background-repeat: no-repeat;
+	border-radius: 0 50px 50px 0;
+	border-top-left-radius: 30px 40px;
+	border-bottom-left-radius: 30px 40px;
+	animation: l7 3s infinite steps(10);
+	position: relative;
+}
+.loader-7::before {
+	content: ' ';
+	position: absolute;
+	inset: calc(50% - 8px) -10px calc(50% - 8px) auto;
+	width: 15px;
+	background: #bd3342;
+	clip-path: polygon(0 50%, 100% 0, 70% 50%, 100% 100%);
+}
+@keyframes l7 {
+	100% {
+		width: 20px;
+		margin-left: 60px;
+	}
+}
+
+/* Loader-8 Styles */
+.loader-8 {
+	width: 80px;
+	height: 40px;
+	border-radius: 0 0 100px 100px;
+	border: 5px solid #538a2d;
+	border-top: 0;
+	box-sizing: border-box;
+	background: radial-gradient(
+			farthest-side at top,
+			#0000 calc(100% - 5px),
+			#e7ef9d calc(100% - 4px)
+		),
+		radial-gradient(2px 3px, #5c4037 89%, #0000) 0 0/17px 12px, #ff1643;
+	--c: radial-gradient(farthest-side, #000 94%, #0000);
+	-webkit-mask: linear-gradient(#0000 0 0), var(--c) 12px -8px,
+		var(--c) 29px -8px, var(--c) 45px -6px, var(--c) 22px -2px,
+		var(--c) 34px 6px, var(--c) 21px 6px, linear-gradient(#000 0 0);
+	mask: linear-gradient(#000 0 0), var(--c) 12px -8px, var(--c) 29px -8px,
+		var(--c) 45px -6px, var(--c) 22px -2px, var(--c) 34px 6px, var(--c) 21px 6px,
+		linear-gradient(#0000 0 0);
+	-webkit-mask-composite: destination-out;
+	mask-composite: exclude, add, add, add, add, add, add;
+	-webkit-mask-repeat: no-repeat;
+	animation: l8 3s infinite;
+}
+@keyframes l8 {
+	0% {
+		-webkit-mask-size: auto, 0 0, 0 0, 0 0, 0 0, 0 0;
+	}
+	15% {
+		-webkit-mask-size: auto, 20px 20px, 0 0, 0 0, 0 0, 0 0;
+	}
+	30% {
+		-webkit-mask-size: auto, 20px 20px, 20px 20px, 0 0, 0 0, 0 0;
+	}
+	45% {
+		-webkit-mask-size: auto, 20px 20px, 20px 20px, 20px 20px, 0 0, 0 0, 0 0;
+	}
+	60% {
+		-webkit-mask-size: auto, 20px 20px, 20px 20px, 20px 20px, 20px 20px, 0 0,
+			0 0;
+	}
+	75% {
+		-webkit-mask-size: auto, 20px 20px, 20px 20px, 20px 20px, 20px 20px,
+			20px 20px, 0 0;
+	}
+	90%,
+	100% {
+		-webkit-mask-size: auto, 20px 20px, 20px 20px, 20px 20px, 20px 20px,
+			20px 20px, 20px 20px;
+	}
+}
