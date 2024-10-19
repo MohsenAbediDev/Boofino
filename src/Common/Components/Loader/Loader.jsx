@@ -6,8 +6,10 @@ export default function Loader() {
 	return (
 		<div className='fixed bg-primary w-full h-full flex items-center justify-center flex-col z-[100]'>
 			<div className={`loader-${randomAnimation}`}></div>
-			
-			<h1 className='mt-5 text-white text-2xl font-bold dir-rtl'>درحال بارگذاری ...</h1>
+
+			<p className='mt-5 text-white text-2xl font-bold dir-rtl typingDots'>
+				درحال بارگذاری
+			</p>
 		</div>
 	)
 }
