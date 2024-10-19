@@ -23,8 +23,8 @@ export default function Menus() {
 	}, [])
 
 	useEffect(() => {
-		const allData = datas.filter((data) => data.itemCount > 0 )
-		const allGroups = allData.map(data => data.group)
+		const allData = datas.filter((data) => data.itemCount > 0)
+		const allGroups = allData.map((data) => data.group)
 		const filteredGroups = new Set(allGroups)
 
 		userData()
@@ -32,7 +32,6 @@ export default function Menus() {
 	}, [datas])
 
 	const getDatas = async () => {
-
 		try {
 			const res = await fetch('http://localhost:3000/products', {
 				method: 'GET',
@@ -42,45 +41,48 @@ export default function Menus() {
 			const data = await res.json()
 			setDatas(data)
 		} catch (err) {
-			console.log(err);
+			console.log(err)
 		}
 	}
 
 	return (
 		<div className='container flex flex-col items-center justify-center mt-5'>
+			{/* If user has not selected a school */}
 			{!userSchool ? (
-				<div className='w-full h-full text-white text-2xl font-bold lg:mt-10 flex items-center flex-col'>
-					<img src='/images/broken-school.png' />
-
+				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
+					<img src='/images/broken-school.png' alt='broken school' />
 					<p>! هنوز مدرستو انتخاب نکردی</p>
-
 					<NavLink
 						to='/dashboard/editprofile'
-						className='my-10 p-4 bg-primaryBTN rounded-md'
-					>
+						className='my-10 p-4 bg-primaryBTN rounded-md'>
 						انتخاب مدرسه
 					</NavLink>
 				</div>
-			) : (
-				<>
-					{/* Food's Menu */}
-					<MenuTitles title='غذاها' />
+			) : !datas.length ? (
+				// If user has selected a school but no products are available
+				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
+					<img
+						className='w-[256px]'
+						src='/images/product-notfound.png'
+						alt='no products'
+					/>
 
+					<p>محصولی در این فروشگاه هنوز ثبت نشده</p>
+				</div>
+			) : (
+				// If user has selected a school and there are products
+				<>
+					<MenuTitles title='غذاها' />
 					<div className='w-full flex flex-col items-center'>
-						{
-							//? show group menu
-							groups.map((group) => (
-								<Menu grouping={group} key={group}>
-									{/* Show products in their own group */}
-									{datas.map(
-										(data) =>
-											data.group === group && data.itemCount > 0 && (
-												<FoodCard {...data} key={data.id} />
-											)
-									)}
-								</Menu>
-							))
-						}
+						{groups.map((group) => (
+							<Menu grouping={group} key={group}>
+								{datas.map(
+									(data) =>
+										data.group === group &&
+										data.itemCount > 0 && <FoodCard {...data} key={data.id} />
+								)}
+							</Menu>
+						))}
 					</div>
 				</>
 			)}
