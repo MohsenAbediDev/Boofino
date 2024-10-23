@@ -5,6 +5,7 @@ import Signin from './Pages/Signin'
 import Logout from './Pages/Logout'
 import Dashboard from './Pages/Dashboard'
 import Cart from './Pages/Cart'
+import MyOrders from './Pages/MyOrders'
 import EditUser from './Pages/EditUser'
 import InfoUser from './Pages/InfoUser'
 import SelectionSchool from './Pages/SelectionSchool'
@@ -33,6 +34,7 @@ const routes = [
 			{ path: '', element: <InfoUser /> },
 			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
+			{ path: 'my-orders', element: <MyOrders /> },
 			{ path: 'add-product', element: <AddProduct /> },
 			{ path: 'product-list', element: <ProductsList /> },
 			{ path: 'statistic', element: <Statistic /> },
