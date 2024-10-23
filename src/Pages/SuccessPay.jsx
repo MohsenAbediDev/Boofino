@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import QrCodeGenerator from '../Common/Components/QrCodeGenerator';
 
 export default function SuccessPay() {
 	const trackingCode = JSON.parse(localStorage.getItem('trackingOrderCode'))?.slice(-1)[0];
@@ -14,7 +15,7 @@ export default function SuccessPay() {
 
 				{/* Show QrCode */}
 				<div className='w-60 h-60 mt-2'>
-					<img src='images/example-qrcode.png' className='w-full rounded-md' />
+					<QrCodeGenerator url={`http://localhost:5173/dashboard/my-orders/${trackingCode}`} />
 				</div>
 
 				{/* Order Info */}
@@ -28,7 +29,7 @@ export default function SuccessPay() {
 				</div>
 
 				{/* Show Info Btn */}
-				<Link to='/dashboard/my-orders'>
+				<Link to={`/dashboard/my-orders/${trackingCode}`}>
 					<button className='w-32 bg-[#68AC50] text-white text-base py-4 rounded-md'>
 						جزئیات
 					</button>
