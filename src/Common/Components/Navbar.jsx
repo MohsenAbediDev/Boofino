@@ -6,7 +6,7 @@ import {
 	getUser,
 	removeProduct,
 	getUserAdmin,
-	getUserWallet
+	getUserWallet,
 } from '../../utils/utils'
 
 //? Toggle Hoc
@@ -49,7 +49,9 @@ function Navbar({ toggleValue, toggleHandler }) {
 	}
 	const getWalletValue = async () => {
 		const wallet = await getUserWallet()
-		const formattedNumber = wallet.toLocaleString('en-US').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		const formattedNumber = wallet
+			.toLocaleString('en-US')
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 		setwalletValue(formattedNumber)
 	}
 
@@ -135,8 +137,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 					{/* Navbar Logo */}
 					<Link
 						to='/'
-						className='text-white font-normal text-[20px] font-shabnam cp'
-					>
+						className='text-white font-normal text-[20px] font-shabnam cp'>
 						<img className='w-24' src='icons/logo.png' alt='boofino' />
 					</Link>
 
@@ -170,14 +171,12 @@ function Navbar({ toggleValue, toggleHandler }) {
 						{searchResults.length > 0 && isShowSearchResult && (
 							<div
 								className='absolute w-full max-h-[60vh] overflow-y-scroll scroll top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg 
-							md:no-scroll'
-							>
+							md:no-scroll'>
 								<ul className='divide-y-[1px] divide-price'>
 									{searchResults.map((result) => (
 										<li
 											className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
-											key={result._id}
-										>
+											key={result._id}>
 											<div className='flex items-center'>
 												<img
 													className='w-14 h-14 bg-cover rounded-lg border border-white'
@@ -197,8 +196,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 															md:text-xs md:h-7 md:px-2'
 														onClick={() => {
 															addToCart(setCount, setProductsID, result._id)
-														}}
-													>
+														}}>
 														افزودن به سبد خرید
 													</button>
 												) : (
@@ -208,8 +206,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 														onClick={() => {
 															removeProduct(result.ـid)
 															getIds()
-														}}
-													>
+														}}>
 														حذف از سبد خرید
 													</button>
 												)}
@@ -224,8 +221,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 					{/* User Profile */}
 					<div
 						onClick={userProfileDropdown}
-						className='text-white font-bold flex items-center'
-					>
+						className='text-white font-bold flex items-center'>
 						{/* User Icon */}
 						<AiOutlineUser className='text-[2rem] text-white cp relative' />
 
@@ -233,15 +229,13 @@ function Navbar({ toggleValue, toggleHandler }) {
 						<div
 							className='absolute left-3 top-full z-10 transition-all hide'
 							id='user-profile'
-							ref={dropdown}
-						>
+							ref={dropdown}>
 							<div className='w-[278px] bg-secondary  py-5 px-6 rounded-2xl'>
 								{/* User Info */}
 								<div className='flex items-center border-b border-b-gray-200 pb-5 mb-2'>
 									<Link
 										to='dashboard'
-										className='object-cover w-14 h-14 rounded-full inline-block'
-									>
+										className='object-cover w-14 h-14 rounded-full inline-block'>
 										<img
 											src='./images/blankUserProfile.png'
 											className='rounded-full'
@@ -263,8 +257,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 								{/* Dashboard Link's */}
 								<Link
 									to='/dashboard'
-									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-								>
+									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 									<span className='flex items-center gap-x-3'>
 										<AiOutlineDashboard className='w-5 h-5' />
 										داشبورد
@@ -273,8 +266,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 								<Link
 									to='/dashboard/cart'
-									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-								>
+									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 									<span className='flex items-center gap-x-3'>
 										<AiOutlineShoppingCart className='w-5 h-5' />
 										سبد خرید
@@ -286,8 +278,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 									<>
 										<Link
 											to='/dashboard/add-product'
-											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-										>
+											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 											<span className='flex items-center gap-x-3'>
 												<MdAddCircleOutline className='w-5 h-5' />
 												افزودن محصول
@@ -296,8 +287,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 										<Link
 											to='/dashboard/product-list'
-											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-										>
+											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 											<span className='flex items-center gap-x-3'>
 												<MdOutlineModeEditOutline className='w-5 h-5' />
 												ویرایش محصول
@@ -307,9 +297,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 								)}
 
 								<Link
-									to='/dashboard'
-									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'
-								>
+									to='/dashboard/my-orders'
+									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 									<span className='flex items-center gap-x-3'>
 										<IoDocumentTextOutline className='w-5 h-5' />
 										سفارش‌های من
@@ -319,8 +308,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 								<div className='mt-2 pt-2 border-t border-t-gray-200'>
 									<Link
 										to='/logout'
-										className='cp flex items-center justify-between text-zinc-700 px-2.5 py-2.5 rounded-xl hover:bg-hoverDropDownLink transition-colors'
-									>
+										className='cp flex items-center justify-between text-zinc-700 px-2.5 py-2.5 rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 										<span className='flex items-center gap-x-3'>
 											<MdExitToApp className='w-5 h-5 text-red' />
 											خروج
@@ -337,8 +325,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 			<div
 				ref={overlay}
 				onClick={userProfileDropdown}
-				className='fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all hide'
-			></div>
+				className='fixed w-full h-full top-0 left-0 bg-black/40 z-30 md:backdrop-blur transition-all hide'></div>
 		</>
 	)
 }
