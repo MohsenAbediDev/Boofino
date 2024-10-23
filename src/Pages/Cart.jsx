@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Notification from '../Common/Components/Notification/Notification'
 
 import { IoClose } from 'react-icons/io5'
@@ -18,13 +18,13 @@ export default function Cart() {
 	const [isShowPatment, setIsShowPayment] = useState(false)
 	const [discountCode, setDiscountCode] = useState('')
 	const [selectedTime, setSelectedTime] = useState(0)
-	const [trackingCode, setTrackingCode] = useState(0)
 	const [count, setCount] = useState([])
 
 	//? Notification Variable's
 	const [successMessage, setSuccessMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 	const [isShowNotification, setIsShowNotification] = useState(false)
+	const navigate = useNavigate()
 
 	const setNewTrackingCode = (newCode) => {
 		let existingArray = JSON.parse(localStorage.getItem('trackingOrderCode')) || []
@@ -46,10 +46,7 @@ export default function Cart() {
 				setNewTrackingCode(data.trackingCode)
 				setIsShowPayment(false)
 
-				setTimeout(
-					() => (window.location.pathname = '/successful-payment'),
-					1000
-				)
+				setTimeout(() => navigate('/successful-payment'), 1000)
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)
