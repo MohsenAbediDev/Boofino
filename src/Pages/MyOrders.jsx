@@ -61,7 +61,7 @@ export default function MyOrders() {
 									{/* Image and products name */}
 									<div className='flex items-center justify-center gap-x-2 mr-5'>
 										<img className='w-16 h-16' src='' />
-										<p>
+										<p className='truncate'>
 											{order.products.map((product) => product.name).join('، ')}
 										</p>
 									</div>

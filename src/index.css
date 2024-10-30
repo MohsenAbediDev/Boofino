@@ -86,6 +86,13 @@ body {
 		@apply opacity-100 visible;
 	}
 
+	.truncate {
+		max-width: 400px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	/* hide scrollbar in chrome */
 	.no-scroll::-webkit-scrollbar {
 		display: none;
