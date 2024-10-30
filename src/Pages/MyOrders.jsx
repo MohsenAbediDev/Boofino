@@ -35,7 +35,7 @@ export default function MyOrders() {
 
 	return (
 		<div className='w-full h-full flex flex-col relative text-xl text-white'>
-			{orders ? (
+			{orders.length > 0 ? (
 				<>
 					{/* Order information */}
 					<div className='w-full flex items-center justify-end gap-10 border-b-2 pb-4 pl-8'>
@@ -65,7 +65,6 @@ export default function MyOrders() {
 											{order.products.map((product) => product.name).join('، ')}
 										</p>
 									</div>
-									{console.log(order)}
 
 									{/* Order information */}
 									<div className='flex items-center gap-10 ml-2'>
@@ -98,7 +97,13 @@ export default function MyOrders() {
 					</div>
 				</>
 			) : (
-				''
+				<div className='h-full flex items-center justify-center flex-col'>
+					<p className='font-bold text-2xl'>شما هنوز سفارشی ثبت نکردید</p>
+
+					<Link to='/' className='bg-primaryBTN p-4 mt-10 rounded-md text-2xl'>
+						بازگشت به خانه
+					</Link>
+				</div>
 			)}
 		</div>
 	)
