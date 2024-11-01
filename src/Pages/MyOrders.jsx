@@ -59,7 +59,7 @@ export default function MyOrders() {
 									key={order._id}
 									className='bg-secondary w-full h-24 flex items-center justify-between rounded-md'>
 									{/* Image and products name */}
-									<div className='flex items-center justify-center gap-x-2 mr-5'>
+									<div className='flex items-center justify-center gap-x-2 mr-3'>
 										{/* Set images */}
 										<div
 											className={`grid overflow-hidden w-16 h-16 rounded-md ${
@@ -82,8 +82,6 @@ export default function MyOrders() {
 												/>
 											))}
 										</div>
-
-										{console.log(order)}
 
 										<p className='truncate'>
 											{order.products.map((product) => product.name).join('، ')}
