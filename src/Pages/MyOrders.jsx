@@ -60,7 +60,31 @@ export default function MyOrders() {
 									className='bg-secondary w-full h-24 flex items-center justify-between rounded-md'>
 									{/* Image and products name */}
 									<div className='flex items-center justify-center gap-x-2 mr-5'>
-										<img className='w-16 h-16' src='' />
+										{/* Set images */}
+										<div
+											className={`grid overflow-hidden w-16 h-16 rounded-md ${
+												order.products.length === 1
+													? 'grid-cols-1 grid-rows-1'
+													: order.products.length === 2
+													? 'grid-cols-2 grid-rows-1'
+													: 'grid-cols-2 grid-rows-2'
+											}`}>
+											{order.products.slice(0, 4).map((product, index) => (
+												<img
+													key={index}
+													className={`object-cover w-full h-full ${
+														order.products.length === 3 && index === 2
+															? 'col-span-2'
+															: ''
+													}`}
+													src={product.imgUrl}
+													alt={product.name}
+												/>
+											))}
+										</div>
+
+										{console.log(order)}
+
 										<p className='truncate'>
 											{order.products.map((product) => product.name).join('، ')}
 										</p>
