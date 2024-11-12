@@ -38,7 +38,7 @@ export default function MyOrders() {
 			{orders.length > 0 ? (
 				<>
 					{/* Order information */}
-					<div className='w-full flex items-center justify-end gap-10 border-b-2 pb-4 pl-8'>
+					<div className='w-full flex sm:hidden items-center justify-end gap-10 border-b-2 pb-4 pl-8'>
 						<span>تاریخ ثبت</span>
 
 						<span>وضعیت</span>
@@ -49,72 +49,153 @@ export default function MyOrders() {
 					</div>
 
 					{/* Order carts */}
-					<div className='w-full h-full flex flex-col items-center justify-start gap-y-5 overflow-y-auto scroll mt-8'>
+					<div className='w-full h-full flex flex-col items-center justify-start gap-y-5 overflow-y-auto scroll mt-8 sm:mt-0'>
 						{orders
 							.slice()
 							.reverse()
 							.map((order) => (
-								<Link
-									to={`./${order.trackingCode}`}
-									key={order._id}
-									className='bg-secondary w-full h-24 flex items-center justify-between rounded-md'>
-									{/* Image and products name */}
-									<div className='flex items-center justify-center gap-x-2 mr-3'>
-										{/* Set images */}
-										<div
-											className={`grid overflow-hidden w-16 h-16 rounded-md ${
-												order.products.length === 1
-													? 'grid-cols-1 grid-rows-1'
-													: order.products.length === 2
-													? 'grid-cols-2 grid-rows-1'
-													: 'grid-cols-2 grid-rows-2'
-											}`}>
-											{order.products.slice(0, 4).map((product, index) => (
-												<img
-													key={index}
-													className={`object-cover w-full h-full ${
-														order.products.length === 3 && index === 2
-															? 'col-span-2'
-															: ''
-													}`}
-													src={product.imgUrl}
-													alt={product.name}
-												/>
-											))}
+								<>
+									{/* Desktop/Tablet card */}
+									<Link
+										to={`./${order.trackingCode}`}
+										key={order._id}
+										className='flex sm:hidden bg-secondary w-full h-24 items-center justify-between rounded-md'>
+										{/* Image and products name */}
+										<div className='flex items-center justify-center gap-x-2 mr-3'>
+											{/* Set images */}
+											<div
+												className={`grid overflow-hidden w-16 h-16 sm:w-14 sm:h-14 rounded-md ${
+													order.products.length === 1
+														? 'grid-cols-1 grid-rows-1'
+														: order.products.length === 2
+														? 'grid-cols-2 grid-rows-1'
+														: 'grid-cols-2 grid-rows-2'
+												}`}>
+												{order.products.slice(0, 4).map((product, index) => (
+													<img
+														key={index}
+														className={`object-cover w-full h-full ${
+															order.products.length === 3 && index === 2
+																? 'col-span-2'
+																: ''
+														}`}
+														src={product.imgUrl}
+														alt={product.name}
+													/>
+												))}
+											</div>
+
+											<p className='truncate'>
+												{order.products
+													.map((product) => product.name)
+													.join('، ')}
+											</p>
 										</div>
 
-										<p className='truncate'>
-											{order.products.map((product) => product.name).join('، ')}
-										</p>
-									</div>
-
-									{/* Order information */}
-									<div className='flex items-center gap-10 ml-2'>
-										{/* Date of registration */}
-										<span>{order.createdAt.match(/T(\d{2}:\d{2})/)[1]}</span>
-										{/* Processing */}
-										<span
-											style={{
-												backgroundColor: statusMap[order.status]?.bgColor,
-											}}
-											className='p-1 text-[16px] rounded-sm'>
-											{statusMap[order.status]?.text}
-										</span>
-
-										{/* Tracking code */}
-										<span>{order.trackingCode}</span>
-
-										{/* Price */}
-										<div className='flex items-center gap-1'>
-											<span>
-												{order.totalPrice
-													.toString()
-													.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+										{/* Order information */}
+										<div className='flex items-center gap-10 ml-2'>
+											{/* Date of registration */}
+											<span>{order.createdAt.match(/T(\d{2}:\d{2})/)[1]}</span>
+											{/* Processing */}
+											<span
+												style={{
+													backgroundColor: statusMap[order.status]?.bgColor,
+												}}
+												className='p-1 text-[16px] rounded-sm'>
+												{statusMap[order.status]?.text}
 											</span>
-											تومان
+
+											{/* Tracking code */}
+											<span>{order.trackingCode}</span>
+
+											{/* Price */}
+											<div className='flex items-center gap-1'>
+												<span>
+													{order.totalPrice
+														.toString()
+														.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+												</span>
+												تومان
+											</div>
 										</div>
-									</div>
-								</Link>
+									</Link>
+
+									{/* Mobile card */}
+									<Link
+										className='hidden sm:flex bg-secondary w-full h-32 rounded-md'
+										to={`./${order.trackingCode}`}
+										key={order._id}>
+										{/* Set image */}
+										<div className='flex items-center'>
+											<div
+												className={`grid overflow-hidden w-16 h-24 rounded-md mr-2 ${
+													order.products.length === 1
+														? 'grid-cols-1 grid-rows-1'
+														: order.products.length === 2
+														? 'grid-cols-2 grid-rows-1'
+														: 'grid-cols-2 grid-rows-2'
+												}`}>
+												{order.products.slice(0, 4).map((product, index) => (
+													<img
+														key={index}
+														className={`object-cover w-full h-full ${
+															order.products.length === 3 && index === 2
+																? 'col-span-2'
+																: ''
+														}`}
+														src={product.imgUrl}
+														alt={product.name}
+													/>
+												))}
+											</div>
+										</div>
+
+										{/* Informations */}
+										<div className='w-full flex flex-col mt-4 mx-2 gap-y-3'>
+											{/* Name & Proccesing */}
+											<div className='flex justify-between'>
+												{/* Name */}
+												<p className='truncate sm:max-w-[112px] text-base'>
+													{order.products
+														.map((product) => product.name)
+														.join('، ')}
+												</p>
+
+												{/* Proccess status */}
+												<span
+													style={{
+														backgroundColor: statusMap[order.status]?.bgColor,
+													}}
+													className='p-1 text-sm rounded-sm'>
+													{statusMap[order.status]?.text}
+												</span>
+											</div>
+
+											{/* Price & Tracking Code */}
+											<div className='flex justify-between'>
+												{/* Price */}
+												<div className='flex items-center text-sm text-[#D0D0D0]  gap-1'>
+													<span>
+														{order.totalPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+													</span>
+													تومان
+												</div>
+
+												{/* Tracking code */}
+												<span>{order.trackingCode}</span>
+											</div>
+
+											{/* Date & Time registration */}
+											<div className='flex justify-end'>
+												<span className='text-xs bg-[#75492b57] rounded-sm p-1'>
+													{order.createdAt.match(/T(\d{2}:\d{2})/)[1]}
+												</span>
+											</div>
+										</div>
+									</Link>
+								</>
 							))}
 					</div>
 				</>
