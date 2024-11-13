@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import BackToDashboard from '../Common/Components/BackToDashboard'
 import { Link } from 'react-router-dom'
 
 export default function MyOrders() {
@@ -38,14 +39,20 @@ export default function MyOrders() {
 			{orders.length > 0 ? (
 				<>
 					{/* Order information */}
-					<div className='w-full flex sm:hidden items-center justify-end gap-10 border-b-2 pb-4 pl-8'>
-						<span>تاریخ ثبت</span>
+					<div className='w-full flex sm:hidden items-center justify-between gap-10 border-b-2 pb-4 pl-8'>
+						<div>
+							<BackToDashboard title='سفارش‌های من' />
+						</div>
 
-						<span>وضعیت</span>
+						<div className='flex gap-10'>
+							<span>تاریخ ثبت</span>
 
-						<span>کد سفارش</span>
+							<span>وضعیت</span>
 
-						<span>قیمت</span>
+							<span>کد سفارش</span>
+
+							<span>قیمت</span>
+						</div>
 					</div>
 
 					{/* Order carts */}

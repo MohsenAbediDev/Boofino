@@ -244,7 +244,7 @@ export default function Cart() {
 					} rounded-dashboardcontainer transition-allabsolute bottom-0 duration-500 overflow-hidden p-7 md:p-4`}>
 					{/* Close payment section */}
 					<IoClose
-						className='absolute left-6 top-6 text-4xl lg:text-3xl text-white cp'
+						className='absolute left-6 top-6 text-4xl lg:text-3xl text-white cp z-10'
 						onClick={() => {
 							setIsShowPayment(false)
 						}}
