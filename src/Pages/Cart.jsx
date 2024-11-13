@@ -9,7 +9,7 @@ import { breakeTime } from '../../datas'
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
-		JSON.parse(localStorage.getItem('productCart'))
+		JSON.parse(localStorage.getItem('productCart')) || []
 	)
 
 	// States for total price, discount, and payment-related features
@@ -27,7 +27,8 @@ export default function Cart() {
 	const navigate = useNavigate()
 
 	const setNewTrackingCode = (newCode) => {
-		let existingArray = JSON.parse(localStorage.getItem('trackingOrderCode')) || []
+		let existingArray =
+			JSON.parse(localStorage.getItem('trackingOrderCode')) || []
 
 		existingArray.push(newCode)
 
@@ -78,9 +79,16 @@ export default function Cart() {
 
 	// Function to calculate total price and total discount
 	const totalPriceHandler = async () => {
+		// Parse the cart items from local storage
 		const mainProductCard = JSON.parse(localStorage.getItem('productCart'))
 		const productsData = []
 		const itemCount = []
+
+		if (mainProductCard && Array.isArray(mainProductCard)) {
+			mainProductCard.forEach((item) => {
+				itemCount.push(item.count)
+			})
+		}
 
 		// Fetch product data from the server to match the cart items
 		try {
@@ -99,7 +107,6 @@ export default function Cart() {
 							count: main.count,
 							oldPrice: product.oldPrice,
 						})
-						itemCount.push(product.itemCount)
 					}
 				}
 			}
