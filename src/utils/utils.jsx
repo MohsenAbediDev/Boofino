@@ -1,31 +1,26 @@
 //? Product function's
 
 // add count funcrion
-const addCount = (setCount, id, count) => {
-	// get current datas
-	const mainProductCart = JSON.parse(localStorage.getItem('productCart'))
-	const mainProductIndex = mainProductCart
-		? mainProductCart.findIndex((product) => product.id === id)
-		: -1
+const addCount = (setCount, id) => {
+	// Retrieve product data from `localStorage`
+	const productData = JSON.parse(localStorage.getItem('productCart')) || []
+	const mainDataIndex = productData.findIndex((product) => product.id === id)
 
-	// add count of product from Cart
-	if (mainProductIndex != -1) {
-		const productData = JSON.parse(localStorage.getItem('productCart'))
-		const mainDataInedx = productData.findIndex((product) => product.id === id)
+	// Ensure the product exists in the cart
+	if (mainDataIndex !== -1) {
+		// Increase the product quantity
+		productData[mainDataIndex].count += 1
+		localStorage.setItem('productCart', JSON.stringify(productData))
 
-		if (productData[mainDataInedx].count < count) {
-			productData[mainDataInedx].count = productData[mainDataInedx].count + 1
-			localStorage.setItem('productCart', JSON.stringify(productData))
-
-			setCount(productData[mainDataInedx].count)
-		}
+		// Update the `setCount` state
+		setCount(productData[mainDataIndex].count)
 	}
 }
 
 // min count function
 const minCount = (setCount, id) => {
 	// get current datas
-	const productData = JSON.parse(localStorage.getItem('productCart'))
+	const productData = JSON.parse(localStorage.getItem('productCart')) || []
 	const mainDataInedx = productData.findIndex((product) => product.id === id)
 	productData[mainDataInedx].count = productData[mainDataInedx].count - 1
 
