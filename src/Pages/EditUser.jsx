@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getUser } from '../utils/utils'
+import { getUser, putUserData } from '../utils/utils'
 
 import InputModal from '../Common/Components/Modals/InputModal'
 import SchoolsList from '../Common/Components/SchoolsList'
@@ -10,14 +10,12 @@ import { IoCameraOutline } from 'react-icons/io5'
 import { LuPencil } from 'react-icons/lu'
 
 export default function EditUser() {
-	const [isShowModal, setIsShowModal] = useState(false)
-	const [isShowNameModal, setIsShowNameModal] = useState(false)
-	const [isShowEmailModal, setIsShowEmailModal] = useState(false)
-	const [isShowSchoolModal, setIsShowSchoolModal] = useState(false)
-	const [isShowPasswordModal, setIsShowPasswordModal] = useState(false)
-	const [isShowPictureModal, setIsShowPictureModal] = useState(false)
+	const [modalType, setModalType] = useState(null)
 	const [filePath, setFilePath] = useState(null)
 	const [selectedPic, setSelectedPic] = useState(null)
+
+	const [inputValue, setInputValue] = useState(null)
+	const [repeatPasswordValue, setRepeatPasswordValue] = useState(null)
 
 	const [fullName, setFullName] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
@@ -45,6 +43,24 @@ export default function EditUser() {
 			.catch((err) => console.log(err))
 	}
 
+	const editUserDatas = async (datas) => {
+		if (datas.value && datas.type === 'fullname') {
+			putUserData({ fullname: datas.value })
+			closeModal()
+		}
+		if (datas.value && datas.type === 'username') {
+			putUserData({ username: datas.value })
+			closeModal()
+		}
+		if (datas.value && datas.type === 'password') {
+			datas.value === repeatPasswordValue
+				? putUserData({ password: datas.value }) && closeModal()
+				: console.log('رمزت اشتباس دادا')
+		}
+	}
+
+	const closeModal = () => setModalType(null)
+
 	return (
 		<>
 			<div className='flex flex-col w-full'>
@@ -58,12 +74,7 @@ export default function EditUser() {
 								className='w-full h-full'
 							/>
 							{/* change profile pic button */}
-							<div
-								className='item'
-								onClick={() => {
-									setIsShowModal(true)
-									setIsShowPictureModal(true)
-								}}>
+							<div className='item' onClick={() => setModalType('picture')}>
 								<IoCameraOutline className='text-white text-3xl' />
 								<span className='text-white text-sm'>تغییر عکس</span>
 							</div>
@@ -73,10 +84,7 @@ export default function EditUser() {
 							<p className='text-2xl sm:text-xl font-bold'>{fullName}</p>
 							<LuPencil
 								className='text-3xl sm:text-2xl cursor-pointer'
-								onClick={() => {
-									setIsShowNameModal(true)
-									setIsShowModal(true)
-								}}
+								onClick={() => setModalType('name')}
 							/>
 						</div>
 					</div>
@@ -92,10 +100,7 @@ export default function EditUser() {
 						</div>
 						<LuPencil
 							className='text-3xl sm:text-2xl cursor-pointer text-white'
-							onClick={() => {
-								setIsShowEmailModal(true)
-								setIsShowModal(true)
-							}}
+							onClick={() => setModalType('username')}
 						/>
 					</div>
 					{/* school box */}
@@ -108,10 +113,7 @@ export default function EditUser() {
 						</div>
 						<LuPencil
 							className='text-3xl sm:text-2xl cursor-pointer text-white'
-							onClick={() => {
-								setIsShowSchoolModal(true)
-								setIsShowModal(true)
-							}}
+							onClick={() => setModalType('school')}
 						/>
 					</div>
 					{/* change password */}
@@ -120,10 +122,7 @@ export default function EditUser() {
 							<p className='text-2xl sm:text-xl text-white'>تغییر رمز عبور</p>
 							<LuPencil
 								className='text-3xl sm:text-2xl text-white'
-								onClick={() => {
-									setIsShowPasswordModal(true)
-									setIsShowModal(true)
-								}}
+								onClick={() => setModalType('password')}
 							/>
 						</div>
 					</div>
@@ -133,69 +132,112 @@ export default function EditUser() {
 			{/* Overlay in Backdrop Navbar */}
 			<div
 				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${
-					isShowModal ? 'show' : 'hide'
+					modalType ? 'show' : 'hide'
 				}`}></div>
 
 			{/* show input modals */}
-			{isShowNameModal ? (
+			{modalType === 'name' && (
 				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>نام جدید خود را وارد کنید</h1>
+
+					<div className='flex justify-center items-center mt-16'>
+						<input
+							className='text-black w-1/2 h-10 placeholder:text-lg p-2 float-left text-2xl rounded-md outline-none'
+							type='text'
+							placeholder='علی'
+							onChange={(value) => setInputValue(value.target.value)}
+						/>
+					</div>
+
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
 							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
-							onClick={() => {
-								setIsShowNameModal(false)
-								setIsShowModal(false)
-							}}>
+							onClick={closeModal}>
 							لغو
 						</button>
-						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
+						<button
+							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
+							onClick={() =>
+								editUserDatas({ value: inputValue, type: 'fullname' })
+							}>
 							ارسال
 						</button>
 					</div>
 				</InputModal>
-			) : isShowEmailModal ? (
+			)}
+			{modalType === 'username' && (
 				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>
 						نام کاربری جدید خود را وارد کنید
 					</h1>
+
+					<div className='flex justify-center items-center mt-16'>
+						<input
+							className='text-black w-1/2 h-10 placeholder:text-lg dir-ltr p-2 float-left text-2xl rounded-md outline-none'
+							type='text'
+							placeholder='Username'
+							onChange={(value) => setInputValue(value.target.value)}
+						/>
+					</div>
+
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
 							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
-							onClick={() => {
-								setIsShowEmailModal(false)
-								setIsShowModal(false)
-							}}>
+							onClick={closeModal}>
 							لغو
 						</button>
-						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
+						<button
+							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
+							onClick={() =>
+								editUserDatas({ value: inputValue, type: 'username' })
+							}>
 							ارسال
 						</button>
 					</div>
 				</InputModal>
-			) : isShowPasswordModal ? (
+			)}
+			{modalType === 'password' && (
 				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>پسورد جدید خود را وارد کنید</h1>
+
+					<div className='flex flex-col justify-center items-center gap-y-5 mt-16'>
+						<input
+							className='text-black w-1/2 h-10 placeholder:text-lg p-2 float-left text-2xl rounded-md outline-none'
+							type='text'
+							placeholder='رمز عبور جدید'
+							onChange={(value) => setInputValue(value.target.value)}
+						/>
+
+						<input
+							className='text-black w-1/2 h-10 placeholder:text-lg p-2 float-left text-2xl rounded-md outline-none'
+							type='text'
+							placeholder='تکرار رمز عبور'
+							onChange={(value) => setRepeatPasswordValue(value.target.value)}
+						/>
+					</div>
+
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
 						<button
 							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
-							onClick={() => {
-								setIsShowPasswordModal(false)
-								setIsShowModal(false)
-							}}>
+							onClick={closeModal}>
 							لغو
 						</button>
-						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
+						<button
+							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
+							onClick={() =>
+								editUserDatas({ value: inputValue, type: 'password' })
+							}>
 							ارسال
 						</button>
 					</div>
 				</InputModal>
-			) : isShowSchoolModal ? (
-				<showModalContext.Provider
-					value={[setIsShowModal, setIsShowSchoolModal]}>
+			)}
+			{modalType === 'school' && (
+				<showModalContext.Provider value={[() => setModalType(null)]}>
 					<SchoolsList onChangeName={setSchool} />
 				</showModalContext.Provider>
-			) : isShowPictureModal ? (
+			)}
+			{modalType === 'picture' && (
 				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>عکس جدید خود را وارد کنید</h1>
 					<form className='mx-auto h-2/3 flex justify-center items-center'>
@@ -223,13 +265,12 @@ export default function EditUser() {
 						<button
 							className='w-24 h-12 text-lg bg-hoverBTN font-bold rounded-md text-black'
 							onClick={() => {
-								setIsShowPictureModal(false)
-								setIsShowModal(false)
+								closeModal()
 								setFilePath(null)
 							}}>
 							لغو
 						</button>
-						{/* چون ای پی آی یوخدی قعلا واسه ارسال کردنش چیزی نزدم */}
+						{/* Need to post profile pic url */}
 						<button
 							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
 							onClick={() => console.log(selectedPic)}>
@@ -237,8 +278,6 @@ export default function EditUser() {
 						</button>
 					</div>
 				</InputModal>
-			) : (
-				''
 			)}
 		</>
 	)
