@@ -45,17 +45,23 @@ export default function EditUser() {
 
 	const editUserDatas = async (datas) => {
 		if (datas.value && datas.type === 'fullname') {
-			putUserData({ fullname: datas.value })
+			await putUserData({ fullname: datas.value })
 			closeModal()
+			await userData()
 		}
 		if (datas.value && datas.type === 'username') {
-			putUserData({ username: datas.value })
+			await putUserData({ username: datas.value })
 			closeModal()
+			await userData()
 		}
 		if (datas.value && datas.type === 'password') {
-			datas.value === repeatPasswordValue
-				? putUserData({ password: datas.value }) && closeModal()
-				: console.log('رمزت اشتباس دادا')
+			if (datas.value === repeatPasswordValue) {
+				await putUserData({ password: datas.value })
+				closeModal()
+				await userData()
+			} else {
+				console.log('رمزت اشتباس دادا')
+			}
 		}
 	}
 
