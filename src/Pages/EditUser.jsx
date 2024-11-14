@@ -14,13 +14,13 @@ export default function EditUser() {
 	const [filePath, setFilePath] = useState(null)
 	const [selectedPic, setSelectedPic] = useState(null)
 
-	const [inputValue, setInputValue] = useState(null)
-	const [repeatPasswordValue, setRepeatPasswordValue] = useState(null)
-
 	const [fullName, setFullName] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
+	const [inputValue, setInputValue] = useState('')
+	const [repeatPasswordValue, setRepeatPasswordValue] = useState('')
 	const [school, setSchool] = useState('')
+	const [passwordError, setPasswordError] = useState('')
 
 	useEffect(() => {
 		userData()
@@ -44,24 +44,33 @@ export default function EditUser() {
 	}
 
 	const editUserDatas = async (datas) => {
+		// Put user fullname
 		if (datas.value && datas.type === 'fullname') {
-			await putUserData({ fullname: datas.value })
-			closeModal()
+			await putUserData({ fullname: datas.value.trim() })
 			await userData()
+			closeModal()
 		}
+		// Put username
 		if (datas.value && datas.type === 'username') {
-			await putUserData({ username: datas.value })
-			closeModal()
+			await putUserData({ username: datas.value.trim() })
 			await userData()
+			closeModal()
 		}
+		// Put user password
 		if (datas.value && datas.type === 'password') {
-			if (datas.value === repeatPasswordValue) {
-				await putUserData({ password: datas.value })
-				closeModal()
-				await userData()
-			} else {
-				console.log('رمزت اشتباس دادا')
+			if (datas.value.trim().length < 8) {
+				setPasswordError('رمزعبور باید حداقل 8 کاراکتر باشد')
+				return
 			}
+
+			if (datas.value !== repeatPasswordValue) {
+				setPasswordError('رمزعبور تطابق ندارد')
+				return
+			}
+
+			await putUserData({ password: datas.value.trim() })
+			await userData()
+			closeModal()
 		}
 	}
 
@@ -206,7 +215,7 @@ export default function EditUser() {
 				<InputModal height={384}>
 					<h1 className='text-2xl text-white'>پسورد جدید خود را وارد کنید</h1>
 
-					<div className='flex flex-col justify-center items-center gap-y-5 mt-16'>
+					<div className='flex flex-col justify-center items-center gap-y-5 mt-12'>
 						<input
 							className='text-black w-1/2 h-10 placeholder:text-lg p-2 float-left text-2xl rounded-md outline-none'
 							type='text'
@@ -220,6 +229,8 @@ export default function EditUser() {
 							placeholder='تکرار رمز عبور'
 							onChange={(value) => setRepeatPasswordValue(value.target.value)}
 						/>
+
+						<p className='text-red'>{passwordError}</p>
 					</div>
 
 					<div className='w-52 flex justify-between absolute bottom-10 left-10'>
