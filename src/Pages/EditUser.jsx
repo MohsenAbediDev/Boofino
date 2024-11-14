@@ -34,32 +34,15 @@ export default function EditUser() {
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
 
-		const userSchool = (data[0].schoolId).toString()
+		const userSchool = data[0].schoolId.toString()
 
 		fetch('http://localhost:3000/schools')
-			.then(res => res.json())
-			.then(data => {
-				const findSchool = data.find(school => school.schoolId === userSchool)
+			.then((res) => res.json())
+			.then((data) => {
+				const findSchool = data.find((school) => school.schoolId === userSchool)
 				setSchool(findSchool.name)
 			})
-			.catch(err => console.log(err))
-	}
-
-	const setUserSchool = async () => {
-		const data = await getUser()
-		setFullName(data[0].fullname)
-		setPhonenumber(data[0].phonenumber)
-		setUsername(data[0].username)
-
-		const userSchool = (data[0].schoolId).toString()
-
-		fetch('http://localhost:3000/schools')
-			.then(res => res.json())
-			.then(data => {
-				const findSchool = data.find(school => school.schoolId === userSchool)
-				return findSchool.name
-			})
-			.catch(() => 'نشد')
+			.catch((err) => console.log(err))
 	}
 
 	return (
@@ -80,8 +63,7 @@ export default function EditUser() {
 								onClick={() => {
 									setIsShowModal(true)
 									setIsShowPictureModal(true)
-								}}
-							>
+								}}>
 								<IoCameraOutline className='text-white text-3xl' />
 								<span className='text-white text-sm'>تغییر عکس</span>
 							</div>
@@ -150,9 +132,9 @@ export default function EditUser() {
 
 			{/* Overlay in Backdrop Navbar */}
 			<div
-				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${isShowModal ? 'show' : 'hide'
-					}`}
-			></div>
+				className={`app-overlay fixed w-full h-full top-0 left-0 bg-black/40 z-30 backdrop-blur transition-all ${
+					isShowModal ? 'show' : 'hide'
+				}`}></div>
 
 			{/* show input modals */}
 			{isShowNameModal ? (
@@ -164,8 +146,7 @@ export default function EditUser() {
 							onClick={() => {
 								setIsShowNameModal(false)
 								setIsShowModal(false)
-							}}
-						>
+							}}>
 							لغو
 						</button>
 						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
@@ -184,8 +165,7 @@ export default function EditUser() {
 							onClick={() => {
 								setIsShowEmailModal(false)
 								setIsShowModal(false)
-							}}
-						>
+							}}>
 							لغو
 						</button>
 						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
@@ -202,8 +182,7 @@ export default function EditUser() {
 							onClick={() => {
 								setIsShowPasswordModal(false)
 								setIsShowModal(false)
-							}}
-						>
+							}}>
 							لغو
 						</button>
 						<button className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'>
@@ -213,8 +192,7 @@ export default function EditUser() {
 				</InputModal>
 			) : isShowSchoolModal ? (
 				<showModalContext.Provider
-					value={[setIsShowModal, setIsShowSchoolModal]}
-				>
+					value={[setIsShowModal, setIsShowSchoolModal]}>
 					<SchoolsList onChangeName={setSchool} />
 				</showModalContext.Provider>
 			) : isShowPictureModal ? (
@@ -248,15 +226,13 @@ export default function EditUser() {
 								setIsShowPictureModal(false)
 								setIsShowModal(false)
 								setFilePath(null)
-							}}
-						>
+							}}>
 							لغو
 						</button>
 						{/* چون ای پی آی یوخدی قعلا واسه ارسال کردنش چیزی نزدم */}
 						<button
 							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
-							onClick={() => console.log(selectedPic)}
-						>
+							onClick={() => console.log(selectedPic)}>
 							ارسال
 						</button>
 					</div>
