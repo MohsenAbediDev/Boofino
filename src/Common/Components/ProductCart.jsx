@@ -93,7 +93,9 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 								{/* Mobile Responsive Price */}
 								<div className='hidden md:block my-2'>
 									<span className='text-white text-xl'>
-										{+mainData.finalPrice * +productCount}
+										{(+mainData.finalPrice * +productCount)
+											.toString()
+											.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 									</span>
 									<span className='text-white text-lg ms-1'>تومان</span>
 								</div>
@@ -127,7 +129,8 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 							{/* Desktop Responsive Price */}
 							<div className='md:hidden'>
 								<span className='text-white text-2xl'>
-									{+mainData.finalPrice * +productCount}
+									{(+mainData.finalPrice * +productCount).toString()
+										.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 								</span>
 								<span className='text-white text-2xl ms-1'>تومان</span>
 							</div>

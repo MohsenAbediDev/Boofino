@@ -206,7 +206,7 @@ export default function Cart() {
 						<div className='text-base py-1 font-shabnam text-white flex items-center justify-between'>
 							<p>تخفیف:</p>
 							<div className=''>
-								{totalDisCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+								{totalDisCount}
 								<span className='pr-2'>تومان</span>
 							</div>
 						</div>
@@ -266,9 +266,7 @@ export default function Cart() {
 							<p className='text-white text-3xl'>کد تخفیف:</p>
 							<input
 								type='text'
-								value={discountCode
-									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+								value={discountCode}
 								className='outline-4 outline-white border-2 border-white bg-secondary rounded-md px-3 text-xl dir-ltr text-white h-9 '
 								onChange={(e) => {
 									setDiscountCode(e.target.value)
