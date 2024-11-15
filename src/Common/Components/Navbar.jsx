@@ -188,7 +188,11 @@ function Navbar({ toggleValue, toggleHandler }) {
 											</div>
 											<div className='flex w-full flex-col my-1'>
 												<p className='text-xl sm:text-lg text-center'>
-													{result.finalPrice} تومان
+													{result.finalPrice &&
+														result.finalPrice
+															.toString()
+															.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+													تومان
 												</p>
 												{!productsID.includes(result._id) ? (
 													<button
