@@ -71,33 +71,30 @@ export default function FoodCard({
 						src={imgUrl}
 						loading='lazy'></img>
 					<h1
-						className='text-black mt-1 text-[17px] font-extrabold font-shabnam
+						className='text-black mt-1 truncate text-[17px] font-extrabold font-shabnam
 					md:text-md md:mt-0.5'>
 						{name}
 					</h1>
 
 					{/* price */}
 					{!isDiscount ? (
-						<h3
-							className='text-price mt-1 text-sm font-extrabold font-shabnam
-								md:mt-1'>
+						<h3 className='text-price mt-1 text-sm font-extrabold font-shabnam md:mt-1'>
 							{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
 							تومان
 						</h3>
 					) : (
-						<div
-							className='flex flex-col leading-5
-							md:flex-row md:gap-x-2'>
-							<h3
-								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
-									md:mt-1'>
-								{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-								تومان
-							</h3>
+						<div className='flex flex-col leading-5 md:flex-row md:gap-x-2'>
 							<h3
 								className='text-dashboardItemActive text-sm font-extrabold font-shabnam line-through decoration-red
 									md:mt-1 md:text-xs'>
 								{oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+								تومان
+							</h3>
+
+							<h3
+								className='text-price mt-0.5 text-sm font-extrabold font-shabnam
+									md:mt-1'>
+								{finalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
 								تومان
 							</h3>
 						</div>
