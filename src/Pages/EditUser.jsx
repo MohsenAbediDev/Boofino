@@ -43,7 +43,34 @@ export default function EditUser() {
 			.catch((err) => console.log(err))
 	}
 
+	// send image to database
+	const uploadImage = async () => {
+		if (selectedPic) {
+			const formData = new FormData()
+			formData.append('imgUrl', selectedPic)
+
+			try {
+				const res = await fetch('http://localhost:3000/uploadimg', {
+					method: 'POST',
+					credentials: 'include',
+					body: formData,
+				})
+				const data = await res.json()
+				return data
+			} catch (err) {
+				alert('مشکلی در بارگذاری عکس پیش آمده')
+			}
+		}
+	}
+
 	const editUserDatas = async (datas) => {
+		const imgUrl = await uploadImage()
+
+		if (imgUrl) {
+			await putUserData({ imgUrl: imgUrl.message })
+			await userData()
+			closeModal()
+		}
 		// Put user fullname
 		if (datas.value && datas.type === 'fullname') {
 			await putUserData({ fullname: datas.value.trim() })
@@ -290,7 +317,7 @@ export default function EditUser() {
 						{/* Need to post profile pic url */}
 						<button
 							className='w-24 h-12 text-lg bg-primaryBTN font-bold rounded-md text-white'
-							onClick={() => console.log(selectedPic)}>
+							onClick={editUserDatas}>
 							ارسال
 						</button>
 					</div>
