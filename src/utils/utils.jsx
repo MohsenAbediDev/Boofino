@@ -137,7 +137,7 @@ const isNotLoggedIn = async () => {
 			window.location.pathname != '/login' &&
 			window.location.pathname != '/school'
 		) {
-			window.location.href = '/signup'
+			window.location.href = '/login'
 		}
 	}
 }
