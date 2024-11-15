@@ -40,6 +40,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 	// User Variable's
 	const [fullName, setFullName] = useState('')
+	const [imgUrl, setImgUrl] = useState('')
 	const [isAdmin, setIsAdmin] = useState(false)
 	const [walletValue, setwalletValue] = useState(0)
 
@@ -89,6 +90,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
+		setImgUrl(data[0].imgUrl)
 	}
 
 	const getIds = () => {
@@ -239,10 +241,10 @@ function Navbar({ toggleValue, toggleHandler }) {
 								<div className='flex items-center border-b border-b-gray-200 pb-5 mb-2'>
 									<Link
 										to='dashboard'
-										className='object-cover w-14 h-14 rounded-full inline-block'>
+										className='w-14 h-14 rounded-full inline-block'>
 										<img
-											src='./images/blankUserProfile.png'
-											className='rounded-full'
+											className='w-full h-full rounded-full'
+											src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
 										/>
 									</Link>
 

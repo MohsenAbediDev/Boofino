@@ -15,6 +15,7 @@ export default function EditUser() {
 	const [selectedPic, setSelectedPic] = useState(null)
 
 	const [fullName, setFullName] = useState('')
+	const [imgUrl, setImgUrl] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
 	const [inputValue, setInputValue] = useState('')
@@ -31,6 +32,7 @@ export default function EditUser() {
 		setFullName(data[0].fullname)
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
+		setImgUrl(data[0].imgUrl)
 
 		const userSchool = data[0].schoolId.toString()
 
@@ -112,7 +114,7 @@ export default function EditUser() {
 						<div className='box'>
 							{/* user profile pic */}
 							<img
-								src='../images/blankUserProfile.png'
+								src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
 								className='w-full h-full'
 							/>
 							{/* change profile pic button */}

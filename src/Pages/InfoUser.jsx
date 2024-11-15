@@ -4,19 +4,21 @@ import { NavLink } from 'react-router-dom'
 
 export default function InfoUser() {
 	const [fullName, setFullName] = useState('')
+	const [imgUrl, setImgUrl] = useState('')
 	const [phonenumber, setPhonenumber] = useState('')
 	const [username, setUsername] = useState('')
 	const [school, setSchool] = useState('')
-
+	
 	useEffect(() => {
 		userData()
 	}, [school])
-
+	
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
 		setPhonenumber(data[0].phonenumber)
 		setUsername(data[0].username)
+		setImgUrl(data[0].imgUrl)
 
 		const userSchool = (data[0].schoolId).toString()
 
@@ -35,7 +37,7 @@ export default function InfoUser() {
 			<div className='flex items-center justify-between'>
 				<div className='flex items-center'>
 					<img
-						src='images/blankUserProfile.png'
+						src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
 						className='w-[60px] h-[60px] rounded-full'
 					/>
 					<p className='mr-2'>مشخصات کاربر</p>

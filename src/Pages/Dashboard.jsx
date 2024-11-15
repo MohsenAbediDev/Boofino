@@ -16,6 +16,7 @@ import {
 export default function Dashboard() {
 	const [isAdmin, setIsAdmin] = useState(false)
 	const [fullName, setFullName] = useState('')
+	const [imgUrl, setImgUrl] = useState('')
 	const [walletValue, setwalletValue] = useState(0)
 	const params = useParams()
 	const dashboardRoute = useRef()
@@ -44,11 +45,14 @@ export default function Dashboard() {
 	const userData = async () => {
 		const data = await getUser()
 		setFullName(data[0].fullname)
+		setImgUrl(data[0].imgUrl)
 	}
 
 	const getWalletValue = async () => {
 		const wallet = await getUserWallet()
-		const formattedNumber = wallet.toLocaleString('en-US').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		const formattedNumber = wallet
+			.toLocaleString('en-US')
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 		setwalletValue(formattedNumber)
 	}
 
@@ -56,15 +60,14 @@ export default function Dashboard() {
 		<section className='container dir-rtl font-shabnam flex justify-between gap-8 my-6 lg:px-6 h-[calc(100vh-144px)] lg:flex-col'>
 			<div
 				ref={dashboardRoute}
-				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20'
-			>
+				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20'>
 				{/* user profile details */}
 				<div className='h-[150px] dashboard-container'>
 					{/* User Container */}
 					<NavLink to='/dashboard' className='bg-hoverBTN dashboard-item h-16'>
 						{/* User Image */}
 						<img
-							src='../images/blankUserProfile.png'
+							src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
 							className='w-[50px] h-[50px] rounded-full'
 						/>
 
@@ -78,8 +81,7 @@ export default function Dashboard() {
 					{/* Wallet Container */}
 					<NavLink
 						to='./wallet'
-						className='w-full flex items-center mt-2 justify-between text-white text-xl transition-all duration-200 h-1/2'
-					>
+						className='w-full flex items-center mt-2 justify-between text-white text-xl transition-all duration-200 h-1/2'>
 						<div className='text-white text-xl flex items-center'>
 							<IoWalletOutline />
 							<span className='px-2'>کیف پول</span>
@@ -100,8 +102,7 @@ export default function Dashboard() {
 						<NavLink
 							to='./statistic'
 							className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'
-						>
+                    hover:bg-dashboardItemActive transition-all duration-200'>
 							<div className='flex items-center'>
 								<MdOutlineQueryStats />
 								<span className='mx-2'>آمارهای من</span>
@@ -114,8 +115,7 @@ export default function Dashboard() {
 					<NavLink
 						to='./my-orders'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'
-					>
+                    hover:bg-dashboardItemActive transition-all duration-200'>
 						<div className='flex items-center'>
 							<IoDocumentTextOutline />
 							<span className='mx-2'>سفارش‌های من</span>
@@ -129,8 +129,7 @@ export default function Dashboard() {
 							<NavLink
 								to='./add-product'
 								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'
-							>
+                    hover:bg-dashboardItemActive transition-all duration-200'>
 								<div className='flex items-center'>
 									<MdAddCircleOutline />
 									<span className='mx-2'>افزودن محصول</span>
@@ -141,8 +140,7 @@ export default function Dashboard() {
 							<NavLink
 								to='./product-list'
 								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'
-							>
+                    hover:bg-dashboardItemActive transition-all duration-200'>
 								<div className='flex items-center'>
 									<MdOutlineModeEditOutline />
 									<span className='mx-2'>ویرایش محصول</span>
@@ -155,8 +153,7 @@ export default function Dashboard() {
 					<NavLink
 						to='cart'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'
-					>
+                    hover:bg-dashboardItemActive transition-all duration-200'>
 						<div className='flex items-center'>
 							<AiOutlineShoppingCart />
 							<span className='mx-2'>سبد خرید</span>
@@ -167,8 +164,7 @@ export default function Dashboard() {
 					<NavLink
 						to='/logout'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-colors duration-200'
-					>
+                    hover:bg-dashboardItemActive transition-colors duration-200'>
 						<div className='flex items-center'>
 							<MdExitToApp className='text-red' />
 							<span className='mx-2'>خروج از حساب</span>
@@ -195,8 +191,7 @@ export default function Dashboard() {
 							className='dashboard-item bg-primaryBTN flex items-center justify-center
 								text-white text-xl font-bold cp w-full
               hover:bg-hoverConfirmBTN transition-colors duration-200
-							order-btn'
-						>
+							order-btn'>
 							ثبت سفارش
 						</div>
 					</div>
