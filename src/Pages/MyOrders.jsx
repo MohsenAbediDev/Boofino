@@ -162,7 +162,7 @@ export default function MyOrders() {
 											{/* Name & Proccesing */}
 											<div className='flex justify-between'>
 												{/* Name */}
-												<p className='truncate sm:max-w-[112px] text-base'>
+												<p className='truncate sm:max-w-1/2'>
 													{order.products
 														.map((product) => product.name)
 														.join('، ')}
@@ -181,7 +181,7 @@ export default function MyOrders() {
 											{/* Price & Tracking Code */}
 											<div className='flex justify-between'>
 												{/* Price */}
-												<div className='flex items-center text-sm text-[#D0D0D0]  gap-1'>
+												<div className='flex items-center text-lg text-[#D0D0D0] gap-1'>
 													<span>
 														{order.totalPrice
 															.toString()
