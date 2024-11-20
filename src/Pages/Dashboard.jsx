@@ -143,7 +143,7 @@ export default function Dashboard() {
                     hover:bg-dashboardItemActive transition-all duration-200'>
 								<div className='flex items-center'>
 									<MdOutlineModeEditOutline />
-									<span className='mx-2'>ویرایش محصول</span>
+									<span className='mx-2'>ویرایش محصولات</span>
 								</div>
 								<MdOutlineArrowBackIos />
 							</NavLink>

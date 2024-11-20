@@ -39,7 +39,7 @@ export default function EditProductCard({
 				<input
 					type='checkbox'
 					className='w-5 h-5 md:h-5 md:w-5 mr-5 outline-none cp'
-					checked={selectedProducts.includes(name)} // Set checlbox status
+					checked={selectedProducts.includes(name)} // Set checkbox status
 					// set product name to selectedProducts
 					onChange={(e) => selectProduct(e)}
 				/>
@@ -51,8 +51,7 @@ export default function EditProductCard({
 						<div className='flex items-center w-1/2 md:w-full'>
 							<img
 								src={imgUrl}
-								className={`w-16 h-16 rounded-lg ml-5
-              md:w-24 md:h-24 md:mx-4`}
+								className={`w-16 h-16 rounded-lg ml-5 md:w-24 md:h-24 md:mx-4`}
 							/>
 							<p className='text-2xl md:text-xl'>{name}</p>
 						</div>

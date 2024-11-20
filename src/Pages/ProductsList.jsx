@@ -127,10 +127,11 @@ export default function ProducstList() {
 						))}
 					</div>
 				</div>
+
 				{datas.length > 0 ? (
 					<div className='w-full bg-primary absolute bottom-0 flex items-center'>
 						<button
-							className='bg-red rounded-md w-20 h-12 text-2xl absolute left-16 md:left-5 md:text-xl md:h-[45px]'
+							className='bg-red rounded-md w-20 h-10 text-2xl absolute left-2 md:left-0 md:text-xl md:h-[45px]'
 							onClick={removeHandler}>
 							حذف
 						</button>

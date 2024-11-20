@@ -296,7 +296,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
 											<span className='flex items-center gap-x-3'>
 												<MdOutlineModeEditOutline className='w-5 h-5' />
-												ویرایش محصول
+												ویرایش محصولات
 											</span>
 										</Link>
 									</>
