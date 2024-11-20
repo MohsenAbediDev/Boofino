@@ -15,10 +15,10 @@ export default function EditProductCard({
 
 	return (
 		<div className='flex items-center w-full'>
-			<div className='flex justify-center items-center bg-secondary h-[170px] rounded-r-2xl md:h-[200px]'>
+			<div className='flex justify-center items-center bg-secondary h-[100px] rounded-r-xl md:h-[100px]'>
 				<input
 					type='checkbox'
-					className='w-6 h-6 md:h-5 md:w-5 mr-5 outline-none cp'
+					className='w-5 h-5 md:h-5 md:w-5 mr-5 outline-none cp'
 					checked={selectedProducts.includes(name)} // تنظیم وضعیت چک‌باکس
 					// set product name to selectedProducts
 					onChange={(e) => {
@@ -45,13 +45,13 @@ export default function EditProductCard({
 				/>
 			</div>
 
-			<Link to={`/edit-product/${name}`} className='w-full'>
-				<div className='bg-secondary h-[170px] w-full rounded-l-2xl my-5 md:my-5 md:h-[200px]'>
+			<Link to={`/edit-product/${name}`} className='w-full my-3 md:my-3'>
+				<div className='bg-secondary h-[100px] w-full rounded-l-xl md:h-[100px]'>
 					<div className='h-full p-5 flex justify-between md:p-2 md:flex-col md:justify-around'>
 						<div className='flex items-center w-1/2 md:w-full'>
 							<img
 								src={imgUrl}
-								className={`w-32 h-32 rounded-lg ml-5
+								className={`w-16 h-16 rounded-lg ml-5
               md:w-24 md:h-24 md:mx-4`}
 							/>
 							<p className='text-2xl md:text-xl'>{name}</p>
