@@ -13,35 +13,35 @@ export default function EditProductCard({
 }) {
 	const setSelectedProducts = useContext(selectedProduct)
 
+	const selectProduct = (e) => {
+		if (e.target.checked) {
+			setSelectedProducts((prevProducts) => {
+				// Checking the existence of the product
+				if (!prevProducts.includes(name)) {
+					return [...prevProducts, name]
+				}
+				return prevProducts
+			})
+		} else {
+			setSelectedProducts((prevProducts) => {
+				if (prevProducts.includes(name)) {
+					const newProducts = prevProducts.filter((product) => product !== name)
+					return newProducts
+				}
+				return prevProducts
+			})
+		}
+	}
+
 	return (
 		<div className='flex items-center w-full'>
 			<div className='flex justify-center items-center bg-secondary h-[100px] rounded-r-xl md:h-[100px]'>
 				<input
 					type='checkbox'
 					className='w-5 h-5 md:h-5 md:w-5 mr-5 outline-none cp'
-					checked={selectedProducts.includes(name)} // تنظیم وضعیت چک‌باکس
+					checked={selectedProducts.includes(name)} // Set checlbox status
 					// set product name to selectedProducts
-					onChange={(e) => {
-						if (e.target.checked) {
-							setSelectedProducts((prevProducts) => {
-								// Checking the existence of the product
-								if (!prevProducts.includes(name)) {
-									return [...prevProducts, name]
-								}
-								return prevProducts
-							})
-						} else {
-							setSelectedProducts((prevProducts) => {
-								if (prevProducts.includes(name)) {
-									const newProducts = prevProducts.filter(
-										(product) => product !== name
-									)
-									return newProducts
-								}
-								return prevProducts
-							})
-						}
-					}}
+					onChange={(e) => selectProduct(e)}
 				/>
 			</div>
 
