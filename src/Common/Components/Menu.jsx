@@ -72,7 +72,7 @@ export default function Menu({ children, grouping }) {
 
 					{/* Insert Food Menu Image's */}
 					<img
-						src={`./images/${
+						src={`http://localhost:3000/contents/${
 							(grouping == 'hotfood' && 'hotfood.png') ||
 							(grouping == 'coldfood' && 'coldfood.png') ||
 							(grouping == 'hotdrink' && 'hotdrink.png') ||

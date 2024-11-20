@@ -231,7 +231,7 @@ export default function Cart() {
 					</div>
 				) : (
 					<div className='w-full h-full text-white text-2xl font-bold lg:mt-10 flex items-center flex-col'>
-						<img src='/images/sad_cart.png' />
+						<img src='http://localhost:3000/contents/sad_cart.png' />
 
 						<p className='mt-10'>سبد خرید شما خالی است</p>
 					</div>

@@ -50,7 +50,7 @@ export default function Menus() {
 			{/* If user has not selected a school */}
 			{!userSchool ? (
 				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
-					<img src='/images/broken-school.png' alt='broken school' />
+					<img src='http://localhost:3000/contents/broken-school.png' alt='broken school' />
 					<p>! هنوز مدرستو انتخاب نکردی</p>
 					<NavLink
 						to='/dashboard/editprofile'
@@ -63,7 +63,7 @@ export default function Menus() {
 				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
 					<img
 						className='w-[256px]'
-						src='/images/product-notfound.png'
+						src='http://localhost:3000/contents/product-notfound.png'
 						alt='no products'
 					/>
 

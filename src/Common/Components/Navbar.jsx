@@ -140,7 +140,11 @@ function Navbar({ toggleValue, toggleHandler }) {
 					<Link
 						to='/'
 						className='text-white font-normal text-[20px] font-shabnam cp'>
-						<img className='w-24' src='icons/logo.png' alt='boofino' />
+						<img
+							className='w-24'
+							src='http://localhost:3000/contents/logo.png'
+							alt='boofino'
+						/>
 					</Link>
 
 					{/* Search */}
@@ -244,7 +248,9 @@ function Navbar({ toggleValue, toggleHandler }) {
 										className='w-14 h-14 rounded-full inline-block'>
 										<img
 											className='w-full h-full rounded-full'
-											src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
+											src={`${
+												imgUrl ? imgUrl : 'http://localhost:3000/contents/blankUserProfile.png'
+											}`}
 										/>
 									</Link>
 

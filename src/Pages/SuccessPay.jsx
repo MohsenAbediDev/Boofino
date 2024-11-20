@@ -21,7 +21,7 @@ export default function SuccessPay() {
 				{/* Order Info */}
 				<div className='flex items-center justify-between w-60 h-60'>
 					<div className='flex items-center'>
-						<img src='images/french-fries.png' className='w-7 h-7' />
+						<img src='http://localhost:3000/contents/french-fries.png' className='w-7 h-7' />
 						<span className='text-[22px] mr-1'>کد سفارش</span>
 					</div>
 

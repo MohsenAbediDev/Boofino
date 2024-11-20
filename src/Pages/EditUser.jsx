@@ -114,7 +114,7 @@ export default function EditUser() {
 						<div className='box'>
 							{/* user profile pic */}
 							<img
-								src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
+								src={`${imgUrl ? imgUrl : 'http://localhost:3000/contents/blankUserProfile.png'}`}
 								className='w-full h-full'
 							/>
 							{/* change profile pic button */}
