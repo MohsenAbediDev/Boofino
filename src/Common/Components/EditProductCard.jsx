@@ -89,11 +89,11 @@ export default function EditProductCard({
 				</div>
 
 				{/* Informations */}
-				<div className='w-full flex flex-col mt-3 mx-2 gap-y-3'>
-					{/* Name & Proccesing */}
+				<div className='w-full flex flex-col mt-3 mx-2 gap-y-2'>
+					{/* Name & Status */}
 					<div className='flex justify-between'>
 						{/* Name */}
-						<p className='truncate w-1/2'>{name}</p>
+						<p className='truncate w-[45%]'>{name}</p>
 
 						{/* Status */}
 						<p
@@ -105,7 +105,7 @@ export default function EditProductCard({
 						</p>
 					</div>
 
-					{/* Price & Tracking Code */}
+					{/* Price & Time */}
 					<div className='flex justify-between'>
 						{/* Price */}
 						<div className='flex items-center text-lg text-[#D0D0D0] gap-1'>

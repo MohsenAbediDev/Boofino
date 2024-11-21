@@ -67,7 +67,11 @@ export default function Dashboard() {
 					<NavLink to='/dashboard' className='bg-hoverBTN dashboard-item h-16'>
 						{/* User Image */}
 						<img
-							src={`${imgUrl ? imgUrl : 'http://localhost:3000/contents/blankUserProfile.png'}`}
+							src={`${
+								imgUrl
+									? imgUrl
+									: 'http://localhost:3000/contents/blankUserProfile.png'
+							}`}
 							className='w-[50px] h-[50px] rounded-full'
 						/>
 
@@ -187,13 +191,8 @@ export default function Dashboard() {
 								</div>
 							</div>
 						</div>
-						<div
-							className='dashboard-item bg-primaryBTN flex items-center justify-center
-								text-white text-xl font-bold cp w-full
-              hover:bg-hoverConfirmBTN transition-colors duration-200
-							order-btn'>
-							ثبت سفارش
-						</div>
+						
+						<div className='order-btn'>ثبت سفارش</div>
 					</div>
 				)}
 			</div>

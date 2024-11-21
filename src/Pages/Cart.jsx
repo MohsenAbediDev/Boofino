@@ -68,7 +68,7 @@ export default function Cart() {
 
 		// Show payment section on "Place Order" button click
 		document.querySelector('.order-btn').addEventListener('click', () => {
-			setIsShowPayment(true)
+			productCart.length > 0 && setIsShowPayment(true)
 		})
 	}, [])
 
