@@ -34,18 +34,21 @@ export default function EditProductCard({
 	}
 
 	return (
-		<div className='flex items-center w-full'>
+		<div className='flex items-center w-full sm:mb-4 md:mb-4'>
 			<div className='flex justify-center items-center bg-secondary h-[100px] rounded-r-xl md:h-[100px]'>
 				<input
 					type='checkbox'
-					className='w-5 h-5 md:h-5 md:w-5 mr-5 outline-none cp'
+					className='w-5 h-5 mr-5 sm:mr-2 outline-none cp'
 					checked={selectedProducts.includes(name)} // Set checkbox status
 					// set product name to selectedProducts
 					onChange={(e) => selectProduct(e)}
 				/>
 			</div>
 
-			<Link to={`/edit-product/${name}`} className='w-full my-3 md:my-3'>
+			{/* Desktop card */}
+			<Link
+				to={`/edit-product/${name}`}
+				className='w-full sm:hidden md:hidden my-3 md:my-3'>
 				<div className='bg-secondary h-[100px] w-full rounded-l-xl md:h-[100px]'>
 					<div className='h-full p-5 flex justify-between md:p-2 md:flex-col md:justify-around'>
 						<div className='flex items-center w-1/2 md:w-full'>
@@ -61,14 +64,62 @@ export default function EditProductCard({
 							</p>
 							<p
 								className={`w-20 h-10 flex justify-center items-center rounded-lg ${
-									itemCount > 0 ? 'bg-green md:w-16' : 'bg-red md:w-[70px]'
+									itemCount > 0
+										? 'bg-[#68AC50] md:w-16'
+										: 'bg-[#FF4E4E] md:w-16'
 								}
-               md:h- md:text-lg`}>
+               md:text-lg`}>
 								{itemCount > 0 ? 'موجود' : 'ناموجود'}
 							</p>
 							<p className='md:text-xl'>
 								{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} تومان
 							</p>
+						</div>
+					</div>
+				</div>
+			</Link>
+
+			{/* Mobile/Tablet card */}
+			<Link
+				className='hidden sm:flex md:flex w-full h-[100px] bg-secondary rounded-l-md'
+				to={`/edit-product/${name}`}>
+				{/* Set image */}
+				<div className='my-auto w-14 h-14 mr-1'>
+					<img className='object-cover w-full h-full rounded-sm' src={imgUrl} />
+				</div>
+
+				{/* Informations */}
+				<div className='w-full flex flex-col mt-3 mx-2 gap-y-3'>
+					{/* Name & Proccesing */}
+					<div className='flex justify-between'>
+						{/* Name */}
+						<p className='truncate w-1/2'>{name}</p>
+
+						{/* Status */}
+						<p
+							className={`w-20 h-10 flex justify-center items-center rounded-lg ${
+								itemCount > 0 ? 'bg-[#68AC50] w-13 ' : 'bg-[#FF4E4E] w-13'
+							}
+               text-lg`}>
+							{itemCount > 0 ? 'موجود' : 'ناموجود'}
+						</p>
+					</div>
+
+					{/* Price & Tracking Code */}
+					<div className='flex justify-between'>
+						{/* Price */}
+						<div className='flex items-center text-lg text-[#D0D0D0] gap-1'>
+							<span>
+								{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+							</span>
+							تومان
+						</div>
+
+						{/* Date & Time registration */}
+						<div className='flex justify-end'>
+							<span className='text-sm rounded-sm p-1'>
+								{dateTime.split('T')[0].replace(/-/g, '/')}
+							</span>
 						</div>
 					</div>
 				</div>

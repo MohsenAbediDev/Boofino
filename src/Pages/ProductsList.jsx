@@ -114,14 +114,13 @@ export default function ProducstList() {
 							</label>
 						</div>
 					</div>
+
+					{/* Show all products */}
 					<div>
 						{datas.map((data) => (
 							<>
 								<selectedProduct.Provider value={setSelectedProducts}>
-									<EditProductCard
-										{...data}
-										selectedProducts={selectedProducts}
-									/>
+									<EditProductCard {...data} selectedProducts={selectedProducts} key={data._id} />
 								</selectedProduct.Provider>
 							</>
 						))}
