@@ -163,6 +163,52 @@ export default function EditProduct() {
 			})
 	}
 
+	// Update product information
+	const updateProductData = async () => {
+		const imgUrl = await uploadImage()
+
+		if (
+			imgUrl ||
+			(name && name !== datas.name) ||
+			(+price && +price !== +datas.price) ||
+			(group && group !== datas.group) ||
+			(+off && +off === 0) ||
+			+off !== +datas.off ||
+			+count === 0 ||
+			+count !== +datas.itemCount
+		) {
+			try {
+				const res = await fetch(
+					`http://localhost:3000/editproduct/${params.name}`,
+					{
+						method: 'PUT',
+						credentials: 'include',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							imgUrl: imgUrl ? imgUrl.message : datas.imgUrl,
+							isDiscount: off > 0 ? true : false,
+							name: name || datas.name,
+							price: price || datas.price,
+							oldPrice: price || datas.price,
+							finalPrice: +Math.floor(
+								(price || datas.price) -
+									((off || datas.off) * (price || datas.price)) / 100
+							),
+							group: group || datas.group,
+							off: off,
+							itemCount: count,
+						}),
+					}
+				)
+				showNotification(res)
+			} catch (err) {
+				console.log(err)
+			}
+		}
+	}
+
 	return (
 		<>
 			<div className='dir-rtl container font-shabnam p-5'>
@@ -193,8 +239,7 @@ export default function EditProduct() {
 									<div className='w-40 h-40 flex justify-center items-center'>
 										<label
 											htmlFor='image-upload'
-											className='bg-primaryBTN text-white cp rounded-md p-2'
-										>
+											className='bg-primaryBTN text-white cp rounded-md p-2'>
 											انتخاب عکس
 										</label>
 										<input
@@ -211,8 +256,7 @@ export default function EditProduct() {
 									<div className='flex flex-col gap-y-4'>
 										<label
 											htmlFor='edit-product-name'
-											className='text-xl text-white'
-										>
+											className='text-xl text-white'>
 											تغییر نام
 										</label>
 										<input
@@ -236,7 +280,7 @@ export default function EditProduct() {
 										{/* Input */}
 										<input
 											type='number'
-											inputmode='numeric'
+											inputMode='numeric'
 											id='edit-product-price'
 											min='0'
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
@@ -250,8 +294,7 @@ export default function EditProduct() {
 										{/* Input title */}
 										<label
 											htmlFor='edit-product-group'
-											className='text-xl text-white'
-										>
+											className='text-xl text-white'>
 											تغییر دسته بندی
 										</label>
 
@@ -259,8 +302,7 @@ export default function EditProduct() {
 										<select
 											className='h-14 cp shadow-xl px-5 text-lgxt-xl rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 											value={group ? group : datas.group}
-											onChange={(e) => setGroup(e.target.value)}
-										>
+											onChange={(e) => setGroup(e.target.value)}>
 											{groups.map((group) => (
 												<option value={group.value} key={group.id}>
 													{group.title}
@@ -274,8 +316,7 @@ export default function EditProduct() {
 										{/* Input title */}
 										<label
 											htmlFor='edit-product-discount'
-											className='text-xl text-white'
-										>
+											className='text-xl text-white'>
 											تغییر تخفیف
 										</label>
 
@@ -289,9 +330,7 @@ export default function EditProduct() {
 											className='h-14 shadow-xl px-5 text-lg rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 											placeholder='تخفیف ندارد'
 											value={off > 0 ? off : ''}
-											onChange={(e) => {
-												setOff(e.target.value)
-											}}
+											onChange={(e) => setOff(e.target.value)}
 										/>
 									</div>
 
@@ -300,8 +339,7 @@ export default function EditProduct() {
 										{/* Input title */}
 										<label
 											htmlFor='edit-product-count'
-											className='text-xl text-white'
-										>
+											className='text-xl text-white'>
 											تغییر تعداد محصول
 										</label>
 
@@ -320,67 +358,19 @@ export default function EditProduct() {
 								<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
 									<button
 										className='h-12 w-24 bg-redBTN outline-none rounded-lg text-xl text-white'
-										onClick={handleOpenModal}
-									>
+										onClick={handleOpenModal}>
 										حذف
 									</button>
 
 									<button
 										className='h-12 w-24 bg-hoverBTN outline-none rounded-lg text-xl text-black'
-										onClick={reset}
-									>
+										onClick={reset}>
 										لغو
 									</button>
 
 									<button
 										className='h-12 w-32 bg-primaryBTN outline-none rounded-lg text-xl text-white'
-										onClick={async () => {
-											const imgUrl = await uploadImage()
-
-											if (
-												imgUrl ||
-												(name && name !== datas.name) ||
-												(+price && +price !== +datas.price) ||
-												(group && group !== datas.group) ||
-												(+off && +off === 0) ||
-												+off !== +datas.off ||
-												+count === 0 ||
-												+count !== +datas.itemCount
-											) {
-												try {
-													const res = await fetch(
-														`http://localhost:3000/editproduct/${params.name}`,
-														{
-															method: 'PUT',
-															credentials: 'include',
-															headers: {
-																'Content-Type': 'application/json',
-															},
-															body: JSON.stringify({
-																imgUrl: imgUrl ? imgUrl.message : datas.imgUrl,
-																isDiscount: off > 0 ? true : false,
-																name: name || datas.name,
-																price: price || datas.price,
-																oldPrice: price || datas.price,
-																finalPrice: +Math.floor(
-																	(price || datas.price) -
-																		((off || datas.off) *
-																			(price || datas.price)) /
-																			100
-																),
-																group: group || datas.group,
-																off: off,
-																itemCount: count,
-															}),
-														}
-													)
-													showNotification(res)
-												} catch (err) {
-													console.log(err)
-												}
-											}
-										}}
-									>
+										onClick={updateProductData}>
 										به روز رسانی
 									</button>
 								</div>
@@ -395,8 +385,7 @@ export default function EditProduct() {
 				isOpen={isModalOpen}
 				onClose={CloseModal}
 				onConfirm={handleConfirm}
-				title='حذف محصول'
-			>
+				title='حذف محصول'>
 				<p>آیا مطمئنید که می‌خواهید محصول را حذف کنید ؟</p>
 			</ConfirmationModal>
 
