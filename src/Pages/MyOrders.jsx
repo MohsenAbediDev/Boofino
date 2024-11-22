@@ -87,12 +87,11 @@ export default function MyOrders() {
 																: ''
 														}`}
 														src={product.imgUrl}
-														alt={product.name}
 													/>
 												))}
 											</div>
 
-											<p className='truncate'>
+											<p className='truncate sm:w-[150px] sm:text-lg'>
 												{order.products
 													.map((product) => product.name)
 													.join('، ')}
@@ -162,7 +161,7 @@ export default function MyOrders() {
 											{/* Name & Proccesing */}
 											<div className='flex justify-between'>
 												{/* Name */}
-												<p className='truncate sm:max-w-1/2'>
+												<p className='truncate sm:w-[150px] sm:text-lg'>
 													{order.products
 														.map((product) => product.name)
 														.join('، ')}
