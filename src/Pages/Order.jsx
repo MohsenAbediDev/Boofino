@@ -50,7 +50,13 @@ export default function Order() {
 						{datas.products.slice(0, 4).map((product, index) => (
 							<img
 								key={index}
-								className={`object-cover w-40 h-40 rounded-lg select-none ${
+								className={`object-cover ${
+									datas.products.length === 1
+										? 'w-40 h-40 '
+										: datas.products.length === 2
+										? 'w-20 h-40 '
+										: 'w-20 h-20 '
+								} ${
 									datas.products.length === 3 && index === 2 ? 'col-span-2' : ''
 								}`}
 								src={product.imgUrl}
@@ -63,7 +69,7 @@ export default function Order() {
 					<div className='flex flex-col w-1/2 sm:w-full mx-auto gap-y-4'>
 						<p className='text-xl text-white'>محصولات</p>
 
-						<div className='w-full min-h-[56px] flex items-center flex-wrap px-2 shadow-xl text-lg rounded-xl bg-[#49494973] text-white'>
+						<div className='w-full min-h-[56px] flex items-center flex-wrap p-2 shadow-xl text-lg rounded-xl bg-[#49494973] text-white'>
 							{datas.products.map((product) => product.name).join('، ')}
 						</div>
 					</div>
@@ -100,7 +106,7 @@ export default function Order() {
 
 						{/* Order date */}
 						<div className='flex items-center flex-col gap-y-4'>
-							<p className='text-xl text-white'>تاریخ ثبت سفارش</p>
+							<p className='text-xl text-white'>تاریخ سفارش</p>
 
 							<span className='flex items-center justify-center w-1/2 sm:w-full h-14 shadow-xl px-2 text-xl sm:text-lg rounded-xl bg-[#49494973] text-white'>
 								{datas.createdAt.split('T')[0].replace(/-/g, '/')}
