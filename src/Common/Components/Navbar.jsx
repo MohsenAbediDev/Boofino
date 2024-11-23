@@ -249,15 +249,21 @@ function Navbar({ toggleValue, toggleHandler }) {
 										<img
 											className='w-full h-full rounded-full'
 											src={`${
-												imgUrl ? imgUrl : 'http://localhost:3000/contents/blankUserProfile.png'
+												imgUrl
+													? imgUrl
+													: 'http://localhost:3000/contents/blankUserProfile.png'
 											}`}
 										/>
 									</Link>
 
+									{/* User informations */}
 									<div className='mr-2.5 flex flex-col gap-y-1 overflow-hidden'>
+										{/* User fullname */}
 										<span className='text-lg text-zinc-700 inline-block font-shabnam truncate'>
 											{fullName}
 										</span>
+
+										{/* User wallet value */}
 										<p className='text-sm text-sky-500 inline-block font-shabnam text-primaryBTN'>
 											موجودی:
 											<span className='px-1'>{walletValue}</span>
@@ -267,6 +273,8 @@ function Navbar({ toggleValue, toggleHandler }) {
 								</div>
 
 								{/* Dashboard Link's */}
+
+								{/* Dashboard */}
 								<Link
 									to='/dashboard'
 									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
@@ -276,6 +284,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 									</span>
 								</Link>
 
+								{/* Cart */}
 								<Link
 									to='/dashboard/cart'
 									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
@@ -285,9 +294,20 @@ function Navbar({ toggleValue, toggleHandler }) {
 									</span>
 								</Link>
 
+								{/* My orders */}
+								<Link
+									to='/dashboard/my-orders'
+									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
+									<span className='flex items-center gap-x-3'>
+										<IoDocumentTextOutline className='w-5 h-5' />
+										سفارش‌های من
+									</span>
+								</Link>
+
 								{/* Admin Link's */}
 								{isAdmin && (
 									<>
+										{/* Add product */}
 										<Link
 											to='/dashboard/add-product'
 											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
@@ -297,6 +317,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 											</span>
 										</Link>
 
+										{/* Edit product */}
 										<Link
 											to='/dashboard/product-list'
 											className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
@@ -308,15 +329,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 									</>
 								)}
 
-								<Link
-									to='/dashboard/my-orders'
-									className='flex items-center justify-between text-zinc-700 px-2.5 h-[46px] rounded-xl hover:bg-hoverDropDownLink transition-colors'>
-									<span className='flex items-center gap-x-3'>
-										<IoDocumentTextOutline className='w-5 h-5' />
-										سفارش‌های من
-									</span>
-								</Link>
-
+								{/* Logout */}
 								<div className='mt-2 pt-2 border-t border-t-gray-200'>
 									<Link
 										to='/logout'
@@ -343,47 +356,3 @@ function Navbar({ toggleValue, toggleHandler }) {
 }
 
 export default withToggle(Navbar)
-
-{
-	/* <li
-className='dir-rtl font-shabnam flex items-start justify-between flex-col py-2 px-2'
-key={index}
->
-<div className='flex items-center'>
-	<img
-		className='w-14 h-14 bg-cover rounded-lg border border-white'
-		src={result.image}
-	/>
-	<p className='font-b text-xl mx-2 md:text-lg'>
-		{result.title}
-	</p>
-</div>
-<div className='flex w-full flex-col my-1'>
-	<p className='text-xl sm:text-lg text-center'>
-		{result.price} تومان
-	</p>
-	{!productsID.includes(result.id) ? (
-		<button
-			className='rounded-md font-shabnam my-1 p-1 bg-primaryBTN hover:bg-hoverBTN transition-all duration-200
-			md:text-xs md:h-7 md:px-2'
-			onClick={() => {
-				addToCart(setCount, setProductsID, result.id)
-			}}
-		>
-			افزودن به سبد خرید
-		</button>
-	) : (
-		<button
-			className='rounded-md font-shabnam my-1 p-1 bg-red hover:bg-hoverBTN transition-all duration-200
-			md:text-xs md:h-7 md:px-2'
-			onClick={() => {
-				removeProduct(result.id)
-				getIds()
-			}}
-		>
-			حذف از سبد خرید
-		</button>
-	)}
-</div>
-</li> */
-}

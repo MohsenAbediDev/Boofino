@@ -115,6 +115,18 @@ export default function Dashboard() {
 						</NavLink>
 					)}
 
+					{/* Cart */}
+					<NavLink
+						to='cart'
+						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+                    hover:bg-dashboardItemActive transition-all duration-200'>
+						<div className='flex items-center'>
+							<AiOutlineShoppingCart />
+							<span className='mx-2'>سبد خرید</span>
+						</div>
+						<MdOutlineArrowBackIos />
+					</NavLink>
+
 					{/* My Orders */}
 					<NavLink
 						to='./my-orders'
@@ -130,6 +142,7 @@ export default function Dashboard() {
 					{/* Admin Link's */}
 					{isAdmin && (
 						<>
+							{/* Add product */}
 							<NavLink
 								to='./add-product'
 								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
@@ -141,6 +154,7 @@ export default function Dashboard() {
 								<MdOutlineArrowBackIos />
 							</NavLink>
 
+							{/* Edit products */}
 							<NavLink
 								to='./product-list'
 								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
@@ -154,17 +168,7 @@ export default function Dashboard() {
 						</>
 					)}
 
-					<NavLink
-						to='cart'
-						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
-                    hover:bg-dashboardItemActive transition-all duration-200'>
-						<div className='flex items-center'>
-							<AiOutlineShoppingCart />
-							<span className='mx-2'>سبد خرید</span>
-						</div>
-						<MdOutlineArrowBackIos />
-					</NavLink>
-
+					{/* Logout */}
 					<NavLink
 						to='/logout'
 						className='dashboard-item bg-dashboardItem justify-between text-white text-xl
@@ -191,7 +195,7 @@ export default function Dashboard() {
 								</div>
 							</div>
 						</div>
-						
+
 						<div className='order-btn'>ثبت سفارش</div>
 					</div>
 				)}
