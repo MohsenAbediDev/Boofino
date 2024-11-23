@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import { getUserAdmin } from '../utils/utils'
 import { Link, useParams } from 'react-router-dom'
 
 export default function Order() {
 	const [datas, setDatas] = useState()
+	const [isUserAdmin, setIsUserAdmin] = useState()
 	const { trackingCode } = useParams()
-
-	console.log(datas)
 
 	const statusMap = {
 		processing: {
@@ -22,7 +22,10 @@ export default function Order() {
 		},
 	}
 
-	useEffect(() => getOrderDatas, [trackingCode])
+	useEffect(() => {
+		getOrderDatas()
+		checkUserAdmin()
+	}, [trackingCode])
 
 	const getOrderDatas = () => {
 		fetch(`http://localhost:3000/order/${trackingCode}`, {
@@ -34,8 +37,10 @@ export default function Order() {
 			.catch((error) => console.log(error))
 	}
 
+	const checkUserAdmin = async () => setIsUserAdmin(await getUserAdmin())
+
 	return (
-		<div className='dashboard-container h-fit flex flex-col justify-center gap-y-9 py-5'>
+		<div className='dashboard-container h-fit flex flex-col justify-center gap-y-9 py-5 dir-rtl'>
 			{datas ? (
 				<>
 					{/* Products image */}
@@ -126,10 +131,24 @@ export default function Order() {
 					{/* Action buttons */}
 					<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
 						<Link
-							to='/dashboard/my-orders'
+							to={
+								isUserAdmin ? '/dashboard/admin-orders' : '/dashboard/my-orders'
+							}
 							className='flex items-center justify-center h-12 w-24 bg-primaryBTN outline-none rounded-lg text-xl text-white'>
 							برگشت
 						</Link>
+
+						{isUserAdmin && (
+							<>
+								<button className='flex items-center justify-center h-12 w-24 bg-[#FF4E4E] outline-none rounded-lg text-xl text-white'>
+									لغو
+								</button>
+
+								<button className='flex items-center justify-center h-12 w-24 bg-[#68AC50] outline-none rounded-lg text-xl text-white'>
+									تحویل
+								</button>
+							</>
+						)}
 					</div>
 				</>
 			) : (
