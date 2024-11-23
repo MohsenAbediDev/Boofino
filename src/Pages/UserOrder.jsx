@@ -125,22 +125,18 @@ export default function Order() {
 
 					{/* Action buttons */}
 					<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
-						<button className='h-12 w-24 bg-hoverBTN outline-none rounded-lg text-xl text-black'>
+						<Link
+							to='/dashboard/my-orders'
+							className='flex items-center justify-center h-12 w-24 bg-primaryBTN outline-none rounded-lg text-xl text-white'>
 							برگشت
-						</button>
-
-						<button className='h-12 w-24 bg-[#FF4E4E] outline-none rounded-lg text-xl text-white'>
-							لغو
-						</button>
-
-						<button className='h-12 w-28 bg-[#68AC50] outline-none rounded-lg text-xl text-white'>
-							تحویل
-						</button>
+						</Link>
 					</div>
 				</>
 			) : (
 				<div className='h-full flex items-center justify-center flex-col'>
-					<p className='font-bold text-2xl text-white'>شما هنوز سفارشی ثبت نکردید</p>
+					<p className='font-bold text-2xl text-white'>
+						شما هنوز سفارشی ثبت نکردید
+					</p>
 
 					<Link to='/' className='bg-primaryBTN p-4 mt-10 rounded-md text-2xl'>
 						بازگشت به خانه
