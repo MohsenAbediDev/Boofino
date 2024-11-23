@@ -15,7 +15,7 @@ export default function SuccessPay() {
 
 				{/* Show QrCode */}
 				<div className='w-60 h-60 mt-2'>
-					<QrCodeGenerator url={`http://localhost:5173/dashboard/my-orders/${trackingCode}`} />
+					<QrCodeGenerator url={`http://localhost:5173/order/${trackingCode}`} />
 				</div>
 
 				{/* Order Info */}
@@ -29,7 +29,7 @@ export default function SuccessPay() {
 				</div>
 
 				{/* Show Info Btn */}
-				<Link to={`/dashboard/my-orders/${trackingCode}`}>
+				<Link to={`/order/${trackingCode}`}>
 					<button className='w-32 bg-[#68AC50] text-white text-base py-4 rounded-md'>
 						جزئیات
 					</button>

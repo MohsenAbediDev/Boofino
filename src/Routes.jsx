@@ -12,7 +12,7 @@ import SelectionSchool from './Pages/SelectionSchool'
 import AddProduct from './Pages/AddProduct'
 import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
-import UserOrder from './Pages/UserOrder'
+import Order from './Pages/Order'
 import AdminOrders from './Pages/AdminOrders'
 import Statistic from './Pages/Statistic'
 import SuccessPay from './Pages/SuccessPay'
@@ -28,6 +28,8 @@ const routes = [
 	{ path: '/school', element: <SelectionSchool /> },
 	{ path: '/successful-payment', element: <SuccessPay /> },
 	{ path: '/payment-failed', element: <PayFailed /> },
+	{ path: '/edit-product/:name', element: <EditProduct /> },
+	{ path: 'order/:trackingCode', element: <Order /> },
 
 	{
 		path: '/dashboard/*',
@@ -37,7 +39,6 @@ const routes = [
 			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
 			{ path: 'my-orders', element: <MyOrders /> },
-			{ path: 'my-orders/:trackingCode', element: <UserOrder /> },
 			{ path: 'admin-orders', element: <AdminOrders /> },
 			{ path: 'add-product', element: <AddProduct /> },
 			{ path: 'product-list', element: <ProductsList /> },
@@ -45,7 +46,6 @@ const routes = [
 			{ path: 'wallet', element: <Wallet /> },
 		],
 	},
-	{ path: '/edit-product/:name', element: <EditProduct /> },
 ]
 
 export default routes
