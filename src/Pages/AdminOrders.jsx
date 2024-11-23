@@ -66,7 +66,7 @@ export default function MyOrders() {
 									<Link
 										to={`./${order.trackingCode}`}
 										key={order._id}
-										className='flex sm:hidden bg-secondary w-full h-24 items-center justify-between rounded-md'>
+										className='flex sm:hidden bg-secondary w-full min-h-[96px] items-center justify-between rounded-md'>
 										{/* Image and products name */}
 										<div className='flex items-center justify-center gap-x-2 mr-3'>
 											{/* Set images */}
