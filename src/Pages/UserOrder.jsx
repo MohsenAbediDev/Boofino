@@ -140,7 +140,7 @@ export default function Order() {
 				</>
 			) : (
 				<div className='h-full flex items-center justify-center flex-col'>
-					<p className='font-bold text-2xl'>شما هنوز سفارشی ثبت نکردید</p>
+					<p className='font-bold text-2xl text-white'>شما هنوز سفارشی ثبت نکردید</p>
 
 					<Link to='/' className='bg-primaryBTN p-4 mt-10 rounded-md text-2xl'>
 						بازگشت به خانه

@@ -12,7 +12,7 @@ import SelectionSchool from './Pages/SelectionSchool'
 import AddProduct from './Pages/AddProduct'
 import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
-import Order from './Pages/Order'
+import UserOrder from './Pages/UserOrder'
 import Statistic from './Pages/Statistic'
 import SuccessPay from './Pages/SuccessPay'
 import PayFailed from './Pages/PayFailed'
@@ -36,7 +36,7 @@ const routes = [
 			{ path: 'editprofile', element: <EditUser /> },
 			{ path: 'cart', element: <Cart /> },
 			{ path: 'my-orders', element: <MyOrders /> },
-			{ path: 'my-orders/:trackingCode', element: <Order /> },
+			{ path: 'my-orders/:trackingCode', element: <UserOrder /> },
 			{ path: 'add-product', element: <AddProduct /> },
 			{ path: 'product-list', element: <ProductsList /> },
 			{ path: 'statistic', element: <Statistic /> },
