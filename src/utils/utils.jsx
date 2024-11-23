@@ -160,7 +160,8 @@ const isNotAdmin = async () => {
 			window.location.pathname == '/dashboard/add-product' ||
 			window.location.pathname == '/dashboard/product-list' ||
 			window.location.pathname.includes('edit-product') ||
-			window.location.pathname == '/dashboard/statistic'
+			window.location.pathname == '/dashboard/statistic' ||
+			window.location.pathname == '/dashboard/admin-orders'
 		) {
 			window.location.href = '/'
 		}

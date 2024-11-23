@@ -14,7 +14,6 @@ import ProductsList from './Pages/ProductsList'
 import EditProduct from './Pages/EditProduct'
 import UserOrder from './Pages/UserOrder'
 import AdminOrders from './Pages/AdminOrders'
-import AdminOrder from './Pages/AdminOrder'
 import Statistic from './Pages/Statistic'
 import SuccessPay from './Pages/SuccessPay'
 import PayFailed from './Pages/PayFailed'
@@ -40,7 +39,6 @@ const routes = [
 			{ path: 'my-orders', element: <MyOrders /> },
 			{ path: 'my-orders/:trackingCode', element: <UserOrder /> },
 			{ path: 'admin-orders', element: <AdminOrders /> },
-			{ path: 'admin-orders/:trackingCode', element: <AdminOrder /> },
 			{ path: 'add-product', element: <AddProduct /> },
 			{ path: 'product-list', element: <ProductsList /> },
 			{ path: 'statistic', element: <Statistic /> },

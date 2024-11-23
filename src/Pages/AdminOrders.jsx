@@ -21,7 +21,7 @@ export default function MyOrders() {
 	}
 
 	const getOrders = () => {
-		fetch('http://localhost:3000/userorders', {
+		fetch('http://localhost:3000/schoolorders', {
 			method: 'GET',
 			credentials: 'include',
 		})
