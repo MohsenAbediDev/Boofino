@@ -4,7 +4,7 @@ import { Outlet, NavLink, useParams } from 'react-router-dom'
 
 //? Icons
 import { IoWalletOutline, IoDocumentTextOutline } from 'react-icons/io5'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiOutlineShoppingCart, AiOutlineShop } from 'react-icons/ai'
 import {
 	MdOutlineArrowBackIos,
 	MdExitToApp,
@@ -160,6 +160,18 @@ export default function Dashboard() {
 					{/* Admin Link's */}
 					{isAdmin && (
 						<>
+							{/* Admin orders */}
+							<NavLink
+								to='./admin-orders'
+								className='dashboard-item bg-dashboardItem justify-between text-white text-xl
+                    hover:bg-dashboardItemActive transition-all duration-200'>
+								<div className='flex items-center'>
+									<AiOutlineShop />
+									<span className='mx-2'>سفارش‌های فروشگاه</span>
+								</div>
+								<MdOutlineArrowBackIos />
+							</NavLink>
+
 							{/* Add product */}
 							<NavLink
 								to='./add-product'
