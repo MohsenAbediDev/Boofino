@@ -41,7 +41,7 @@ export default function MyOrders() {
 					{/* Order information */}
 					<div className='w-full flex sm:hidden items-center justify-between gap-10 border-b-2 pb-4 pl-8'>
 						<div>
-							<BackToDashboard title='سفارش‌های من' />
+							<BackToDashboard title='سفارش‌های فروشگاه' />
 						</div>
 
 						<div className='flex gap-10'>
@@ -53,6 +53,11 @@ export default function MyOrders() {
 
 							<span>قیمت</span>
 						</div>
+					</div>
+
+					{/* Route to dashboard in mobile responsive */}
+					<div className='hidden sm:flex mb-2'>
+						<BackToDashboard title='سفارش‌های فروشگاه' />
 					</div>
 
 					{/* Order cards */}

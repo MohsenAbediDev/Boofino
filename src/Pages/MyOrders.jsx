@@ -55,6 +55,11 @@ export default function MyOrders() {
 						</div>
 					</div>
 
+					{/* Route to dashboard in mobile responsive */}
+					<div className='hidden sm:flex mb-2'>
+						<BackToDashboard title='سفارش‌های من' />
+					</div>
+
 					{/* Order cards */}
 					<div className='w-full h-full flex flex-col items-center justify-start gap-y-5 overflow-y-auto scroll mt-8 sm:mt-0'>
 						{orders
