@@ -61,7 +61,7 @@ body {
 	}
 	
 	.order-btn {
-		@apply dashboard-item bg-primaryBTN flex items-center justify-center text-white text-xl font-bold cp w-full hover:bg-hoverConfirmBTN transition-colors duration-200;
+		@apply dashboard-item bg-primaryBTN h-12 flex items-center justify-center text-white text-xl font-bold cp w-full hover:bg-hoverConfirmBTN transition-colors duration-200;
 	}
 }
 

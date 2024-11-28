@@ -62,7 +62,7 @@ export default function Dashboard() {
 				ref={dashboardRoute}
 				className='min-w-[290px] flex flex-col gap-y-5 sticky top-20'>
 				{/* user profile details */}
-				<div className='h-[150px] dashboard-container'>
+				<div className='h-[150px] dashboard-container py-5'>
 					{/* User Container */}
 					<NavLink to='/dashboard' className='bg-hoverBTN dashboard-item h-16'>
 						{/* User Image */}
@@ -98,6 +98,24 @@ export default function Dashboard() {
 						</div>
 					</NavLink>
 				</div>
+
+				{/* Total Price */}
+				{params['*'] === 'cart' && (
+					<div className='dashboard-container h-36 py-5 lg:hidden'>
+						<div className='h-1/2 text-white text-xl flex justify-between items-center w-full'>
+							<span>قیمت کل:</span>
+
+							<div className='flex gap-x-1.5'>
+								{/* Cart Price */}
+								<span className='totalPrice'>0</span>
+
+								<span className='text-xl'>تومان</span>
+							</div>
+						</div>
+
+						<button className='order-btn'>ثبت سفارش</button>
+					</div>
+				)}
 
 				{/* Dashboard Links */}
 				<div className='dashboard-container flex flex-col gap-y-3'>
@@ -179,26 +197,6 @@ export default function Dashboard() {
 						</div>
 					</NavLink>
 				</div>
-
-				{/* Total Price */}
-				{params['*'] === 'cart' && (
-					<div className='dashboard-container h-[140px] lg:hidden'>
-						<div className='h-1/2 flex items-center'>
-							<div className='text-white text-xl flex justify-between items-center w-full'>
-								<span>قیمت کل</span>
-
-								<div className='flex gap-x-1.5'>
-									{/* Cart Price */}
-									<span className='totalPrice'>0</span>
-
-									<span className='text-xl'>تومان</span>
-								</div>
-							</div>
-						</div>
-
-						<div className='order-btn'>ثبت سفارش</div>
-					</div>
-				)}
 			</div>
 
 			<Outlet />
