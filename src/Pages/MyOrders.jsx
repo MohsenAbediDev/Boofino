@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import { Link } from 'react-router-dom'
 
@@ -66,7 +66,7 @@ export default function MyOrders() {
 							.slice()
 							.reverse()
 							.map((order) => (
-								<>
+								<React.Fragment key={order._id}>
 									{/* Desktop/Tablet card */}
 									<Link
 										to={`/order/${order.trackingCode}`}
@@ -135,7 +135,7 @@ export default function MyOrders() {
 									<Link
 										className='hidden sm:flex bg-secondary w-full h-32 rounded-md'
 										to={`/order/${order.trackingCode}`}
-										key={order._id}>
+										key={order._id + '-' + order.date}>
 										{/* Set image */}
 										<div className='flex items-center'>
 											<div
@@ -206,7 +206,7 @@ export default function MyOrders() {
 											</div>
 										</div>
 									</Link>
-								</>
+								</React.Fragment>
 							))}
 					</div>
 				</>
