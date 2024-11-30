@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { getUserAdmin } from '../utils/utils'
 import BackToDashboard from '../Common/Components/BackToDashboard'
+import Notification from '../Common/Components/Notification/Notification'
 import { Link, useParams } from 'react-router-dom'
 
 export default function Order() {
 	const [datas, setDatas] = useState()
 	const [isUserAdmin, setIsUserAdmin] = useState()
 	const { trackingCode } = useParams()
+
+	//? Notification Variable's
+	const [successMessage, setSuccessMessage] = useState('')
+	const [errorMessage, setErrorMessage] = useState('')
+	const [isShowNotification, setIsShowNotification] = useState(false)
 
 	const statusMap = {
 		processing: {
@@ -44,9 +50,29 @@ export default function Order() {
 				status: statusType === 'delivered' ? 'delivered' : 'canceled',
 			}),
 		})
-			.then((res) => res.json())
-			.then((res) => console.log(res))
+			.then((res) => showNotification(res))
 			.catch((error) => console.log(error))
+	}
+
+	// Set and show notification message
+	const showNotification = (response) => {
+		const handleResponse = (data) => {
+			if (response.ok) {
+				setErrorMessage('')
+				setSuccessMessage(data.message)
+				setIsShowNotification(true)
+			} else {
+				setSuccessMessage('')
+				setErrorMessage(data.message)
+				setIsShowNotification(true)
+			}
+		}
+
+		const handleFailure = (error) => {
+			console.error('Error parsing JSON:', error)
+		}
+
+		response.json().then(handleResponse).catch(handleFailure)
 	}
 
 	useEffect(() => {
@@ -196,6 +222,13 @@ export default function Order() {
 					</div>
 				)}
 			</div>
+
+			{isShowNotification && (
+				<Notification
+					errorMessage={errorMessage}
+					successMessage={successMessage}
+				/>
+			)}
 		</div>
 	)
 }
