@@ -20,16 +20,16 @@ export default function Footer() {
 
 						{/* Social Icons */}
 						<div className='flex w-44 justify-between mt-6'>
-							<a href='#'>
+							<a target='_blank' href='#'>
 								<FaInstagram className='text-white text-3xl' />
 							</a>
-							<a href='#'>
+							<a target='_blank' href='#'>
 								<FaTelegram className='text-white text-3xl' />
 							</a>
-							<a href=''>
+							<a target='_blank' href=''>
 								<FaTwitter className='text-white text-3xl' />
 							</a>
-							<a href=''>
+							<a target='_blank' href=''>
 								<FaYoutube className='text-white text-3xl' />
 							</a>
 						</div>
@@ -43,7 +43,7 @@ export default function Footer() {
 						{/* Phone */}
 						<div className='text-xl lg:w-full text-white flex items-center gap-x-2 p-2 lg:px-0'>
 							<FaPhone />
-							<a href='tel:09215647908'>09215647908</a>
+							<a href='tel:09215647908'>09909090909</a>
 						</div>
 
 						{/* Email */}
@@ -56,8 +56,7 @@ export default function Footer() {
 						<div className='text-xl lg:w-full text-white flex gap-x-2 p-2 lg:px-0'>
 						<FaLocationDot />
 							<span>
-								آدرس دفتر: خیابان ولیعصر, نرسیده به طالقانی, کوچه رحیم زاده,
-								پلاک ۳
+								آدرس بوفه: محل آدرس شما
 							</span>
 						</div>
 					</div>
