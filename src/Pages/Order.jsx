@@ -33,14 +33,16 @@ export default function Order() {
 			.catch((error) => console.log(error))
 	}
 
-	const setCompeleteOrder = async () => {
+	const setOrderStatus = async (statusType) => {
 		await fetch(`http://localhost:3000/order/${trackingCode}/status`, {
 			method: 'PUT',
 			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ status: 'delivered' }),
+			body: JSON.stringify({
+				status: statusType === 'delivered' ? 'delivered' : 'canceled',
+			}),
 		})
 			.then((res) => res.json())
 			.then((res) => console.log(res))
@@ -165,12 +167,14 @@ export default function Order() {
 
 							{isUserAdmin && (
 								<>
-									<button className='flex items-center justify-center h-12 w-24 bg-[#FF4E4E] outline-none rounded-lg text-xl text-white'>
+									<button
+										onClick={() => setOrderStatus('canceled')}
+										className='flex items-center justify-center h-12 w-24 bg-[#FF4E4E] outline-none rounded-lg text-xl text-white'>
 										لغو
 									</button>
 
 									<button
-										onClick={setCompeleteOrder}
+										onClick={() => setOrderStatus('delivered')}
 										className='flex items-center justify-center h-12 w-24 bg-[#68AC50] outline-none rounded-lg text-xl text-white'>
 										تحویل
 									</button>
