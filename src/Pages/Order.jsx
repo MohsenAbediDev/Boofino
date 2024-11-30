@@ -61,6 +61,8 @@ export default function Order() {
 				setErrorMessage('')
 				setSuccessMessage(data.message)
 				setIsShowNotification(true)
+
+				setTimeout(() => window.history.back(), 2000)
 			} else {
 				setSuccessMessage('')
 				setErrorMessage(data.message)
