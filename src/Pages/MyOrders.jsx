@@ -10,7 +10,7 @@ export default function MyOrders() {
 			text: 'درحال انجام',
 			bgColor: '#8a8b896c',
 		},
-		compeleted: {
+		delivered: {
 			text: 'اتمام',
 			bgColor: '#68AC50',
 		},
