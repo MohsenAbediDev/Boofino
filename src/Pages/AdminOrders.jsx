@@ -69,7 +69,7 @@ export default function MyOrders() {
 								<>
 									{/* Desktop/Tablet card */}
 									<Link
-										to={`./${order.trackingCode}`}
+										to={`/order/${order.trackingCode}`}
 										key={order._id}
 										className='flex sm:hidden bg-secondary w-full min-h-[96px] items-center justify-between rounded-md'>
 										{/* Image and products name */}
