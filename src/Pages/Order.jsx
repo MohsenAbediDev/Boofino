@@ -13,7 +13,7 @@ export default function Order() {
 			text: 'درحال انجام',
 			bgColor: '#8a8b896c',
 		},
-		compeleted: {
+		delivered: {
 			text: 'اتمام',
 			bgColor: '#68AC50',
 		},
@@ -22,11 +22,6 @@ export default function Order() {
 			bgColor: '#FF4E4E',
 		},
 	}
-
-	useEffect(() => {
-		getOrderDatas()
-		checkUserAdmin()
-	}, [trackingCode])
 
 	const getOrderDatas = () => {
 		fetch(`http://localhost:3000/order/${trackingCode}`, {
@@ -37,6 +32,25 @@ export default function Order() {
 			.then((res) => setDatas(res))
 			.catch((error) => console.log(error))
 	}
+
+	const setCompeleteOrder = async () => {
+		await fetch(`http://localhost:3000/order/${trackingCode}/status`, {
+			method: 'PUT',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ status: 'delivered' }),
+		})
+			.then((res) => res.json())
+			.then((res) => console.log(res))
+			.catch((error) => console.log(error))
+	}
+
+	useEffect(() => {
+		getOrderDatas()
+		checkUserAdmin()
+	}, [trackingCode])
 
 	const checkUserAdmin = async () => setIsUserAdmin(await getUserAdmin())
 
@@ -155,7 +169,9 @@ export default function Order() {
 										لغو
 									</button>
 
-									<button className='flex items-center justify-center h-12 w-24 bg-[#68AC50] outline-none rounded-lg text-xl text-white'>
+									<button
+										onClick={setCompeleteOrder}
+										className='flex items-center justify-center h-12 w-24 bg-[#68AC50] outline-none rounded-lg text-xl text-white'>
 										تحویل
 									</button>
 								</>
