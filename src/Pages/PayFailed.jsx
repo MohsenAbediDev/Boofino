@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { domain } from '../utils/utils'
 import QrCodeGenerator from '../Common/Components/QrCodeGenerator'
 
 export default function PayFailed() {
@@ -15,7 +16,7 @@ export default function PayFailed() {
 
 				{/* Show QrCode */}
 				<div className='w-60 h-60 mt-2'>
-					<QrCodeGenerator url={`http://localhost:5173/dashboard/cart`} />
+					<QrCodeGenerator url={`${domain}/dashboard/cart`} />
 				</div>
 
 				{/* Show Info Btn */}

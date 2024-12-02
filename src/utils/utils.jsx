@@ -1,5 +1,6 @@
 //? Global variable's
 const host = 'http://localhost:3000'
+const domain = 'http://localhost:5173'
 
 //? Product function's
 
@@ -173,6 +174,7 @@ const isNotAdmin = async () => {
 
 export {
 	host,
+	domain,
 	addCount,
 	minCount,
 	addToCart,

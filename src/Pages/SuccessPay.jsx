@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { host } from '../utils/utils'
+import { host, domain } from '../utils/utils'
 import QrCodeGenerator from '../Common/Components/QrCodeGenerator'
 
 export default function SuccessPay() {
@@ -19,7 +19,7 @@ export default function SuccessPay() {
 				{/* Show QrCode */}
 				<div className='w-60 h-60 mt-2'>
 					<QrCodeGenerator
-						url={`http://localhost:5173/order/${trackingCode}`}
+						url={`${domain}/order/${trackingCode}`}
 					/>
 				</div>
 
