@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import { host } from '../utils/utils'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import { Link } from 'react-router-dom'
 
@@ -21,7 +22,7 @@ export default function MyOrders() {
 	}
 
 	const getOrders = () => {
-		fetch('http://localhost:3000/schoolorders', {
+		fetch(`${host}/schoolorders`, {
 			method: 'GET',
 			credentials: 'include',
 		})

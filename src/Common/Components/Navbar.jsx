@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import productDatas from '../../../datas'
 import {
 	addToCart,
 	getUser,
 	removeProduct,
 	getUserAdmin,
 	getUserWallet,
+	host,
 } from '../../utils/utils'
 
 //? Toggle Hoc
@@ -15,7 +15,6 @@ import withToggle from '../Hocs/withToggle'
 //? Icon's
 import {
 	AiOutlineUser,
-	AiOutlineHome,
 	AiOutlineShoppingCart,
 	AiOutlineDashboard,
 } from 'react-icons/ai'
@@ -31,7 +30,6 @@ import { RiSearch2Line } from 'react-icons/ri'
 
 function Navbar({ toggleValue, toggleHandler }) {
 	// Product Variable's
-	const [products, setProducts] = useState(productDatas)
 	const [searchTerm, setSearchTerm] = useState('')
 	const [searchResults, setSearchResults] = useState([])
 	const [isShowSearchResult, setIsShowSearchResult] = useState(false)
@@ -56,12 +54,6 @@ function Navbar({ toggleValue, toggleHandler }) {
 		setwalletValue(formattedNumber)
 	}
 
-	const performSearch = (value) => {
-		const results = products.filter((data) => data.title.includes(value.trim()))
-
-		return results
-	}
-
 	useEffect(() => {
 		getIds()
 		userData()
@@ -75,7 +67,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 	const searchHandler = async (name) => {
 		try {
-			const res = await fetch(`http://localhost:3000/search-products/${name}`, {
+			const res = await fetch(`${host}/search-products/${name}`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -106,9 +98,6 @@ function Navbar({ toggleValue, toggleHandler }) {
 	const handleSearchChange = (event) => {
 		const { value } = event.target
 		setSearchTerm(value)
-
-		const results = performSearch(value)
-		setSearchResults(results)
 
 		!value && setSearchResults([])
 	}
@@ -142,7 +131,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 						className='text-white font-normal text-[20px] font-shabnam cp'>
 						<img
 							className='w-24'
-							src='http://localhost:3000/contents/logo.png'
+							src={`${host}/contents/logo.png`}
 							alt='boofino'
 						/>
 					</Link>
@@ -175,9 +164,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 
 						{/* Show Search Result */}
 						{searchResults.length > 0 && isShowSearchResult && (
-							<div
-								className='absolute w-full max-h-[60vh] overflow-y-scroll scroll top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg 
-							md:no-scroll'>
+							<div className='absolute w-full max-h-[60vh] overflow-y-scroll scroll top-full left-0 text-white bg-primary border border-t-0 border-price py-2 px-4 rounded-lg md:no-scroll'>
 								<ul className='divide-y-[1px] divide-price'>
 									{searchResults.map((result) => (
 										<li
@@ -251,7 +238,7 @@ function Navbar({ toggleValue, toggleHandler }) {
 											src={`${
 												imgUrl
 													? imgUrl
-													: 'http://localhost:3000/contents/blankUserProfile.png'
+													: `${host}/contents/blankUserProfile.png`
 											}`}
 										/>
 									</Link>

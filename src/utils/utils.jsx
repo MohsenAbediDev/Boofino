@@ -1,3 +1,6 @@
+//? Global variable's
+const host = 'http://localhost:3000'
+
 //? Product function's
 
 // add count funcrion
@@ -73,7 +76,7 @@ const removeProduct = (id) => {
 //? Check user is login or not
 const getUser = async () => {
 	try {
-		const response = await fetch('http://localhost:3000/user', {
+		const response = await fetch(`${host}/user`, {
 			method: 'GET',
 			credentials: 'include',
 		})
@@ -87,7 +90,7 @@ const getUser = async () => {
 //? Update user information
 const putUserData = async (data) => {
 	try {
-		const response = await fetch('http://localhost:3000/user', {
+		const response = await fetch(`${host}/user`, {
 			method: 'PUT',
 			credentials: 'include',
 			headers: {
@@ -103,7 +106,7 @@ const putUserData = async (data) => {
 //? Delete product from database
 const deleteProduct = async (product) => {
 	try {
-		const res = await fetch(`http://localhost:3000/deleteproduct/${product}`, {
+		const res = await fetch(`${host}/deleteproduct/${product}`, {
 			method: 'DELETE',
 			credentials: 'include',
 		})
@@ -169,6 +172,7 @@ const isNotAdmin = async () => {
 }
 
 export {
+	host,
 	addCount,
 	minCount,
 	addToCart,

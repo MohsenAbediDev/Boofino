@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { host } from '../../utils/utils'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
 export default function Menu({ children, grouping }) {
@@ -46,8 +47,7 @@ export default function Menu({ children, grouping }) {
 		<>
 			<div
 				className='w-full h-[351px] bg-menu rounded-[11px] rounded-ee-[64px] relative flex items-center overflow-hidden my-8
-			sm:rounded-none'
-			>
+			sm:rounded-none'>
 				<button className='left-2.5 scrollBTN' onClick={scrollLeft}>
 					<AiOutlineArrowLeft />
 				</button>
@@ -56,12 +56,10 @@ export default function Menu({ children, grouping }) {
 				<div
 					className={`h-full w-[556px] float-right dir-rtl absolute right-0 z-0  transition-opacity duration-500 ${
 						scroll && 'opacity-40'
-					}`}
-				>
+					}`}>
 					<p
 						className='text-white text-menu font-bold m-3 absolute
-						md:text-[28px] md:mt-2 select-none'
-					>
+						md:text-[28px] md:mt-2 select-none'>
 						{/* Insert Food Menu Grouping */}
 						{grouping == 'hotfood' && 'غذای گرم'}
 						{grouping == 'coldfood' && 'غذای سرد'}
@@ -72,7 +70,7 @@ export default function Menu({ children, grouping }) {
 
 					{/* Insert Food Menu Image's */}
 					<img
-						src={`http://localhost:3000/contents/${
+						src={`${host}/contents/${
 							(grouping == 'hotfood' && 'hotfood.png') ||
 							(grouping == 'coldfood' && 'coldfood.png') ||
 							(grouping == 'hotdrink' && 'hotdrink.png') ||
@@ -91,8 +89,7 @@ export default function Menu({ children, grouping }) {
 					className={`h-full ${
 						scroll ? 'w-full' : 'w-2/3'
 					} transition-all duration-500 flex items-center absolute overflow-x-auto dir-rtl no-scroll scroll-smooth
-					md:w-full md:-bottom-6`}
-				>
+					md:w-full md:-bottom-6`}>
 					{children}
 				</div>
 

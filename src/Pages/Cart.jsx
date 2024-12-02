@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
+import { host } from '../utils/utils'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import ProductCart from '../Common/Components/ProductCart'
 import { Link, useNavigate } from 'react-router-dom'
 import Notification from '../Common/Components/Notification/Notification'
-
 import { IoClose } from 'react-icons/io5'
-import { breakeTime } from '../../datas'
 
 export default function Cart() {
 	const [productCart, setProductCart] = useState(
@@ -17,6 +16,7 @@ export default function Cart() {
 	const [totalDisCount, setTotalDiscount] = useState(0)
 	const [isShowPatment, setIsShowPayment] = useState(false)
 	const [discountCode, setDiscountCode] = useState('')
+	const [breakeTime, setBreakeTime] = useState('')
 	const [selectedTime, setSelectedTime] = useState(0)
 	const [count, setCount] = useState([])
 
@@ -92,7 +92,7 @@ export default function Cart() {
 
 		// Fetch product data from the server to match the cart items
 		try {
-			const res = await fetch('http://localhost:3000/products', {
+			const res = await fetch(`${host}/products`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -126,7 +126,7 @@ export default function Cart() {
 			})
 
 			// Show total price in the UI
-			document.querySelector('.totalPrice').innerHTML = sumPrice
+			document.querySelector('.totalPrice').innerHTML = sumPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 			return sumPrice
 		})
@@ -156,7 +156,7 @@ export default function Cart() {
 
 		const data = { products, totalPrice }
 
-		fetch('http://localhost:3000/buyproducts', {
+		fetch(`${host}/buyproducts`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
@@ -231,7 +231,7 @@ export default function Cart() {
 					</div>
 				) : (
 					<div className='w-full h-full text-white text-2xl font-bold lg:mt-10 flex items-center flex-col'>
-						<img src='http://localhost:3000/contents/sad_cart.png' />
+						<img src={`${host}/contents/sad_cart.png`} />
 
 						<p className='mt-10'>سبد خرید شما خالی است</p>
 					</div>
@@ -286,22 +286,23 @@ export default function Cart() {
 								<option value={0}>تایم آزاد</option>
 
 								{/* Render delivery time options */}
-								{breakeTime.map((breake) => (
-									<option
-										key={breake.id}
-										value={breake.id}
-										disabled={
-											new Date().getHours() >= breake.endHour
-												? new Date().getMinutes() > breake.endMinutes
-													? true
-													: new Date().getHours() > breake.endHour
-													? true
+								{breakeTime &&
+									breakeTime.map((breake) => (
+										<option
+											key={breake.id}
+											value={breake.id}
+											disabled={
+												new Date().getHours() >= breake.endHour
+													? new Date().getMinutes() > breake.endMinutes
+														? true
+														: new Date().getHours() > breake.endHour
+														? true
+														: false
 													: false
-												: false
-										}>
-										{breake.title}
-									</option>
-								))}
+											}>
+											{breake.title}
+										</option>
+									))}
 							</select>
 						</div>
 

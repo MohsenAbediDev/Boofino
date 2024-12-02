@@ -1,8 +1,8 @@
-import { isNotLoggedIn } from "../utils/utils"
+import { isNotLoggedIn, host } from "../utils/utils"
 
 export default function Logout() {
 	const logout = () => {
-		fetch('http://localhost:3000/logout', {
+		fetch(`${host}/logout`, {
 			method: 'GET',
 			credentials: 'include',
 		})

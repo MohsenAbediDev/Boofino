@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
-import QrCodeGenerator from '../Common/Components/QrCodeGenerator';
+import { host } from '../utils/utils'
+import QrCodeGenerator from '../Common/Components/QrCodeGenerator'
 
 export default function SuccessPay() {
-	const trackingCode = JSON.parse(localStorage.getItem('trackingOrderCode'))?.slice(-1)[0];
+	const trackingCode = JSON.parse(
+		localStorage.getItem('trackingOrderCode')
+	)?.slice(-1)[0]
 
 	return (
 		<div className='dashboard-container h-fit flex flex-col items-center justify-center py-5 px-5 mt-5'>
@@ -15,13 +18,18 @@ export default function SuccessPay() {
 
 				{/* Show QrCode */}
 				<div className='w-60 h-60 mt-2'>
-					<QrCodeGenerator url={`http://localhost:5173/order/${trackingCode}`} />
+					<QrCodeGenerator
+						url={`http://localhost:5173/order/${trackingCode}`}
+					/>
 				</div>
 
 				{/* Order Info */}
 				<div className='flex items-center justify-between w-60 h-60'>
 					<div className='flex items-center'>
-						<img src='http://localhost:3000/contents/french-fries.png' className='w-7 h-7' />
+						<img
+							src={`${host}/contents/french-fries.png`}
+							className='w-7 h-7'
+						/>
 						<span className='text-[22px] mr-1'>کد سفارش</span>
 					</div>
 

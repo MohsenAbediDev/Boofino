@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { getUser } from '../utils/utils'
+import { getUser, host } from '../utils/utils'
+
 import { NavLink } from 'react-router-dom'
 
 export default function InfoUser() {
@@ -22,7 +23,7 @@ export default function InfoUser() {
 
 		const userSchool = (data[0].schoolId).toString()
 
-		fetch('http://localhost:3000/schools')
+		fetch(`${host}/schools`)
 			.then(res => res.json())
 			.then(data => {
 				const findSchool = data.find(school => school.schoolId === userSchool)

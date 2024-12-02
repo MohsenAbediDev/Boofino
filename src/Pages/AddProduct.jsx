@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { host } from '../utils/utils'
 import Notification from '../Common/Components/Notification/Notification'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 
@@ -56,10 +57,10 @@ export default function AddProduct() {
 	const uploadImage = async () => {
 		if (selectedPic) {
 			const formData = new FormData()
-			formData.append('imgUrl', selectedPic)
+			formData.append(`${host}/imgUrl`, selectedPic)
 
 			try {
-				const res = await fetch('http://localhost:3000/uploadimg', {
+				const res = await fetch('uploadimg', {
 					method: 'POST',
 					credentials: 'include',
 					body: formData,
@@ -93,7 +94,7 @@ export default function AddProduct() {
 			}
 
 			try {
-				await fetch('http://localhost:3000/addproduct', {
+				await fetch(`${host}/addproduct`, {
 					method: 'POST',
 					credentials: 'include',
 					headers: {
@@ -102,7 +103,7 @@ export default function AddProduct() {
 					body: JSON.stringify(productData),
 				}).then((res) => {
 					showNotification(res)
-					if(res.ok){
+					if (res.ok) {
 						setFilePath(null)
 						setSelectedPic(null)
 						setTitle('')
@@ -112,7 +113,7 @@ export default function AddProduct() {
 						setCount('')
 					}
 				})
-			} catch (err) { }
+			} catch (err) {}
 		} else {
 			setSuccessMessage('')
 			setErrorMessage('لطفا تمام فیلد هارا پر کنید')
@@ -134,8 +135,7 @@ export default function AddProduct() {
 					{/* Select image input */}
 					<label
 						htmlFor='image-upload'
-						className='bg-primaryBTN text-white cp rounded-md p-2'
-					>
+						className='bg-primaryBTN text-white cp rounded-md p-2'>
 						انتخاب عکس
 					</label>
 					<input
@@ -198,8 +198,7 @@ export default function AddProduct() {
 						<select
 							className='h-14 cp shadow-xl px-5 text-lgxt-xl rounded-dashboarditem bg-dashboardItem text-white outline-none border-none'
 							value={group}
-							onChange={(e) => setGroup(e.target.value)}
-						>
+							onChange={(e) => setGroup(e.target.value)}>
 							<option value='' disabled>
 								انتخاب کنید
 							</option>
@@ -214,7 +213,9 @@ export default function AddProduct() {
 					{/* Add product off */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
-						<label htmlFor='add-product-discount' className='text-xl text-white'>
+						<label
+							htmlFor='add-product-discount'
+							className='text-xl text-white'>
 							افزودن تخفیف (عدد)
 						</label>
 
@@ -259,8 +260,7 @@ export default function AddProduct() {
 					</button>
 					<button
 						className='h-12 w-24 bg-primaryBTN rounded-lg text-xl text-white'
-						onClick={sendToApi}
-					>
+						onClick={sendToApi}>
 						افزودن
 					</button>
 				</div>

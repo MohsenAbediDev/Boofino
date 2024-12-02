@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getUserAdmin } from '../utils/utils'
+import { getUserAdmin, host } from '../utils/utils'
 import BackToDashboard from '../Common/Components/BackToDashboard'
 import Notification from '../Common/Components/Notification/Notification'
 import { Link, useParams } from 'react-router-dom'
@@ -30,7 +30,7 @@ export default function Order() {
 	}
 
 	const getOrderDatas = () => {
-		fetch(`http://localhost:3000/order/${trackingCode}`, {
+		fetch(`${host}/order/${trackingCode}`, {
 			method: 'GET',
 			credentials: 'include',
 		})
@@ -40,7 +40,7 @@ export default function Order() {
 	}
 
 	const setOrderStatus = async (statusType) => {
-		await fetch(`http://localhost:3000/order/${trackingCode}/status`, {
+		await fetch(`${host}/order/${trackingCode}/status`, {
 			method: 'PUT',
 			credentials: 'include',
 			headers: {

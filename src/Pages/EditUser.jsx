@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getUser, putUserData } from '../utils/utils'
-
+import { getUser, putUserData, host } from '../utils/utils'
 import InputModal from '../Common/Components/Modals/InputModal'
 import SchoolsList from '../Common/Components/SchoolsList'
 import { showModalContext } from '../Common/contexts/showModalContext'
@@ -36,7 +35,7 @@ export default function EditUser() {
 
 		const userSchool = data[0].schoolId.toString()
 
-		fetch('http://localhost:3000/schools')
+		fetch(`${host}/schools`)
 			.then((res) => res.json())
 			.then((data) => {
 				const findSchool = data.find((school) => school.schoolId === userSchool)
@@ -52,7 +51,7 @@ export default function EditUser() {
 			formData.append('imgUrl', selectedPic)
 
 			try {
-				const res = await fetch('http://localhost:3000/uploadimg', {
+				const res = await fetch(`${host}/uploadimg`, {
 					method: 'POST',
 					credentials: 'include',
 					body: formData,
@@ -114,7 +113,9 @@ export default function EditUser() {
 						<div className='box'>
 							{/* user profile pic */}
 							<img
-								src={`${imgUrl ? imgUrl : 'http://localhost:3000/contents/blankUserProfile.png'}`}
+								src={`${
+									imgUrl ? imgUrl : `${host}/contents/blankUserProfile.png`
+								}`}
 								className='w-full h-full'
 							/>
 							{/* change profile pic button */}

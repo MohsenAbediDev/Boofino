@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import { deleteProduct, host } from '../utils/utils'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { deleteProduct } from '../utils/utils'
 import ConfirmationModal from '../Common/Components/Modals/ConfirmationModal'
 import Notification from '../Common/Components/Notification/Notification'
 import BackToDashboard from '../Common/Components/BackToDashboard'
@@ -102,7 +102,7 @@ export default function EditProduct() {
 	// get main product data
 	const getData = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/product/${params.name}`, {
+			const res = await fetch(`${host}/product/${params.name}`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -121,7 +121,7 @@ export default function EditProduct() {
 	// get all products
 	const allProduct = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/products', {
+			const res = await fetch(`${host}/products`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -139,7 +139,7 @@ export default function EditProduct() {
 			formData.append('imgUrl', selectedPic)
 
 			try {
-				const res = await fetch('http://localhost:3000/uploadimg', {
+				const res = await fetch(`${host}/uploadimg`, {
 					method: 'POST',
 					credentials: 'include',
 					body: formData,
@@ -178,30 +178,27 @@ export default function EditProduct() {
 			+count !== +datas.itemCount
 		) {
 			try {
-				const res = await fetch(
-					`http://localhost:3000/editproduct/${params.name}`,
-					{
-						method: 'PUT',
-						credentials: 'include',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify({
-							imgUrl: imgUrl ? imgUrl.message : datas.imgUrl,
-							isDiscount: off > 0 ? true : false,
-							name: name || datas.name,
-							price: price || datas.price,
-							oldPrice: price || datas.price,
-							finalPrice: +Math.floor(
-								(price || datas.price) -
-									((off || datas.off) * (price || datas.price)) / 100
-							),
-							group: group || datas.group,
-							off: off,
-							itemCount: count,
-						}),
-					}
-				)
+				const res = await fetch(`${host}/editproduct/${params.name}`, {
+					method: 'PUT',
+					credentials: 'include',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						imgUrl: imgUrl ? imgUrl.message : datas.imgUrl,
+						isDiscount: off > 0 ? true : false,
+						name: name || datas.name,
+						price: price || datas.price,
+						oldPrice: price || datas.price,
+						finalPrice: +Math.floor(
+							(price || datas.price) -
+								((off || datas.off) * (price || datas.price)) / 100
+						),
+						group: group || datas.group,
+						off: off,
+						itemCount: count,
+					}),
+				})
 				showNotification(res)
 			} catch (err) {
 				console.log(err)

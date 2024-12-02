@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { isLoggedIn } from '../utils/utils'
+import { isLoggedIn, host } from '../utils/utils'
 import Notification from '../Common/Components/Notification/Notification'
 import { Link } from 'react-router-dom'
 import { CiUser, CiLock } from 'react-icons/ci'
@@ -25,7 +25,7 @@ export default function Signin() {
 		}
 
 		// Post user data
-		fetch('http://localhost:3000/login', {
+		fetch(`${host}/login`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
@@ -102,8 +102,7 @@ export default function Signin() {
 						{/* Login Button */}
 						<button
 							onClick={login}
-							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'
-						>
+							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
 							ورود
 						</button>
 					</div>

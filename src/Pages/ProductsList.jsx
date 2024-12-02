@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import EditProductCard from '../Common/Components/EditProductCard'
 import Notification from '../Common/Components/Notification/Notification'
 import { selectedProduct } from '../Common/contexts/selectedProductsContext'
-import { deleteProduct } from '../utils/utils'
+import { deleteProduct, host } from '../utils/utils'
 
 export default function ProducstList() {
 	const [datas, setDatas] = useState([])
@@ -49,7 +49,7 @@ export default function ProducstList() {
 			} else {
 				// If it was more than one product
 				try {
-					await fetch('http://localhost:3000/deleteproducts', {
+					await fetch(`${host}/deleteproducts`, {
 						method: 'DELETE',
 						credentials: 'include',
 						headers: {
@@ -80,7 +80,7 @@ export default function ProducstList() {
 
 	const getDatas = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/products', {
+			const res = await fetch(`${host}/products`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -120,7 +120,11 @@ export default function ProducstList() {
 						{datas.map((data) => (
 							<>
 								<selectedProduct.Provider value={setSelectedProducts}>
-									<EditProductCard {...data} selectedProducts={selectedProducts} key={data._id} />
+									<EditProductCard
+										{...data}
+										selectedProducts={selectedProducts}
+										key={data._id}
+									/>
 								</selectedProduct.Provider>
 							</>
 						))}

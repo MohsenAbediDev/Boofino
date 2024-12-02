@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { getUser, host } from '../../utils/utils'
 import { NavLink } from 'react-router-dom'
 
 import Menu from './Menu'
 import MenuTitles from './MenuTitles'
 import FoodCard from './FoodCard'
-import { getUser } from '../../utils/utils'
 
 export default function Menus() {
 	const [datas, setDatas] = useState([])
@@ -33,7 +33,7 @@ export default function Menus() {
 
 	const getDatas = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/products', {
+			const res = await fetch(`${host}/products`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -50,7 +50,7 @@ export default function Menus() {
 			{/* If user has not selected a school */}
 			{!userSchool ? (
 				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
-					<img src='http://localhost:3000/contents/broken-school.png' alt='broken school' />
+					<img src={`${host}/contents/broken-school.png`} alt='broken school' />
 					<p>! هنوز مدرستو انتخاب نکردی</p>
 					<NavLink
 						to='/dashboard/editprofile'
@@ -63,7 +63,7 @@ export default function Menus() {
 				<div className='w-full h-full text-white text-2xl font-bold mb-14 lg:mt-10 flex items-center flex-col'>
 					<img
 						className='w-[256px]'
-						src='http://localhost:3000/contents/product-notfound.png'
+						src={`${host}/contents/product-notfound.png`}
 						alt='no products'
 					/>
 

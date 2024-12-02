@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { CiUser, CiPhone, CiLock } from 'react-icons/ci'
 import Notification from '../Common/Components/Notification/Notification'
 import { Link } from 'react-router-dom'
-import { isLoggedIn } from '../utils/utils'
+import { host } from '../utils/utils'
 
 export default function Signup() {
 	const [nameInputValue, setNameInputValue] = useState('')
@@ -36,7 +36,7 @@ export default function Signup() {
 		}
 
 		// Post user data
-		fetch('http://localhost:3000/register', {
+		fetch(`${host}/register`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
@@ -120,8 +120,8 @@ export default function Signup() {
 								className='form-input'
 								onChange={(e) => setPhoneInputValue(e.target.value)}
 								type='tel'
-								pattern="[0-9]*" 
-								inputMode="numeric"
+								pattern='[0-9]*'
+								inputMode='numeric'
 								placeholder='شماره همراه'
 							/>
 						</div>
@@ -154,8 +154,7 @@ export default function Signup() {
 						{/* Submit Form's */}
 						<button
 							onClick={register}
-							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'
-						>
+							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
 							ادامه
 						</button>
 					</div>

@@ -1,6 +1,6 @@
 import { FaMinus } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
-import { addCount, minCount, removeProduct } from '../../utils/utils'
+import { addCount, minCount, removeProduct, host } from '../../utils/utils'
 
 export default function ProductCart({ id, count, onRemove, totalPrice }) {
 	const [datas, setDatas] = useState([])
@@ -25,7 +25,7 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 
 	const getDatas = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/products', {
+			const res = await fetch(`${host}/products`, {
 				method: 'GET',
 				credentials: 'include',
 			})
@@ -129,7 +129,8 @@ export default function ProductCart({ id, count, onRemove, totalPrice }) {
 							{/* Desktop Responsive Price */}
 							<div className='md:hidden'>
 								<span className='text-white text-2xl'>
-									{(+mainData.finalPrice * +productCount).toString()
+									{(+mainData.finalPrice * +productCount)
+										.toString()
 										.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 								</span>
 								<span className='text-white text-2xl ms-1'>تومان</span>

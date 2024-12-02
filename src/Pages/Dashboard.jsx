@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
-import { getUserAdmin, getUser, getUserWallet } from '../utils/utils'
+import { getUserAdmin, getUser, getUserWallet, host } from '../utils/utils'
 import { Outlet, NavLink, useParams } from 'react-router-dom'
 
 //? Icons
@@ -68,9 +68,7 @@ export default function Dashboard() {
 						{/* User Image */}
 						<img
 							src={`${
-								imgUrl
-									? imgUrl
-									: 'http://localhost:3000/contents/blankUserProfile.png'
+								imgUrl ? imgUrl : `${host}/contents/blankUserProfile.png`
 							}`}
 							className='w-[50px] h-[50px] rounded-full'
 						/>

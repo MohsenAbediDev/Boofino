@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { host } from '../../utils/utils'
 import InputModal from './Modals/InputModal'
-import { useContext } from 'react'
 import { showModalContext } from '../contexts/showModalContext'
 import { cityList } from '../../provinces_cities'
 import { putUserData } from '../../utils/utils'
@@ -43,7 +43,7 @@ export default function SchoolsList({ onChangeName }) {
 
 	const getSchools = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/schools')
+			const res = await fetch(`${host}/schools`)
 			const data = await res.json()
 
 			const schoolList = []
@@ -62,7 +62,7 @@ export default function SchoolsList({ onChangeName }) {
 
 	const getStates = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/schools')
+			const res = await fetch(`${host}/schools`)
 			const datas = await res.json()
 			let supportedStates = []
 			let supportedCities = []
