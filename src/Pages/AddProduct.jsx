@@ -75,6 +75,16 @@ export default function AddProduct() {
 		}
 	}
 
+	const clearInputs = () => {
+		setFilePath(null)
+		setSelectedPic(null)
+		setTitle('')
+		setPrice('')
+		setGroup('')
+		setOff('')
+		setCount('')
+	}
+
 	// send product to database
 	const sendToApi = async () => {
 		const imgUrl = await uploadImage()
@@ -104,13 +114,7 @@ export default function AddProduct() {
 				}).then((res) => {
 					showNotification(res)
 					if (res.ok) {
-						setFilePath(null)
-						setSelectedPic(null)
-						setTitle('')
-						setPrice('')
-						setGroup('')
-						setOff('')
-						setCount('')
+						clearInputs()
 					}
 				})
 			} catch (err) {}
@@ -255,8 +259,8 @@ export default function AddProduct() {
 				</div>
 
 				<div className='flex justify-end w-4/5 gap-x-5'>
-					<button className='h-12 w-24 bg-hoverBTN rounded-lg text-xl text-black'>
-						لغو
+					<button onClick={clearInputs} className='h-12 w-24 bg-hoverBTN rounded-lg text-xl text-black'>
+						پاک کردن
 					</button>
 					<button
 						className='h-12 w-24 bg-primaryBTN rounded-lg text-xl text-white'
