@@ -12,7 +12,7 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function Footer() {
 	return (
 		<footer>
-			<div className='min-h-80 w-full bg-footer flex lg:flex-col dir-rtl p-11 lg:p-6'>
+			<div className='min-h-80 w-full bg-footer flex lg:flex-col dir-rtl p-11 lg:p-6 mt-6'>
 				{/* Boofino Brand */}
 				<div className='h-full w-1/3 p-9 lg:p-0'>
 					<div className='w-full h-full flex flex-col'>
