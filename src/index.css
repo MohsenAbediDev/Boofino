@@ -59,7 +59,7 @@ body {
 	.cart-button {
 		@apply h-[40px] text-2xl border-2 rounded-lg md:text-xl md:rounded-md;
 	}
-	
+
 	.order-btn {
 		@apply dashboard-item bg-primaryBTN h-12 flex items-center justify-center text-white text-xl font-bold cp w-full hover:bg-hoverConfirmBTN transition-colors duration-200;
 	}
@@ -88,6 +88,10 @@ body {
 
 	.show {
 		@apply opacity-100 visible;
+	}
+
+	.rotate-y-180 {
+		transform: rotateY(180deg);
 	}
 
 	.truncate {

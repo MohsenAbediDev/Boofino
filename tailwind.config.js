@@ -13,7 +13,7 @@ export default {
 		extend: {
 			fontFamily: {
 				shabnam: 'shabnam',
-				arial: 'Arial'
+				arial: 'Arial',
 			},
 			fontSize: {
 				menu: '40px',
@@ -21,7 +21,10 @@ export default {
 			borderRadius: {
 				dashboardcontainer: '20px',
 				dashboarditem: '15px',
-			}
+			},
+			transform: {
+				'rotate-y-180': 'rotateY(180deg)',
+			},
 		},
 
 		// container sizes
@@ -55,7 +58,7 @@ export default {
 			green: '#10DD60',
 			incomeStat: '#405189',
 			userStat: '#A32B40',
-			premierFoodStat: '#BB7809'
+			premierFoodStat: '#BB7809',
 		},
 	},
 	plugins: [],

@@ -19,7 +19,7 @@ export default function MenuTitles(props) {
 				{/* Line Icon */}
 				<RxBorderSolid className='w-5' />
 				{/* Star Icon */}
-				<BiSolidStarHalf className='w-6 text-[#FF8F00]' />
+				<BiSolidStarHalf className='w-6 text-[#FF8F00] rotate-y-180' />
 			</div>
 		</div>
 	)
