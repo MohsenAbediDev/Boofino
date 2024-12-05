@@ -38,7 +38,7 @@ export default function InfoUser() {
 			<div className='flex items-center justify-between'>
 				<div className='flex items-center'>
 					<img
-						src={`${imgUrl ? imgUrl : './images/blankUserProfile.png'}`}
+						src={`${imgUrl ? imgUrl : `${host}/contents/blankUserProfile.png`}`}
 						className='w-[60px] h-[60px] rounded-full'
 					/>
 					<p className='mr-2'>مشخصات کاربر</p>
