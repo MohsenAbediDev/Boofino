@@ -95,9 +95,10 @@ export default function SchoolsList({ onChangeName }) {
 									استان خود را انتخاب کنید
 								</h1>
 								<select
+									value={selectedState || 0}
 									onChange={(e) => setSelectedState(e.target.value)}
 									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'>
-									<option value={0} disabled selected>
+									<option value={0} disabled>
 										استان خود را انتخاب کنید
 									</option>
 									{states.map((state) => (
@@ -113,9 +114,10 @@ export default function SchoolsList({ onChangeName }) {
 									شهر خود را انتخاب کنید
 								</h1>
 								<select
+									value={selectedCity || 0}
 									onChange={(e) => setSelectedCity(e.target.value)}
 									className='bg-white w-full rounded-md border-none outline-none cp text-lg h-10'>
-									<option value={0} disabled selected>
+									<option value={0} disabled>
 										شهر خود را انتخاب کنید
 									</option>
 									{selectedState &&
