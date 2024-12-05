@@ -57,10 +57,10 @@ export default function AddProduct() {
 	const uploadImage = async () => {
 		if (selectedPic) {
 			const formData = new FormData()
-			formData.append(`${host}/imgUrl`, selectedPic)
+			formData.append('imgUrl', selectedPic)
 
 			try {
-				const res = await fetch('uploadimg', {
+				const res = await fetch(`${host}/uploadimg`, {
 					method: 'POST',
 					credentials: 'include',
 					body: formData,
