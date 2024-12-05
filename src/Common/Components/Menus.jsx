@@ -72,7 +72,7 @@ export default function Menus() {
 			) : (
 				// If user has selected a school and there are products
 				<>
-					<MenuTitles title='غذاها' />
+					<MenuTitles title='منو' />
 					<div className='w-full flex flex-col items-center'>
 						{groups.map((group) => (
 							<Menu grouping={group} key={group}>
