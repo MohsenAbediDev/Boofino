@@ -135,7 +135,7 @@ export default function MyOrders() {
 									{/* Mobile card */}
 									<Link
 										className='hidden sm:flex bg-secondary w-full h-32 rounded-md'
-										to={`./${order.trackingCode}`}
+										to={`/order/${order.trackingCode}`}
 										key={order._id + '-' + order.date}>
 										{/* Set image */}
 										<div className='flex items-center'>
