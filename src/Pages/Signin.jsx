@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { CiUser, CiLock } from 'react-icons/ci'
 
 export default function Signin() {
+	const [loading, setLoading] = useState(false)
+
 	const [usernameInputValue, setUsernameInputValue] = useState('')
 	const [passwordInputValue, setPasswordInputValue] = useState('')
 
@@ -24,6 +26,8 @@ export default function Signin() {
 			password: passwordInputValue,
 		}
 
+		setLoading(true)
+
 		// Post user data
 		fetch(`${host}/login`, {
 			method: 'POST',
@@ -32,7 +36,9 @@ export default function Signin() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(userData),
-		}).then((res) => showNotification(res))
+		})
+			.then((res) => showNotification(res))
+			.finally(() => setLoading(false))
 	}
 
 	// Show notification function
@@ -100,11 +106,41 @@ export default function Signin() {
 						</div>
 
 						{/* Login Button */}
-						<button
-							onClick={login}
-							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
-							ورود
-						</button>
+						{!loading && (
+							<button
+								onClick={login}
+								className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
+								ورود
+							</button>
+						)}
+
+						{loading && (
+							<button
+								type='button'
+								className='form-input flex items-center justify-center w-[70%] p-0 text-lg bg-[#714eff77] cursor-not-allowed'
+								disabled>
+								<span>درحال برسی </span>
+
+								{/* Loading Animation */}
+								<svg
+									className='mr-3 w-5 h-5 animate-spin text-white'
+									xmlns='http://www.w3.org/2000/svg'
+									fill='none'
+									viewBox='0 0 24 24'>
+									<circle
+										className='opacity-25'
+										cx='12'
+										cy='12'
+										r='10'
+										stroke='currentColor'
+										strokeWidth='4'></circle>
+									<path
+										className='opacity-75'
+										fill='currentColor'
+										d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+								</svg>
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

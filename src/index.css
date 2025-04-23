@@ -131,6 +131,10 @@ body {
 	.box:hover .item {
 		@apply top-0;
 	}
+
+	.animate-spin {
+		animation: spin 1s linear infinite;
+	}
 }
 
 /* Remove spinner keys in Chrome, Safari, Edge, and Opera */
@@ -143,4 +147,11 @@ input[type='number']::-webkit-outer-spin-button {
 /* remove spinner buttons in Firefox */
 input[type='number'] {
 	-moz-appearance: textfield;
+}
+
+/* KeyFrames */
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
 }
