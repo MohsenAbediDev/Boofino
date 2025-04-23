@@ -69,19 +69,19 @@ export default function Signin() {
 				<span className='mt-5 font-bold text-4xl'>بوفینو</span>
 
 				{/* Signup Form */}
-				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[19rem] rounded-lg bg-secondary'>
+				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 sm:w-[22rem] h-[19rem] rounded-lg bg-secondary'>
 					<p className='mt-5 text-2xl font-bold'>ورود</p>
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
 						ثبت نام نکردی؟
 						<Link to='/signup' className='mr-1.5 text-red'>
-							ثبت نام کن
+							ثبت نام کنید
 						</Link>
 					</div>
 
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
 						{/* Username Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiUser className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -93,7 +93,7 @@ export default function Signin() {
 						</div>
 
 						{/* Password Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiLock className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -109,7 +109,7 @@ export default function Signin() {
 						{!loading && (
 							<button
 								onClick={login}
-								className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
+								className='form-input w-[70%] sm:w-11/12 p-0 text-xl bg-primaryBTN'>
 								ورود
 							</button>
 						)}
@@ -117,7 +117,7 @@ export default function Signin() {
 						{loading && (
 							<button
 								type='button'
-								className='form-input flex items-center justify-center w-[70%] p-0 text-lg bg-[#714eff77] cursor-not-allowed'
+								className='form-input flex items-center justify-center w-[70%] sm:w-11/12 p-0 text-lg bg-[#714eff77] cursor-not-allowed'
 								disabled>
 								<span>درحال برسی </span>
 

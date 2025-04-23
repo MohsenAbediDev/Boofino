@@ -77,19 +77,19 @@ export default function Signup() {
 				<span className='mt-5 font-bold text-4xl'>بوفینو</span>
 
 				{/* Signup Form */}
-				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 h-[27rem] rounded-lg bg-secondary'>
+				<div className='mt-5 gap-y-1 flex items-center flex-col w-96 sm:w-[22rem] h-[27rem] rounded-lg bg-secondary'>
 					<p className='mt-5 text-2xl font-bold'>عضویت</p>
 
 					<div className='text-lg text-gray-500 text-[#a3a9b3]'>
 						قبلا ثبت نام کردی؟
 						<Link to='/login' className='mr-1.5 text-red'>
-							وارد شو
+							وارد شوید
 						</Link>
 					</div>
 
 					<div className='w-full flex items-center flex-col space-y-2.5 lg:space-y-3.5'>
 						{/* Name Input */}
-						<div className='relative mt-2 w-[70%] dir-rtl'>
+						<div className='relative mt-2 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiUser className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -101,7 +101,7 @@ export default function Signup() {
 						</div>
 
 						{/* Username Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiUser className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -113,7 +113,7 @@ export default function Signup() {
 						</div>
 
 						{/* Phone Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiPhone className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -127,7 +127,7 @@ export default function Signup() {
 						</div>
 
 						{/* Password Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiLock className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -139,7 +139,7 @@ export default function Signup() {
 						</div>
 
 						{/* Confirm Password Input */}
-						<div className='relative mt-5 w-[70%] dir-rtl'>
+						<div className='relative mt-5 w-[70%] sm:w-11/12 dir-rtl'>
 							<CiLock className='absolute top-2 right-1.5 text-[#8f95a0]' />
 
 							<input
@@ -154,13 +154,13 @@ export default function Signup() {
 						{/* Submit Form's */}
 						<button
 							onClick={register}
-							className='form-input w-[70%] p-0 text-xl bg-primaryBTN'>
+							className='form-input w-[70%] sm:w-11/12 p-0 text-xl bg-primaryBTN'>
 							ادامه
 						</button>
 					</div>
 				</div>
 
-				<p className='mt-2 text-sm w-96 dir-rtl text-center'>
+				<p className='mt-2 text-sm leading-7 w-96 sm:w-[22rem] dir-rtl text-center'>
 					با عضویت در سایت، تمامی
 					<a href='#' className='text-red'>
 						{' '}
