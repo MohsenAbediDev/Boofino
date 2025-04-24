@@ -210,6 +210,7 @@ export default function EditProduct() {
 		<>
 			<div className='dir-rtl container font-shabnam p-5'>
 				<BackToDashboard title='ویرایش محصول' />
+
 				<div className='flex gap-x-5'>
 					<div className='min-w-[320px] divide-y-2 divide-dashboardItemActive h-[700px] overflow-y-auto scroll lg:hidden'>
 						{products.map((product) => (
@@ -223,6 +224,7 @@ export default function EditProduct() {
 							</div>
 						))}
 					</div>
+
 					<div className='dashboard-container h-fit py-5 flex flex-col gap-y-9 justify-center'>
 						{datas && (
 							<>
@@ -249,7 +251,7 @@ export default function EditProduct() {
 									</div>
 								</div>
 
-								<div className='w-4/5 grid grid-cols-2 gap-5 lg:grid-cols-1 mx-auto'>
+								<div className='w-4/5 sm:w-full grid grid-cols-2 gap-5 lg:grid-cols-1 mx-auto'>
 									<div className='flex flex-col gap-y-4'>
 										<label
 											htmlFor='edit-product-name'
@@ -352,21 +354,22 @@ export default function EditProduct() {
 										/>
 									</div>
 								</div>
-								<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
+
+								<div className='flex justify-end mx-auto w-4/5 sm:w-full gap-x-5'>
 									<button
-										className='h-12 w-24 bg-redBTN outline-none rounded-lg text-xl text-white'
+										className='h-12 w-24 bg-redBTN outline-none rounded-lg text-xl sm:text-lg text-white'
 										onClick={handleOpenModal}>
 										حذف
 									</button>
 
 									<button
-										className='h-12 w-24 bg-hoverBTN outline-none rounded-lg text-xl text-black'
+										className='h-12 w-24 bg-hoverBTN outline-none rounded-lg text-xl sm:text-lg text-black'
 										onClick={reset}>
 										لغو
 									</button>
 
 									<button
-										className='h-12 w-32 bg-primaryBTN outline-none rounded-lg text-xl text-white'
+										className='h-12 w-32 bg-primaryBTN outline-none rounded-lg text-xl sm:text-lg text-white'
 										onClick={updateProductData}>
 										به روز رسانی
 									</button>
