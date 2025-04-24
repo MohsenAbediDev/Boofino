@@ -251,7 +251,7 @@ export default function EditProduct() {
 									</div>
 								</div>
 
-								<div className='w-4/5 sm:w-full grid grid-cols-2 gap-5 lg:grid-cols-1 mx-auto'>
+								<div className='w-4/5 sm:w-full sm:px-2 grid grid-cols-2 gap-5 lg:grid-cols-1 mx-auto'>
 									<div className='flex flex-col gap-y-4'>
 										<label
 											htmlFor='edit-product-name'

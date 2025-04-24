@@ -132,7 +132,7 @@ export default function Order() {
 							</div>
 						</div>
 
-						<div className='w-4/5 grid grid-cols-2 gap-5 mx-auto'>
+						<div className='w-4/5 sm:w-full grid grid-cols-2 gap-5 mx-auto'>
 							{/* Final price */}
 							<div className='flex items-center flex-col gap-y-4'>
 								<p className='text-xl text-white'>قیمت</p>
@@ -182,7 +182,7 @@ export default function Order() {
 						</div>
 
 						{/* Action buttons */}
-						<div className='flex justify-end mx-auto w-4/5 gap-x-5'>
+						<div className='flex justify-end mx-auto w-4/5 sm:w-full gap-x-5'>
 							<Link
 								to={
 									isUserAdmin

@@ -128,9 +128,10 @@ export default function AddProduct() {
 	return (
 		<div className='w-full flex flex-col'>
 			<BackToDashboard title='افزودن محصول' />
+
 			<div className='dashboard-container h-fit py-5 flex flex-col gap-y-9 items-center justify-center'>
 				{/* Select image section */}
-				<div className='bg-dashboardItem shadow-xl w-40 h-40 rounded-dashboarditem flex justify-center items-center relative overflow-hidden'>
+				<div className='bg-primary shadow-xl w-40 h-40 rounded-dashboarditem flex justify-center items-center relative overflow-hidden'>
 					{/* Show image */}
 					{filePath && (
 						<img src={filePath} className='w-full h-full absolute' />
@@ -152,7 +153,7 @@ export default function AddProduct() {
 				</div>
 
 				{/* Input's section */}
-				<div className='w-4/5 grid grid-cols-2 gap-5 lg:grid-cols-1'>
+				<div className='w-4/5 sm:w-full sm:px-2 grid grid-cols-2 gap-5 lg:grid-cols-1'>
 					{/* Add product name */}
 					<div className='flex flex-col gap-y-4'>
 						{/* Input title */}
@@ -258,8 +259,11 @@ export default function AddProduct() {
 					</div>
 				</div>
 
-				<div className='flex justify-end w-4/5 gap-x-5'>
-					<button onClick={clearInputs} className='h-12 w-24 bg-hoverBTN rounded-lg text-xl text-black'>
+				{/* Action buttons */}
+				<div className='flex justify-end w-4/5 sm:w-full sm:px-2 gap-x-5'>
+					<button
+						onClick={clearInputs}
+						className='h-12 w-24 bg-hoverBTN rounded-lg text-xl text-black'>
 						پاک کردن
 					</button>
 					<button

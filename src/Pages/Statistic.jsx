@@ -36,12 +36,12 @@ export default function Statistic() {
 
 			<div className='dashboard-container text-white h-fit py-5 px-5 sm:px-2 flex flex-col gap-y-9'>
 				{/* Sale Stat */}
-				<div className='flex items-center gap-x-2'>
+				<div className='flex items-center gap-x-2 sm:hidden'>
 					<ImStatsBars />
 					<p className='text-xl'>میزان فروش</p>
 				</div>
 
-				<div className='flex justify-center items-center'>
+				<div className='flex justify-center items-center sm:hidden'>
 					<SaleChart data={saleData} dataKey='مقدار' grid />
 				</div>
 
