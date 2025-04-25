@@ -1,6 +1,5 @@
 # 🍔 **بوفینو (Boofino)** + CMS کامل
-![Screenshot (955)](https://github.com/user-attachments/assets/e47435ac-f542-4be2-a796-1bcad0720e6c)
-
+![postspark_export_2025-04-25_21-50-53](https://github.com/user-attachments/assets/7efacc17-063f-4903-8a6d-bf61dfd23c0a)
 
 [نسخه آنلاین](https://boofino.liara.run)
 
@@ -60,6 +59,37 @@ npm start
 ```
 http://localhost:5173
 ```
+
+## مشارکت کنندگان
+### Frontend
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/MohsenAbediDev">
+        <img src="https://avatars.githubusercontent.com/u/133788186?v=4" width="100px;" alt="MohsenAbediDev"/><br />
+        <sub><b>MohsenAbediDev</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ShirPalang">
+        <img src="https://avatars.githubusercontent.com/u/154445569?v=4" width="100px;" alt="ShirPalang"/><br />
+        <sub><b>ShirPalang</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+### Backend
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/MohsenAbediDev">
+        <img src="https://avatars.githubusercontent.com/u/133788186?v=4" width="100px;" alt="MohsenAbediDev"/><br />
+        <sub><b>MohsenAbediDev</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## 🤝 **مشارکت**
 
